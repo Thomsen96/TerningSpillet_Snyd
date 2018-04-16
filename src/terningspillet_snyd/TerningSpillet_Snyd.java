@@ -19,9 +19,8 @@ public class TerningSpillet_Snyd {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+       public static void main(String[] args) {
         // TODO code application logic here
-        /*
         runde = new Runde(3,6);
         runde.printTerninger();
         runde.start_rounde();
@@ -46,7 +45,8 @@ public class TerningSpillet_Snyd {
             runde.løgner();
         
         }
-        */
+        
+             
 
     }
 

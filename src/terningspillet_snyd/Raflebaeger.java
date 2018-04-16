@@ -1,22 +1,37 @@
 package terningspillet_snyd;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Raflebaeger
 {
 	/** listen af terninger, der er i raflebægeret */
     public ArrayList<Terning> terninger;
     public boolean tom = false;
+    public boolean trappe_regel = true;
 
-	public Raflebaeger(int antalTerninger)
+	public Raflebaeger(int antalTerninger, boolean trappe)
 	{
-		terninger = new ArrayList<Terning>();
-		for (int i=0; i<antalTerninger; i++)
-		{
-			Terning t;
-			t = new Terning();
-			terninger.add(t);
-		}
+            terninger = new ArrayList<Terning>();
+            if(!trappe){
+
+                for (int i=0; i<antalTerninger; i++)
+                {
+                        Terning t;
+                        t = new Terning();
+                        terninger.add(t);
+                }
+            }else{ // Lav en trappe 
+                for (int i=0; i<antalTerninger; i++)
+                {
+                        Terning t;
+                        t = new Terning(i+1);
+                        terninger.add(t);
+                }
+            }
+            
 	}
+        
 
 	/** lægger en terning i bægeret */
 	public void tilføjTerning(Terning t)
@@ -41,10 +56,12 @@ public class Raflebaeger
 	/** ryster bægeret, så alle terningerne bliver 'kastet' og får en ny værdi */
 	public void ryst()
 	{
-		for (Terning t : terninger) 
-		{
-			t.kast();
-		}
+            for (Terning t : terninger) 
+            {
+                    t.kast();
+            }
+            Sorter();
+            Check_for_trapperegel();
 	}
 
 
@@ -74,4 +91,22 @@ public class Raflebaeger
         public int antalTerninger(){
             return terninger.size();
         }
+
+    private void Sorter() {
+        TerningComparator sammenligner = new TerningComparator();
+        Collections.sort(terninger,sammenligner);
+    }
+
+    private void Check_for_trapperegel() {
+        for (int i = 0; i < terninger.size(); i++) {
+            System.out.println("Terninger:"+terninger.get(i).getVærdi());
+            if((i+1) != terninger.get(i).getVærdi()){
+                trappe_regel = false;
+                i = terninger.size();
+            }
+        }
+        if(trappe_regel){
+            System.out.println("Trappereglen er opfyldt!");
+        }
+    }
 }

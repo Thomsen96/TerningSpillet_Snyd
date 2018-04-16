@@ -11,7 +11,13 @@ public class Terning
 		// vælg en tilfældig side til at starte med
 		værdi = (int) (Math.random() * 6 + 1);
 	}
-
+        
+	public Terning(int værdi)
+	{
+		// vælg en tilfældig side til at starte med
+		this.værdi = værdi;
+	}
+        
 	/** kaster terningen, så den får en anden værdi */
 	public void kast()
 	{
