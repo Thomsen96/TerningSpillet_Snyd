@@ -48,4 +48,8 @@ public class SpillerForbindelse {
     public String modtag() throws IOException{
         return spillerRecive.readLine();
     }
+    
+    public void lukForbindelse() throws IOException{
+        spillerSocket.close();
+    }
 }

@@ -18,6 +18,7 @@ public class ServerNetværk {
     private ServerSocket server_socket;
     
     private final ArrayList<SpillerForbindelse> spillere;
+//    public final ArrayList<SpillerForbindelse> spillere;        //for testing
     /*
     private ArrayList<Socket> spillerSocket;
     private ArrayList<PrintWriter> spillerSend;
@@ -142,4 +143,16 @@ public class ServerNetværk {
         System.out.println("Message: \""+"Antal terninger: "+antalTerninger +" \" Sent to all players.");
     }
     
+    
+    public void kickSpiller(int spillerNr){
+        SpillerForbindelse spiller = spillere.get(spillerNr);
+        try {
+            spiller.lukForbindelse();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        spillere.remove(spillerNr);
+        
+        
+    }
 }

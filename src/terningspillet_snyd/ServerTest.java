@@ -26,6 +26,9 @@ public class ServerTest {
         server.modtagFraSpiller(0);
         server.sendRaflebaere(t, 0);
         server.sendAntalTernigerTilAlle(22);
+        server.kickSpiller(0);
+        Thread.sleep(5000);
+        //System.out.println(server.spillere.toString());
     }
 
 }

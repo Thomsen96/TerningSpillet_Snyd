@@ -22,6 +22,7 @@ public class ClientTest {
 //        System.out.println(spiller.modtag());
         System.out.println(spiller.modtagTerninger().toString());
         System.out.println(spiller.modtagAntalTerninger());
+        System.out.println(spiller.modtag());
     }
     
 }
