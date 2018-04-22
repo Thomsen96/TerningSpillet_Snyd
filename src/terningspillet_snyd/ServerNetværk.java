@@ -97,7 +97,6 @@ public class ServerNetværk {
     
     public void sendRaflebaere(Raflebaeger baeger, int spillerNr){
         SpillerForbindelse spiller = spillere.get(spillerNr);
-        spiller.spillerSend.println(baeger);
-        spiller.spillerSend.flush();
+        spiller.send(baeger.toString());
     }
 }
