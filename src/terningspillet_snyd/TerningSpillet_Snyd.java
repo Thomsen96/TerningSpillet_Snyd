@@ -13,50 +13,15 @@ import java.util.ArrayList;
  */
 public class TerningSpillet_Snyd {
     
-    public static Runde runde;
-    private static boolean debug = true;
+   public static Spil_tilstandsmaskine Spillet;
+    
+   public static void main(String[] args) {
 
-    /**
-     * @param args the command line arguments
-     */
-       public static void main(String[] args) {
-        // TODO code application logic here
-        runde = new Runde(3,6);
-        runde.printTerninger();
-        runde.start_rounde();
-        
-        runde.løgner();
-        
-        for (int i = 0; i < 10; i++) {
-            runde.gæt((int) (Math.random()* 6 + 1),(int) (Math.random()* 6 + 1));
-        }
-        
-        runde.løgner();
-        
-        for (int j = 0; j < 10; j++) {
-            runde.start_rounde();
-            runde.printTerninger();
-            //printstats();
+    Spillet.GAME(3,6);
+    //Spillet.Spilselv();
+    //Spillet.SeSpil();
+   }
 
-            for (int i = 0; i < 3; i++) {
-                runde.gæt((int) (Math.random()* 6 + 1),(int) (Math.random()* 6 + 1));
-            }
-
-            runde.løgner();
-        
-        }
-        
-             
-
-    }
-
-    private static void printstats() {
-        if(debug){
-            for (int i = 1; i < 7; i++) {
-                System.out.println("   Terninger    Komb");
-                System.out.println(i+"'er: "+runde.getAntalØjne(i)+" \t "+runde.getKombinationer(i));
-            }            
-        }    
-    }
     
 }
+

@@ -74,23 +74,23 @@ public class RundeTest {
     @Test
     public void testStart_rounde() {
         System.out.println("start_rounde");
-        Runde instance = new Runde(5, 6);
+        Spil instance = new Spil(5, 6);
         instance.start_rounde();
-        instance.printTerninger();
+        instance.printTerninger(0);
         instance.antal_terninger_ialt();
         
-        instance.gæt(2, 1);
-        instance.gæt(2, 2);
-        instance.gæt(2, 3);
-        instance.gæt(2, 4);
-        instance.gæt(2, 5);
-        instance.løgner();
+        instance.gæt(2, 1, instance.getHvis_tur() );
+        instance.gæt(2, 2, instance.getHvis_tur());
+        instance.gæt(2, 3, instance.getHvis_tur());
+        instance.gæt(2, 4, instance.getHvis_tur());
+        instance.gæt(2, 5, instance.getHvis_tur());
+        instance.løgner(instance.getHvis_tur());
         
         for (int i = 0; i < 7; i++) {
             instance.start_rounde();
-            instance.printTerninger();
-            instance.gæt(2, 100);
-            instance.løgner();            
+            instance.printTerninger(0);
+            instance.gæt(2, 100, instance.getHvis_tur());
+            instance.løgner(instance.getHvis_tur());            
         }
         
         assertEquals(instance.antal_terninger_ialt(), instance.liste_af_raflebaeger.get(0).antalTerninger());
