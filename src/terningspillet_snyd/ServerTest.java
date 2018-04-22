@@ -25,6 +25,7 @@ public class ServerTest {
         server.sendTilSpiller("hello player",0);
         server.modtagFraSpiller(0);
         server.sendRaflebaere(t, 0);
+        server.sendAntalTernigerTilAlle(22);
     }
 
 }

@@ -13,6 +13,8 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -81,6 +83,7 @@ public class SpillerNetværk {
             
             Scanner beskedScanner = new Scanner(besked);
             Raflebaeger baeger = new Raflebaeger(0, false);
+            
             System.out.println("modtag terning called; message recived:" +  besked );
             
             // if the first number is message, first int read is integer
@@ -95,6 +98,19 @@ public class SpillerNetværk {
             ioe.printStackTrace();
         }
         return null;
-        
+    }
+    
+    public int modtagAntalTerninger(){
+        try {
+            Scanner beskedScanner = new Scanner(indBuffer.readLine());
+            while(beskedScanner.hasNextInt() != true){
+                beskedScanner.next();
+            }
+            
+            return beskedScanner.nextInt();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return -1;
     }
 }

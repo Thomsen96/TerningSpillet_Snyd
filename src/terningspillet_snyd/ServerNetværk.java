@@ -118,4 +118,28 @@ public class ServerNetværk {
         spiller.send(baeger.toString());
         System.out.println("Message: \""+ baeger.toString() +" \" Sent to player "+spillerNr+".");
     }
+    
+    /**
+     * Sender antal terninger til bestemt spiller
+     * @param antalTerninger
+     * @param spillerNr 
+     */
+    public void sendAntalTernigerTilSpiller(int antalTerninger, int spillerNr){
+        SpillerForbindelse spiller = spillere.get(spillerNr);
+        spiller.send("Antal terninger: "+antalTerninger);
+        System.out.println("Message: \""+"Antal terninger: "+antalTerninger +" \" Sent to player "+spillerNr+".");
+    }
+    
+    /**
+     * Sender antal terninger til alle
+     * @param antalTerninger 
+     */
+    public void sendAntalTernigerTilAlle(int antalTerninger){
+        for(SpillerForbindelse spiller: spillere){
+        spiller.send("Antal terninger: "+antalTerninger);
+        }
+        
+        System.out.println("Message: \""+"Antal terninger: "+antalTerninger +" \" Sent to all players.");
+    }
+    
 }
