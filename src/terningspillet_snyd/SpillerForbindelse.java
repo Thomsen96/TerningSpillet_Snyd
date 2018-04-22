@@ -17,8 +17,8 @@ import java.net.Socket;
  */
 public class SpillerForbindelse {
     private final Socket spillerSocket;
-    public final PrintWriter spillerSend;
-    public final BufferedReader spillerRecive;
+    private final PrintWriter spillerSend;
+    private final BufferedReader spillerRecive;
     private String spillerNavn;
 
     
