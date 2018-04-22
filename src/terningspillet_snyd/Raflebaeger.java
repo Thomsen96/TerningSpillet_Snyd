@@ -97,9 +97,9 @@ public class Raflebaeger
         Collections.sort(terninger,sammenligner);
     }
 
-    private void Check_for_trapperegel() {
+    public void Check_for_trapperegel() {
         for (int i = 0; i < terninger.size(); i++) {
-            System.out.println("Terninger:"+terninger.get(i).getVærdi());
+            //System.out.println("Terninger:"+terninger.get(i).getVærdi());
             if((i+1) != terninger.get(i).getVærdi()){
                 trappe_regel = false;
                 i = terninger.size();

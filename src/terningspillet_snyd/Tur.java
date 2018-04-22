@@ -24,8 +24,8 @@ public class Tur {
         }
         
         Score = (antal*10)+værdi;  
-        System.out.println("Antal: "+antal+" Værdi: "+værdi+" Er det en gyldig kombi? "+GyldigKombi+" Score: "+Score);
-        
+        //System.out.println("Antal: "+antal+" Værdi: "+værdi+" Er det en gyldig kombi? "+GyldigKombi+" Score: "+Score);
+        System.out.println("Spiller "+spiller+" siger "+antal+" "+værdi+"'er");
     }
     
     public boolean isGyldigKombi() {
