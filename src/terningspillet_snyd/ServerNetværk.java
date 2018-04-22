@@ -44,7 +44,10 @@ public class ServerNetværk {
         spillere = new ArrayList<>();
         System.out.println("Server initiated");
     }
-    
+    /**
+     * Modtager forbindelse udefra og tilføjer denne til spiller listen.
+     * Denne funktion venter på forbindelse fra klient, uden timeout.
+     */
     public void modtagForbindelse() {
         try{
             Socket nySpiller = server_socket.accept();
@@ -65,14 +68,21 @@ public class ServerNetværk {
         }
     }
     
-    
+    /**
+     * sender string til alle spillere
+     * @param besked 
+     */
     public void sendTilAlle(String besked){
         for (SpillerForbindelse spiller : spillere){
             spiller.send(besked);
         }
         System.out.println("Message: \""+ besked +" \" Sent to all players.");
     }
-    
+    /**
+     * sender string til spillerNr.
+     * @param besked
+     * @param spillerNr 
+     */
     public void sendTilSpiller(String besked, int spillerNr){
         /*
         spillerSend.get(spiller).println(besked);
@@ -82,7 +92,11 @@ public class ServerNetværk {
         spillere.get(spillerNr).send(besked);
         System.out.println("Message: \""+ besked +" \" Sent to player "+spillerNr+".");
     }
-    
+    /**
+     * modtager besked fra spiller
+     * @param spillerNr
+     * @return 
+     */
     public String modtagFraSpiller(int spillerNr){
         try{
             //String besked = spillerRecive.get(spiller).readLine();
@@ -94,7 +108,11 @@ public class ServerNetværk {
         }
         return "error";
     }
-    
+    /**
+     * Sender raflebære til spiller nr.
+     * @param baeger
+     * @param spillerNr 
+     */
     public void sendRaflebaere(Raflebaeger baeger, int spillerNr){
         SpillerForbindelse spiller = spillere.get(spillerNr);
         spiller.send(baeger.toString());
