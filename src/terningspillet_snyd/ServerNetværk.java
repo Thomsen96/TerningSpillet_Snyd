@@ -115,7 +115,6 @@ public class ServerNetværk {
      */
     public void sendRaflebaere(Raflebaeger baeger, int spillerNr){
         SpillerForbindelse spiller = spillere.get(spillerNr);
-        //spiller.send(baeger.antalTerninger()+baeger.toString());
         spiller.send(baeger.toString());
         System.out.println("Message: \""+ baeger.toString() +" \" Sent to player "+spillerNr+".");
     }

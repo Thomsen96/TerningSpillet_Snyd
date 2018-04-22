@@ -77,7 +77,7 @@ public class SpillerNetværk {
             besked = besked.replace(",", "");   //dont need two spaces between ints
             besked = besked.replace("]", "");   //dont need to end on space
             
-            //replace to make space between ints, else scanner wont work
+            //replace to make space between ints, else scanner.hasNextInt wont work
             
             Scanner beskedScanner = new Scanner(besked);
             Raflebaeger baeger = new Raflebaeger(0, false);
@@ -87,7 +87,7 @@ public class SpillerNetværk {
             while(beskedScanner.hasNextInt()){
                 Terning t = new Terning(beskedScanner.nextInt());
                 baeger.tilføjTerning(t);
-                System.out.println("Ny terning tilføjet");
+                //System.out.println("Ny terning tilføjet");
             }
             
             return baeger;
