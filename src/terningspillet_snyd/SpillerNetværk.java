@@ -6,11 +6,13 @@
 package terningspillet_snyd;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Scanner;
 
 /**
  *
@@ -60,10 +62,39 @@ public class SpillerNetværk {
         return "error";
     }
     
-    
-    
     public void send(String besked){
         udBuffer.println(besked);
         udBuffer.flush();
+    }
+    /**
+     * Modtager raflebæger fra server
+     * Afhængig af formatet af Raflebaeger.toString();
+     * @return 
+     */
+    public Raflebaeger modtagTerninger(){
+        try{
+            String besked = indBuffer.readLine().replace("[", " ");
+            besked = besked.replace(",", "");   //dont need two spaces between ints
+            besked = besked.replace("]", "");   //dont need to end on space
+            
+            //replace to make space between ints, else scanner wont work
+            
+            Scanner beskedScanner = new Scanner(besked);
+            Raflebaeger baeger = new Raflebaeger(0, false);
+            System.out.println("modtag terning called; message recived:" +  besked );
+            
+            // if the first number is message, first int read is integer
+            while(beskedScanner.hasNextInt()){
+                Terning t = new Terning(beskedScanner.nextInt());
+                baeger.tilføjTerning(t);
+                System.out.println("Ny terning tilføjet");
+            }
+            
+            return baeger;
+        } catch (IOException ioe){
+            ioe.printStackTrace();
+        }
+        return null;
+        
     }
 }

@@ -19,6 +19,8 @@ public class ClientTest {
         SpillerNetværk spiller = new SpillerNetværk(8998, "James");
         System.out.println(spiller.modtag());
         spiller.send("Hello server");
+//        System.out.println(spiller.modtag());
+        System.out.println(spiller.modtagTerninger().toString());
     }
     
 }
