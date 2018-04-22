@@ -73,25 +73,31 @@ public class ServerNetværk {
         System.out.println("Message: \""+ besked +" \" Sent to all players.");
     }
     
-    public void sendTilSpiller(String besked, int spiller){
+    public void sendTilSpiller(String besked, int spillerNr){
         /*
         spillerSend.get(spiller).println(besked);
         spillerSend.get(spiller).flush();
         */
         
-        spillere.get(spiller).send(besked);
-        System.out.println("Message: \""+ besked +" \" Sent to player "+spiller+".");
+        spillere.get(spillerNr).send(besked);
+        System.out.println("Message: \""+ besked +" \" Sent to player "+spillerNr+".");
     }
     
-    public String modtagFraSpiller(int spiller){
+    public String modtagFraSpiller(int spillerNr){
         try{
             //String besked = spillerRecive.get(spiller).readLine();
-            String besked = spillere.get(spiller).modtag();
-            System.out.println("Message: \""+ besked +" \" Recived from player "+spiller+".");
+            String besked = spillere.get(spillerNr).modtag();
+            System.out.println("Message: \""+ besked +" \" Recived from player "+spillerNr+".");
             return besked;
         }catch (IOException ioe){
             ioe.printStackTrace();
         }
         return "error";
+    }
+    
+    public void sendRaflebaere(Raflebaeger baeger, int spillerNr){
+        SpillerForbindelse spiller = spillere.get(spillerNr);
+        spiller.spillerSend.println(baeger);
+        spiller.spillerSend.flush();
     }
 }
