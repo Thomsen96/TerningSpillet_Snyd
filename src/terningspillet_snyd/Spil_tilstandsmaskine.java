@@ -25,7 +25,7 @@ public class Spil_tilstandsmaskine {
                 }            
             }    
         }
-
+/*
     public static void SeSpil() {
         Spil = new Spil(3,6);
         Spil.printTerninger(0);
@@ -155,7 +155,8 @@ public class Spil_tilstandsmaskine {
 
        
     }
-
+*/
+    
     /**
      * Opretter et Spil objekt og udgør tilstandsmaskinen der styrer spillet
      * 
@@ -164,25 +165,22 @@ public class Spil_tilstandsmaskine {
      */
     public static void GAME(int spillere, int antal_terninger) {
         Spil = new Spil(spillere,antal_terninger); // Opret og start spillet 
-        String spil_status = "Start";
 
         while(true){
-           switch(spil_status) {
-                case "Start":
+           switch(Spil.getSpil_status()) {
+                case "start":
                     Spil.printTerninger(0); // Print terninger
                     Spil.start_rounde(); // Start runden
                     printstats(); // Viser alle kombi
-                    spil_status = "Spil";
                     break;
-                case "Spil":
+                case "spil":
                     System.out.println("Følgende kommandoer er tilladt:Guess(#,#), MyDices(#), AllDices! eller Liar!");
-                    spil_status = læsCommandov2();
+                    læsCommandov2(læsINTtastatur());
                     break;
                 case "runde_slut":
                     Spil.printTerninger(0); // Print terninger
                     Spil.start_rounde(); // Start en ny runde
                     printstats(); // Viser alle kombi
-                    spil_status = "Spil";
                     break; 
                 case "spil_slut":
                     System.out.println("Spillet er færdigt!");
@@ -194,8 +192,7 @@ public class Spil_tilstandsmaskine {
         }
     }
 
-    private static String læsCommandov2() {
-        String streng = læsINTtastatur();
+    private static void læsCommandov2(String streng) {
         if(streng.startsWith("Guess(") && streng.endsWith(")")){
             streng = streng.substring(6);
             int antal = 0;
@@ -233,12 +230,7 @@ public class Spil_tilstandsmaskine {
             Spil.gæt(værdi,antal);
             
         }else if(streng.matches("Liar!")){
-            Spil.løgner(Spil.getHvis_tur());
-            if(Spil.getSpil_status().matches("runde_slut")){
-                return "runde_slut";
-            }else if(Spil.getSpil_status().matches("spil_færdig")){
-                return "spil_slut"; 
-            }
+            Spil.løgner();
         }else if(streng.startsWith("MyDices(") && streng.endsWith(")")){
             int spiller = 0;
             streng = streng.substring(8,streng.indexOf(")"));
@@ -260,7 +252,6 @@ public class Spil_tilstandsmaskine {
         }else{
             System.out.println("Ugyldig kommando!: "+streng);
         }
-        return "Spil";
     }
 
      /**
