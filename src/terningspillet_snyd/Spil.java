@@ -78,43 +78,6 @@ public class Spil {
 
     }
 
-    void gæt(int værdi, int antal, int spiller) {
-
-        if (test_spilstatus()) {
-            return;
-        }
-
-        while (liste_af_raflebaeger.get(hvis_tur - 1).antalTerninger() == 0) {
-            Skift_tur();
-        }
-        
-        if(spiller != hvis_tur){
-            System.out.println("Det er ikke din tur endnu!");
-            return;
-        }
-        if (værdi > 1 && værdi < 7 && antal > 0) {
-            if (forrige_gæt == null) { // Hvis det er første tur i en ny runde
-                forrige_gæt = new Tur(værdi, antal, this.getKombinationer(værdi), hvis_tur);
-                Skift_tur();
-            } else { // Hvis det er 2+ tur.
-                nuværende_gæt = new Tur(værdi, antal, this.getKombinationer(værdi), hvis_tur);
-                
-                if (nuværende_gæt.Score > forrige_gæt.Score) { // Gyldigt gæt der er højere end forrige_gæt
-                    forrige_gæt = nuværende_gæt;
-                    Skift_tur();
-                } else {
-                    System.out.println("\t Din Score er ikke bedre end det bedste \"forrige_gæt\"");
-                    nuværende_gæt = null;
-                }
-            }
-            
-        }else {
-            System.out.print("Ugyldigt gæt! ");
-            System.out.println("Antal: " + antal + " Værdi: " + værdi);
-        }
-
-    }
-
     void gæt(int værdi, int antal) {
 
         if (test_spilstatus()) {
@@ -125,7 +88,6 @@ public class Spil {
             Skift_tur();
         }
         
-        //Hvis_turErDet();
         if (værdi > 1 && værdi < 7 && antal > 0) {
             if (forrige_gæt == null) { // Hvis det er første tur i en ny runde
                 forrige_gæt = new Tur(værdi, antal, this.getKombinationer(værdi), hvis_tur);
@@ -147,12 +109,12 @@ public class Spil {
         }
 
     }    
-    void løgner(int spiller) {
+    void løgner() {
         if (test_spilstatus()) {
             return;
         }
         
-        if(spiller != hvis_tur){
+        if(getHvis_tur() != hvis_tur){
             System.out.println("Det er ikke din tur endnu!");
             return;
         }
@@ -191,7 +153,7 @@ public class Spil {
             String text = liste_af_raflebaeger.get(spiller-1).toString();
             System.out.println("Spiller " + (spiller) + " " + text);
         }else{
-            // Udskriv Spillerne og deres terninger!
+            // Udskriv alle spillere og deres terninger!
             for (int i = 0; i < antal_spillere; i++) {
                 String text = liste_af_raflebaeger.get(i).toString();
                 System.out.println("Spiller " + (i + 1) + " " + text);
@@ -224,6 +186,7 @@ public class Spil {
 
         }
         runde_nr++;
+        spil_status = "spil";
     }
 
     private void runde_slut() {
@@ -253,7 +216,7 @@ public class Spil {
             }
         }
         if (tomme >= antal_spillere - 1) {
-            spil_status = "spil_færdig";
+            spil_status = "spil_slut";
             System.out.println("Spiller " + taber + " har tabt!");
         }
     }
@@ -263,7 +226,7 @@ public class Spil {
     }
 
     public boolean test_spilstatus() {
-        if (spil_status == "spil_færdig") {
+        if (spil_status == "spil_slut") {
             System.out.println("Genstart spillet! Spiller " + taber + " har tabt!");
             return true;
         }

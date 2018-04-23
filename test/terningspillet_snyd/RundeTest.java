@@ -70,7 +70,7 @@ public class RundeTest {
         fail("The test case is a prototype.");
     }
 
-    */
+    
     @Test
     public void testStart_rounde() {
         System.out.println("start_rounde");
@@ -96,5 +96,6 @@ public class RundeTest {
         assertEquals(instance.antal_terninger_ialt(), instance.liste_af_raflebaeger.get(0).antalTerninger());
 
     }
+*/
     
 }
