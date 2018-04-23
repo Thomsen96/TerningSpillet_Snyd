@@ -12,6 +12,7 @@ public class Terning
 		værdi = (int) (Math.random() * 6 + 1);
 	}
         
+        /** konstruktør der opretter en terning med en bestemt værdi*/
 	public Terning(int værdi)
 	{
 		// vælg en tilfældig side til at starte med

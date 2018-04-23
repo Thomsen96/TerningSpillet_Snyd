@@ -40,6 +40,14 @@ public class Spil {
 
         liste_af_raflebaeger = new ArrayList<Raflebaeger>(); // opret liste-array af "Raflebaeger" objekter
 
+        for (int i = 0; i < antal_spillere; i++) {
+            liste_af_raflebaeger.add(new Raflebaeger(antal_terninger));
+            liste_af_raflebaeger.get(i).ryst(); // Ryst raflebageret
+            //liste_af_raflebaeger.get(i).Check_for_trapperegel();
+        }        
+        
+        // Til test af trappereglen
+        /*
         for (int i = 0; i < antal_spillere-1; i++) {
             liste_af_raflebaeger.add(new Raflebaeger(antal_terninger, false));
             liste_af_raflebaeger.get(i).ryst(); // Ryst raflebageret
@@ -47,7 +55,8 @@ public class Spil {
             liste_af_raflebaeger.add(new Raflebaeger(antal_terninger, true));
             liste_af_raflebaeger.get(liste_af_raflebaeger.size()-1).Check_for_trapperegel();
             //liste_af_raflebaeger.get(i).ryst(); // Ryst raflebageret
-            spil_status = "start";
+        */
+        spil_status = "start";
         
     }
 
@@ -83,7 +92,6 @@ public class Spil {
             System.out.println("Det er ikke din tur endnu!");
             return;
         }
-        //Hvis_turErDet();
         if (værdi > 1 && værdi < 7 && antal > 0) {
             if (forrige_gæt == null) { // Hvis det er første tur i en ny runde
                 forrige_gæt = new Tur(værdi, antal, this.getKombinationer(værdi), hvis_tur);
@@ -133,7 +141,6 @@ public class Spil {
                     nuværende_gæt = null;
                 }
             }
-            
         }else {
             System.out.print("Ugyldigt gæt! ");
             System.out.println("Antal: " + antal + " Værdi: " + værdi);

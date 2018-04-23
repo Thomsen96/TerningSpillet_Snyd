@@ -86,6 +86,7 @@ public class Spil_tilstandsmaskine {
                                         antal += ((int) antal_string.charAt(i)-48)* (int) Math.pow(10, antal_string.length()-1-i);
                                 }
                             } catch (Exception e) {
+                                e.printStackTrace();
                                 antal = 0;
                             }
                             
@@ -99,6 +100,7 @@ public class Spil_tilstandsmaskine {
                                         værdi += ((int) værdi_string.charAt(i)-48)* (int) Math.pow(10, værdi_string.length()-1-i);
                                 }                                
                             } catch (Exception e) {
+                                e.printStackTrace();
                                 værdi = 0;
                             }
                             
@@ -168,8 +170,8 @@ public class Spil_tilstandsmaskine {
            switch(spil_status) {
                 case "Start":
                     Spil.printTerninger(0); // Print terninger
-                    printstats(); // Viser alle kombi
                     Spil.start_rounde(); // Start runden
+                    printstats(); // Viser alle kombi
                     spil_status = "Spil";
                     break;
                 case "Spil":
@@ -178,8 +180,8 @@ public class Spil_tilstandsmaskine {
                     break;
                 case "runde_slut":
                     Spil.printTerninger(0); // Print terninger
-                    printstats(); // Viser alle kombi
                     Spil.start_rounde(); // Start en ny runde
+                    printstats(); // Viser alle kombi
                     spil_status = "Spil";
                     break; 
                 case "spil_slut":
@@ -210,6 +212,7 @@ public class Spil_tilstandsmaskine {
                         antal += ((int) antal_string.charAt(i)-48)* (int) Math.pow(10, antal_string.length()-1-i);
                 }
             } catch (Exception e) {
+                e.printStackTrace();
                 antal = 0;
             }
 
@@ -223,6 +226,7 @@ public class Spil_tilstandsmaskine {
                         værdi += ((int) værdi_string.charAt(i)-48)* (int) Math.pow(10, værdi_string.length()-1-i);
                 }                                
             } catch (Exception e) {
+                e.printStackTrace();
                 værdi = 0;
             }
 
@@ -268,6 +272,7 @@ public class Spil_tilstandsmaskine {
         try {
             læstint = tastatur.nextLine();
         } catch (Exception e) {
+            e.printStackTrace();
             tastatur.nextLine(); // Læs linjeskift
             return "bob bob"; // Returner et ugyldt menu valg
         }
