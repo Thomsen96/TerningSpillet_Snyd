@@ -53,17 +53,7 @@ public class ServerNetværk {
         try{
             Socket nySpiller = server_socket.accept();
             SpillerForbindelse nySpillerForbindelse = new SpillerForbindelse(nySpiller);
-            /*
-            spillerSocket.add(nySpiller);
-            spillerSend.add(new PrintWriter(nySpiller.getOutputStream())) ;
-            spillerRecive.add(new BufferedReader(new InputStreamReader(nySpiller.getInputStream())));
-            spillerNavn.add(modtagFraSpiller(spillerSocket.size() -1));
-            */
-            
             spillere.add(nySpillerForbindelse);
-            nySpillerForbindelse.setSpillerNavn(nySpillerForbindelse.modtag());
-            System.out.println("Player "+ spillere.size() +" added to list, with name: " + nySpillerForbindelse.getSpillerNavn());
-            
         } catch (Exception e) {
            e.printStackTrace(); 
         }
