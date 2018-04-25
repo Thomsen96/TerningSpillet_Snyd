@@ -106,7 +106,7 @@ public class ServerNetværk {
      */
     public void sendRaflebaere(Raflebaeger baeger, int spillerNr){
         SpillerForbindelse spiller = spillere.get(spillerNr);
-        spiller.send(baeger.toString());
+        spiller.send("ctr:tern"+baeger.toString());
         System.out.println("Message: \""+ baeger.toString() +" \" Sent to player "+spillerNr+".");
     }
     
@@ -127,7 +127,7 @@ public class ServerNetværk {
      */
     public void sendAntalTernigerTilAlle(int antalTerninger){
         for(SpillerForbindelse spiller: spillere){
-        spiller.send("Antal terninger: "+antalTerninger);
+        spiller.send("ctr:antaltern "+antalTerninger);
         }
         
         System.out.println("Message: \""+"Antal terninger: "+antalTerninger +" \" Sent to all players.");
