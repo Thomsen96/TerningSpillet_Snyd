@@ -109,4 +109,8 @@ public class SpillerNetværk {
         }
         return -1;
     }
+    
+    boolean getisConnected() {
+        return forbindelse.isConnected();
+    }
 }

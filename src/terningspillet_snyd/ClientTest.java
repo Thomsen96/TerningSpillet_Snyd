@@ -16,13 +16,13 @@ public class ClientTest {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        SpillerNetværk spiller = new SpillerNetværk(8998, "James");
-        System.out.println(spiller.modtag());
-        spiller.send("Hello server");
-//        System.out.println(spiller.modtag());
-        System.out.println(spiller.modtagTerninger().toString());
-        System.out.println(spiller.modtagAntalTerninger());
-        System.out.println(spiller.modtag());
+        KlientFunk klient;
+        klient = new KlientFunk(8998,"James");
+        
+        while(klient.Forbundet()){
+            klient.modtagKommando();
+        }
+        
     }
     
 }
