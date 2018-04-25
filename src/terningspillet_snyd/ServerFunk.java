@@ -49,7 +49,7 @@ public class ServerFunk {
     }
     
     public void initierRunde(ArrayList<Raflebaeger> raflebærgre){
-    
+        
     }
     
 }
