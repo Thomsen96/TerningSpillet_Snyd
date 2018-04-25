@@ -36,6 +36,7 @@ public class ServerFunk {
             System.out.println("Player "+ navne.size() +" added to list, with name: " + navne.get(i));
             netværk.sendTilAlle("msg:Spilleren "+ navne.get(i)+" har tilsluttet sig spillet som spiller " + navne.size());
         }
+        netværk.sendTilAlle("ctr:initier spil");
     }
     
     public void initierSpil(){
@@ -44,7 +45,11 @@ public class ServerFunk {
         for (int i = 0; i < navne.size(); i++){
             netværk.sendTilAlle("msg:   Spiller " + (i+1) + " er "+ navne.get(i));
         }
+        netværk.sendTilAlle("ctr:initier runde");
     }
     
+    public void initierRunde(ArrayList<Raflebaeger> raflebærgre){
+    
+    }
     
 }
