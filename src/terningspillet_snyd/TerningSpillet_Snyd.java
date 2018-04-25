@@ -17,7 +17,7 @@ public class TerningSpillet_Snyd {
     
    public static void main(String[] args) {
 
-    Spillet.GAME(3,8);
+    Spillet.GAME(3,1);
     //Spillet.Spilselv();
     //Spillet.SeSpil();
    }

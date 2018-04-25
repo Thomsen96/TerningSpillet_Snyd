@@ -20,8 +20,21 @@ public class ServerTest {
         server.modtagForbindelse();
         //server.modtagForbindelse();
         //Thread.sleep(5000);
-        server.sendTilSpiller("hello player",0);
-        server.modtagFraSpiller(0);
+        server.sendTilSpiller("msg: Dav med dig",0);
+        server.sendTilSpiller("ctr:accepteret",0);
+        //server.sendTilSpiller("ctr:This is junk.png",0);
+        server.sendTilSpiller("ctr:initier spil",0);
+        server.sendTilSpiller("ctr:initier runde",0);
+        server.sendTilSpiller("ctr:start runde",0);
+        server.sendTilSpiller("ctr:tur",0);
+        server.sendTilSpiller("ctr:gaetaccepteret",0);
+        server.sendTilSpiller("ctr:runde slut",0);
+        server.sendTilSpiller("ctr:spil slut",0);
+        server.sendTilSpiller("ctr:tilslut spil",0);
+        //server.modtagFraSpiller(0);
+        
+        //server.kickSpiller(0);
+        
     }
 
 }

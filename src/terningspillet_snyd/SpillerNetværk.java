@@ -28,6 +28,7 @@ public class SpillerNetværk {
             udBuffer  = new PrintWriter(forbindelse.getOutputStream());
             indBuffer = new BufferedReader(new InputStreamReader(forbindelse.getInputStream()));
             
+            
             send(navn);
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,5 +66,9 @@ public class SpillerNetværk {
     public void send(String besked){
         udBuffer.println(besked);
         udBuffer.flush();
+    }
+
+    boolean getisConnected() {
+        return forbindelse.isConnected();
     }
 }
