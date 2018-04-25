@@ -48,8 +48,11 @@ public class ServerFunk {
         netværk.sendTilAlle("ctr:initier runde");
     }
     
-    public void initierRunde(ArrayList<Raflebaeger> raflebærgre){
-        
+    public void initierRunde(ArrayList<Raflebaeger> raflebærgre,int antalTerninger){
+        netværk.sendAntalTernigerTilAlle(antalTerninger);
+        for (int i = 0; i < navne.size(); i++){
+            netværk.sendRaflebaere(raflebærgre.get(i),i);
+        }
     }
     
 }
