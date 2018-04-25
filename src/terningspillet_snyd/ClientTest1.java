@@ -9,19 +9,15 @@ package terningspillet_snyd;
  *
  * @author john
  */
-public class ClientTest {
+public class ClientTest1 {
     
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        KlientFunk klient;
-        klient = new KlientFunk(8998,"James");
-        
-        while(klient.Forbundet()){
-            klient.modtagKommando();
-        }
+        SpillerNetværk spiller = new SpillerNetværk(8998, "James");
+        while(true) System.out.println(spiller.modtag());
         
     }
     
