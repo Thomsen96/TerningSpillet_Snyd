@@ -5,6 +5,8 @@
  */
 package terningspillet_snyd;
 
+import Klient.Klient_raflebaeger;
+
 /**
  *
  * @author chris
@@ -13,9 +15,13 @@ public class KlientFunk {
 
     private static SpillerNetværk spiller;
     private static String state = "Tilslut_spil";
+    public static Klient.Klient_raflebaeger baerger;
+            
 
     public KlientFunk(int portnavn, String navn) {
         spiller = new SpillerNetværk(portnavn, navn);
+        baerger = new Klient_raflebaeger(); // Opretter et tomt raflebaerger så der ikke opstår null-pointer exception, hvis der forsøges tilgået raflebærger før det er modtaget
+                
         //System.out.println(spiller.modtag());
         //spiller.send("Hello server");
 
@@ -72,6 +78,13 @@ public class KlientFunk {
                     state = "Ikke_tur";
                     System.out.println("Går fra Initier_runde til Ikke_tur");
                     return "\null";
+                }else if(streng.startsWith("ctr:tern")){
+                streng = streng.substring(7, streng.length());
+                baerger = spiller.modtagTerninger(streng);
+                
+                }else if(streng.startsWith("ctr:antaltern")){
+                
+                
                 }else{
                     System.out.println("Ugyldig kommando fra state \"Initier_runde\".");
                     return "\null";
@@ -90,7 +103,7 @@ public class KlientFunk {
                     return "\null";
                 }  
             case "Tur":
-                if(streng.matches("ctr:gaetaccepteret")){
+                if(streng.matches("ctr:gaet accepteret")){
                     state = "Ikke_tur";
                     System.out.println("Dit gæt blev accepteret og turen skifter til en anden (Går fra Tur til Ikke_tur)");
                     return "\null";

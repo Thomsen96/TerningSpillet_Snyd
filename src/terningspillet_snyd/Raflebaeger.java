@@ -114,7 +114,7 @@ public class Raflebaeger {
         return terninger.size();
     }
 
-    private void Sorter() {
+    public void Sorter() {
         TerningComparator sammenligner = new TerningComparator();
         Collections.sort(terninger, sammenligner);
     }

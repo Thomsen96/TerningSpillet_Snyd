@@ -33,7 +33,7 @@ public class ServerTest {
         server.sendTilSpiller("ctr:tilslut spil",0);
         //server.modtagFraSpiller(0);
         
-        //server.kickSpiller(0);
+        server.kickSpiller(0);
         
     }
 
