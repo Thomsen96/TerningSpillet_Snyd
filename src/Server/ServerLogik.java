@@ -39,7 +39,7 @@ public class ServerLogik {
                 case "spil":
                     System.out.println("Følgende kommandoer er tilladt:Guess(#,#), MyDices(#), AllDices! eller Liar!");
                     String komando = serverLogik.runde(spilLogik.getHvis_tur());
-                    læsCommandov2(komando);
+                    læsCommandov3(komando);
                     break;
                 case "runde_slut":
                     spilLogik.printTerninger(0); // Print terninger
@@ -63,7 +63,7 @@ public class ServerLogik {
      * Behandler en komando fra spille til spillogikken
      * @param streng 
      */
-    private static void læsCommandov2(String streng) {
+    private static void læsCommandov3(String streng) {
         if(streng.startsWith("Guess(") && streng.endsWith(")")){
             streng = streng.substring(6);
             int antal = 0;
@@ -107,27 +107,9 @@ public class ServerLogik {
             } else {
                 serverLogik.spillerGættedeFejl(turFørSkift, antal, værdi);
             }
-            
+            //end if - gæt
         }else if(streng.matches("Liar!")){
             spilLogik.løgner();
-        }else if(streng.startsWith("MyDices(") && streng.endsWith(")")){
-            int spiller = 0;
-            streng = streng.substring(8,streng.indexOf(")"));
-
-            for (int i = 0; i < streng.length(); i++) {
-                if(streng.charAt(i) > 57 || streng.charAt(i) < 48){
-                    spiller = -1;
-                    i = streng.length();
-                }else{
-                    spiller += ((int) streng.charAt(i)-48)* (int) Math.pow(10, streng.length()-1-i);
-                }
-            }
-        
-            spilLogik.printTerninger(spiller);
-
-        }else if(streng.trim().matches("AllDices!")){
-            spilLogik.printTerninger(0);
-
         }else{
             System.out.println("Ugyldig kommando!: "+streng);
         }
