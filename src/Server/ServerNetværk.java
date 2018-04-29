@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package terningspillet_snyd;
+package Server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import terningspillet_snyd.Raflebaeger;
+import terningspillet_snyd.SpillerForbindelse;
 
 /**
  *

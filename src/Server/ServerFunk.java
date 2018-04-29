@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package terningspillet_snyd;
+package Server;
 
 import java.util.ArrayList;
+import terningspillet_snyd.Raflebaeger;
 
 /**
  *
@@ -53,6 +54,12 @@ public class ServerFunk {
         for (int i = 0; i < navne.size(); i++){
             netværk.sendRaflebaere(raflebærgre.get(i),i);
         }
+        netværk.sendTilAlle("ctr:start runde");
     }
+    
+    public void runde(){
+        
+    }
+    
     
 }

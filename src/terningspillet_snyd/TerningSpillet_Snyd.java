@@ -5,6 +5,7 @@
  */
 package terningspillet_snyd;
 
+import Server.Spil_tilstandsmaskine;
 import java.util.ArrayList;
 
 /**

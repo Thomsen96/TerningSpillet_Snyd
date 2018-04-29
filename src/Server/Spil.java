@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package terningspillet_snyd;
+package Server;
 
 import java.util.ArrayList;
+import terningspillet_snyd.Raflebaeger;
+import terningspillet_snyd.Tur;
 
 /**
  *

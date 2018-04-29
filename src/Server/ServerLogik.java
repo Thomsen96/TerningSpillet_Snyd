@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package terningspillet_snyd;
+package Server;
 
-import static terningspillet_snyd.Spil_tilstandsmaskine.Spil;
+import Server.Spil;
+import static Server.Spil_tilstandsmaskine.Spil;
 
 /**
  *
@@ -27,6 +28,32 @@ public class ServerLogik {
         
         logik.modtagForbindelse(antalSpillere);
         logik.initierSpil();
+        logik.initierRunde(raflebærgre, antalTerninger);
+        
+        while(!spilLogik.getSpil_status().equals("spil slut")){
+           switch(spilLogik.getSpil_status()) {
+                case "start":
+                    spilLogik.printTerninger(0); // Print terninger
+                    spilLogik.start_rounde(); // Start runden
+                    printstats(); // Viser alle kombi
+                    break;
+                case "spil":
+                    System.out.println("Følgende kommandoer er tilladt:Guess(#,#), MyDices(#), AllDices! eller Liar!");
+                    læsCommandov2("");
+                    break;
+                case "runde_slut":
+                    spilLogik.printTerninger(0); // Print terninger
+                    spilLogik.start_rounde(); // Start en ny runde
+                    printstats(); // Viser alle kombi
+                    break; 
+                case "spil_slut":
+                    System.out.println("Spillet er færdigt!");
+                    return; // Afslut spil                
+                default:
+                    System.out.println("Fejl, ugyldig tilstand");
+                    return;    
+            }    
+        }
     }
     
     
@@ -96,5 +123,14 @@ public class ServerLogik {
         }else{
             System.out.println("Ugyldig kommando!: "+streng);
         }
+    }
+    
+    private static void printstats() {
+        if(debug){
+            for (int i = 1; i < 7; i++) {
+                System.out.println("   Terninger    Komb");
+                System.out.println(i+"'er: "+Spil.getAntalØjne(i)+" \t "+Spil.getKombinationer(i));
+            }            
+        }    
     }
 }
