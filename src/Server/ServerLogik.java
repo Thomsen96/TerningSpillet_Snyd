@@ -48,6 +48,7 @@ public class ServerLogik {
                     printstats(); // Viser alle kombi
                     break; 
                 case "spil_slut":
+                    serverLogik.spilSlut(spilLogik.getTaber());
                     System.out.println("Spillet er færdigt!");
                     return; // Afslut spil                
                 default:
