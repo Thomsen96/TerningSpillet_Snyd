@@ -122,4 +122,11 @@ public class ServerFunk {
         }
         netværk.sendTilAlle("ctr:runde slut");
     }
+
+    public void spillerUgyldigKomando(int spillerNr){
+        spillerNr--;
+        netværk.sendTilSpiller("msg:Din sendte kommando er ugyldig", spillerNr);
+        netværk.sendTilSpiller("ctr:ugyldigt", spillerNr);
+    }
+
 }

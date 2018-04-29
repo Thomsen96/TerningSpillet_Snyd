@@ -121,6 +121,9 @@ public class ServerLogik {
             }
         }else{
             System.out.println("Ugyldig kommando!: "+streng);
+            
+            //server funk
+            serverLogik.spillerUgyldigKomando(turFørSkift);
         }
     }
     
