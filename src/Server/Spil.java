@@ -62,6 +62,11 @@ public class Spil {
         
     }
 
+    /**
+     * Få antallets af terninger der viser "værdi"-antal øjne
+     * @param værdi
+     * @return
+     */
     public int getAntalØjne(int værdi) {
         if (værdi > 0 && værdi < 7) {
             return AntalØjne[værdi];
@@ -71,6 +76,11 @@ public class Spil {
 
     }
 
+    /**
+     * Få antallet af terninger der viser "værdi"-antal øjne OG terninger der viser "1" øje.
+     * @param værdi
+     * @return
+     */
     public int getKombinationer(int værdi) {
         if (værdi > 0 && værdi < 7) {
             return Kombinationer[værdi];
@@ -79,24 +89,32 @@ public class Spil {
         }
 
     }
-
+    
+    /**
+     * Spillerne kan angive et gæt med en værdi og hvor mange af dem han tror der er totalt mellem alle spillerne/
+     * i alles raflebaerger.
+     * @param værdi 
+     * @param antal
+     */
     void gæt(int værdi, int antal) {
 
         if (test_spilstatus()) {
             return;
         }
 
+        // Er nok outdated tror jeg?
         while (liste_af_raflebaeger.get(hvis_tur - 1).antalTerninger() == 0) {
             Skift_tur();
             System.out.println("Skifter tur da spilleren har tomt raflebægre");
         }
         
+        // Ser om værdi er gyldig og om antal er større end 0
         if (værdi > 1 && værdi < 7 && antal > 0) {
             if (forrige_gæt == null) { // Hvis det er første tur i en ny runde
-                forrige_gæt = new Tur(værdi, antal, this.getKombinationer(værdi), hvis_tur);
+                forrige_gæt = new Tur(værdi, antal, this.getKombinationer(værdi), hvis_tur); // Lav et gæt
                 Skift_tur();
-            } else { // Hvis det er 2+ tur.
-                nuværende_gæt = new Tur(værdi, antal, this.getKombinationer(værdi), hvis_tur);
+            } else { // Hvis det er 2.+ tur.
+                nuværende_gæt = new Tur(værdi, antal, this.getKombinationer(værdi), hvis_tur); // Lav et gæt
                 
                 if (nuværende_gæt.Score > forrige_gæt.Score) { // Gyldigt gæt der er højere end forrige_gæt
                     forrige_gæt = nuværende_gæt;
@@ -106,22 +124,28 @@ public class Spil {
                     nuværende_gæt = null;
                 }
             }
-        }else {
+        }else { // Hvis enten værdi eller antal er ugyldig
             System.out.print("Ugyldigt gæt! ");
             System.out.println("Antal: " + antal + " Værdi: " + værdi);
         }
 
-    }    
+    }
+    
+    /**
+     * Spilleren der har turen kan angive at den forrige spiller lyver:
+     */    
     void løgner() {
         if (test_spilstatus()) {
             return;
         }
         
+        // Tror også denne er outdated?
         if(getHvis_tur() != hvis_tur){
             System.out.println("Det er ikke din tur endnu!");
             return;
         }
 
+        // Tror også det her if statement er lige meget nu?
         if (forrige_gæt == null) {
             System.out.println("Du kan ikke sige, at du selv lyver!");
         } else {
@@ -170,7 +194,11 @@ public class Spil {
         if (test_spilstatus()) {
             return;
         }
-
+        //nuller inden den laves.
+        for (int i = 0; i <= 6; i++) {
+            AntalØjne[i] = 0;
+            Kombinationer[i] = 0;
+        }
         Hvis_turErDet();
         for (Raflebaeger raflebaeger : liste_af_raflebaeger) {
             if(raflebaeger.trappe_regel){
@@ -207,10 +235,7 @@ public class Spil {
             liste_af_raflebaeger.get(i).ryst(); // Ryst raflebageret
             //System.out.println("Rystet: "+i);
         }
-        for (int i = 0; i <= 6; i++) {
-            AntalØjne[i] = 0;
-            Kombinationer[i] = 0;
-        }
+        
         spil_status = "runde_slut";
 
         int tomme = 0;

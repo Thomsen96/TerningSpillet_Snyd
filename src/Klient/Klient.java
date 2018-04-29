@@ -32,7 +32,7 @@ public class Klient {
         vindue.add( faneblade );
         vindue.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // reagér på luk
         vindue.pack();                  // lad vinduet selv bestemme sin størrelse
-        vindue.setVisible(true);      
+        vindue.setVisible(true);   
         
         /*
         JFrame vindue = new JFrame("Snyd");

@@ -6,6 +6,8 @@
 package Klient;
 
 import java.util.Scanner;
+import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
 
 /**
  *
@@ -14,6 +16,7 @@ import java.util.Scanner;
 public class ClientTest {
     
    static Scanner tastatur = new Scanner(System.in);
+   static int antal_terninger;
     /**
      * @param args the command line arguments
      */
@@ -21,21 +24,42 @@ public class ClientTest {
         // TODO code application logic here
         KlientFunk klient;
         klient = new KlientFunk(8998,"Mark");
+        
+        JTabbedPane faneblade = new JTabbedPane();
+        
+        Velkomstskærm Velkomstskærm = new Velkomstskærm();
+        Spil_skærm Spil_skærm = new Spil_skærm();
+        Grafikdemo Grafikdemo = new Grafikdemo();
+        
+        faneblade.add("Spillet", Spil_skærm);
+        faneblade.add("Start", Velkomstskærm);
+        
+        Spil_skærm.setlogik(klient);
+        
+        
+        JFrame vindue = new JFrame("Snyd");
+        vindue.add( faneblade );
+        vindue.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // reagér på luk
+        vindue.pack();                  // lad vinduet selv bestemme sin størrelse
+        vindue.setVisible(true);
+
         int antal = 1;
         int værdi = 2;
         
+        
+                
         
         
         while(klient.Forbundet()){
             klient.modtagKommando();
             if(klient.getState() == "Tur"){
                 antal = læsINTtastatur();
-                værdi = læsINTtastatur();
                 
-                if(antal != -1){
-                    klient.sendKommando("Guess("+antal+","+værdi+")");
-                }else{
+                if(antal == -1){
                     klient.sendKommando("Liar!");
+                }else{
+                    værdi = læsINTtastatur();
+                    klient.sendKommando("Guess("+antal+","+værdi+")");
                 }
                 /*
                 if(antal == 11 && værdi == 6){
@@ -51,6 +75,7 @@ public class ClientTest {
                 */
             }
         }
+
         
     }
      /**

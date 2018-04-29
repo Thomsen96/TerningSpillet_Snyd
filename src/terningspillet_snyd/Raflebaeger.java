@@ -144,8 +144,8 @@ public class Raflebaeger {
                 i = terninger.size();
             }
         }
-        if (trappe_regel) {
-            System.out.println("Trappereglen er opfyldt!");
-        }
+//        if (trappe_regel) {
+//            System.out.println("Trappereglen er opfyldt!");
+//        }
     }
 }

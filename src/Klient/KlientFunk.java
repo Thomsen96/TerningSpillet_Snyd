@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import terningspillet_snyd.Terning;
 
 /**
  *
@@ -229,6 +230,15 @@ public class KlientFunk {
             spiller.send(streng);            
         }
         state = "Ikke_tur";
+    }
+
+    int[] getTerninger() {
+        int[] Terninger = new int[6];
+        
+        for (int i = 0; i < baerger.terninger.size(); i++) {
+            Terninger[i] = baerger.terninger.get(i).getVærdi();
+        }
+        return Terninger;
     }
 
 
