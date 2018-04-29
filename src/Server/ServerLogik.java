@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package terningspillet_snyd;
-
-import static terningspillet_snyd.Spil_tilstandsmaskine.Spil;
+package Server;
 
 /**
  *
@@ -27,6 +25,34 @@ public class ServerLogik {
         
         logik.modtagForbindelse(antalSpillere);
         logik.initierSpil();
+        
+        
+        while(!spilLogik.getSpil_status().equals("spil slut")){
+           switch(spilLogik.getSpil_status()) {
+                case "start":
+                    spilLogik.printTerninger(0); // Print terninger
+                    logik.initierRunde(Spil.liste_af_raflebaeger, spilLogik.antal_terninger_ialt()); //skriv til spillere runden begynder
+                    spilLogik.start_rounde(); // Start runden
+                    printstats(); // Viser alle kombi
+                    break;
+                case "spil":
+                    System.out.println("Følgende kommandoer er tilladt:Guess(#,#), MyDices(#), AllDices! eller Liar!");
+                    logik.runde(spilLogik.getHvis_tur());
+                    læsCommandov2();
+                    break;
+                case "runde_slut":
+                    spilLogik.printTerninger(0); // Print terninger
+                    spilLogik.start_rounde(); // Start en ny runde
+                    printstats(); // Viser alle kombi
+                    break; 
+                case "spil_slut":
+                    System.out.println("Spillet er færdigt!");
+                    return; // Afslut spil                
+                default:
+                    System.out.println("Fejl, ugyldig tilstand");
+                    return;    
+            }    
+        }
     }
     
     
@@ -96,5 +122,12 @@ public class ServerLogik {
         }else{
             System.out.println("Ugyldig kommando!: "+streng);
         }
+    }
+    
+    private static void printstats() {
+        for (int i = 1; i < 7; i++) {
+            System.out.println("   Terninger    Komb");
+            System.out.println(i+"'er: "+spilLogik.getAntalØjne(i)+" \t "+spilLogik.getKombinationer(i));
+        }      
     }
 }
