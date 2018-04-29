@@ -188,6 +188,7 @@ public class Spil {
             
 
         }
+        taber = -1; //Reset taber hvis spillet ikke er slut.
         runde_nr++;
         spil_status = "spil";
     }
@@ -221,8 +222,6 @@ public class Spil {
         if (tomme >= antal_spillere - 1) {
             spil_status = "spil_slut";
             System.out.println("Spiller " + taber + " har tabt!");
-        } else {
-            taber = -1; //Reset taber hvis spillet ikke er slut.
         }
     }
 
