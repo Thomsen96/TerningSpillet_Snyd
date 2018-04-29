@@ -5,9 +5,6 @@
  */
 package Server;
 
-import Server.Spil;
-import static Server.Spil_tilstandsmaskine.Spil;
-
 /**
  *
  * @author john
@@ -28,12 +25,13 @@ public class ServerLogik {
         
         logik.modtagForbindelse(antalSpillere);
         logik.initierSpil();
-        logik.initierRunde(raflebærgre, antalTerninger);
+        
         
         while(!spilLogik.getSpil_status().equals("spil slut")){
            switch(spilLogik.getSpil_status()) {
                 case "start":
                     spilLogik.printTerninger(0); // Print terninger
+                    logik.initierRunde(Spil.liste_af_raflebaeger, spilLogik.antal_terninger_ialt()); //skriv til spillere runden begynder
                     spilLogik.start_rounde(); // Start runden
                     printstats(); // Viser alle kombi
                     break;
@@ -126,11 +124,9 @@ public class ServerLogik {
     }
     
     private static void printstats() {
-        if(debug){
-            for (int i = 1; i < 7; i++) {
-                System.out.println("   Terninger    Komb");
-                System.out.println(i+"'er: "+Spil.getAntalØjne(i)+" \t "+Spil.getKombinationer(i));
-            }            
-        }    
+        for (int i = 1; i < 7; i++) {
+            System.out.println("   Terninger    Komb");
+            System.out.println(i+"'er: "+spilLogik.getAntalØjne(i)+" \t "+spilLogik.getKombinationer(i));
+        }      
     }
 }
