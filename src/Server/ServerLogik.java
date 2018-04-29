@@ -11,6 +11,7 @@ package Server;
  */
 public class ServerLogik {
     public static Spil spilLogik;
+    public static ServerFunk serverLogik;
     /**
      * @param args the command line arguments
      */
@@ -20,25 +21,25 @@ public class ServerLogik {
         int antalSpillere = 2;
         int antalTerninger = 6;
         
-        ServerFunk logik = new ServerFunk(port);
+        serverLogik = new ServerFunk(port);
         spilLogik = new Spil(antalSpillere, antalTerninger);
         
-        logik.modtagForbindelse(antalSpillere);
-        logik.initierSpil();
+        serverLogik.modtagForbindelse(antalSpillere);
+        serverLogik.initierSpil();
         
         
         while(!spilLogik.getSpil_status().equals("spil slut")){
            switch(spilLogik.getSpil_status()) {
                 case "start":
                     spilLogik.printTerninger(0); // Print terninger
-                    logik.initierRunde(Spil.liste_af_raflebaeger, spilLogik.antal_terninger_ialt()); //skriv til spillere runden begynder
+                    serverLogik.initierRunde(Spil.liste_af_raflebaeger, spilLogik.antal_terninger_ialt()); //skriv til spillere runden begynder
                     spilLogik.start_rounde(); // Start runden
                     printstats(); // Viser alle kombi
                     break;
                 case "spil":
                     System.out.println("Følgende kommandoer er tilladt:Guess(#,#), MyDices(#), AllDices! eller Liar!");
-                    logik.runde(spilLogik.getHvis_tur());
-                    læsCommandov2();
+                    String komando = serverLogik.runde(spilLogik.getHvis_tur());
+                    læsCommandov2(komando);
                     break;
                 case "runde_slut":
                     spilLogik.printTerninger(0); // Print terninger
@@ -67,6 +68,7 @@ public class ServerLogik {
             streng = streng.substring(6);
             int antal = 0;
             int værdi = 0;
+            int turFørSkift = spilLogik.getHvis_tur();
 
             try {
                 String antal_string = streng.substring(0,streng.indexOf(","));
@@ -98,6 +100,13 @@ public class ServerLogik {
             }
 
             spilLogik.gæt(værdi,antal);
+            
+            //Serveren sender beskeder ud om tilstanden af spillet
+            if (spilLogik.getHvis_tur() != turFørSkift){
+                serverLogik.spillerGættede(turFørSkift, antal, værdi);
+            } else {
+                serverLogik.spillerGættedeFejl(turFørSkift, antal, værdi);
+            }
             
         }else if(streng.matches("Liar!")){
             spilLogik.løgner();
