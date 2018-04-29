@@ -17,6 +17,10 @@ public class ServerFunk {
     private ArrayList<String> navne;
     private int antalSpillere;
     
+    /**
+     * Serveren oprettes på port, og er herefter klar til at modtage forbindelser
+     * @param port 
+     */
     public ServerFunk(int port){
         netværk = new ServerNetværk(port);
         navne = new ArrayList<>();
@@ -40,6 +44,10 @@ public class ServerFunk {
         netværk.sendTilAlle("ctr:initier spil");
     }
     
+    /**
+     * Skriver til spillerene at spillet starter
+     * Herefter gåes til "initier runde"
+     */
     public void initierSpil(){
         netværk.sendTilAlle("msg:Alle spillere er nu tilsluttet og spillet vil gå igang.");
         netværk.sendTilAlle("msg:Spillerlisten er som følger:");
@@ -49,6 +57,12 @@ public class ServerFunk {
         netværk.sendTilAlle("ctr:initier runde");
     }
     
+    /**
+     * Sender det totale antal terninger og hvert raflebære til deres respektive ejere.
+     * Herefter gåes til "start runde"
+     * @param raflebærgre
+     * @param antalTerninger 
+     */
     public void initierRunde(ArrayList<Raflebaeger> raflebærgre,int antalTerninger){
         netværk.sendAntalTernigerTilAlle(antalTerninger);
         for (int i = 0; i < navne.size(); i++){
@@ -57,6 +71,11 @@ public class ServerFunk {
         netværk.sendTilAlle("ctr:start runde");
     }
     
+    /**
+     * Fortæller spilleren der har tur det er hans tur og retunerer den kommando han sender.
+     * @param spillerNr
+     * @return kommando
+     */
     public String runde(int spillerNr){
         spillerNr--;
         netværk.sendTilSpiller("ctr:tur", spillerNr);
@@ -122,13 +141,20 @@ public class ServerFunk {
         }
         netværk.sendTilAlle("ctr:runde slut");
     }
-
+    
+    /**
+     * Spilleren har sendt en ugyldig kommando
+     * @param spillerNr 
+     */
     public void spillerUgyldigKomando(int spillerNr){
         spillerNr--;
         netværk.sendTilSpiller("msg:Din sendte kommando er ugyldig", spillerNr);
         netværk.sendTilSpiller("ctr:ugyldigt", spillerNr);
     }
-    
+    /**
+     * Spillet er slut, taberen udråbes og alle spillere kickes.
+     * @param taber 
+     */
     public void spilSlut(int taber){
         taber--;
         netværk.sendTilAlle("msg:Spillet er slut.");
