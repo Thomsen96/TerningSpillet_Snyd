@@ -92,8 +92,34 @@ public class ServerFunk {
      * SpillerNr kaldte snyd på spilleren før ham, boolean viser om det var korrekt.
      * @param spillerNr
      * @param sandt 
+     * @param tidligereGæt 
+     * @param visTerninger 
      */
-    public void spillerKaldteSnyd(int spillerNr, boolean sandt){
+    public void spillerKaldteSnyd(int spillerNr, boolean sandt, Tur tidligereGæt, String visTerninger){
+        spillerNr--;
+        int tidligereSpiller = tidligereGæt.spiller;
+        tidligereSpiller--;
+        //Spilleren kaldte snyd på spilleren før ham(tur.spiller), bolean fortæller om det var korrekt eller ej.
+        String tern1 = visTerninger.substring(0, visTerninger.indexOf(";"));
+        String tern2 = visTerninger.substring(visTerninger.indexOf(";"), visTerninger.length()-1);
         
+        if (sandt){
+            netværk.sendTilAlle("msg:"+navne.get(spillerNr)+" har kaldt snyd på "+
+                    navne.get(tidligereSpiller)+"'s gæt." );
+            netværk.sendTilAlle("msg:Terningerne var som følger:");
+            netværk.sendTilAlle("msg:"+tern1);
+            netværk.sendTilAlle("msg:"+tern2);
+            netværk.sendTilAlle("msg:Der var ikke "+tidligereGæt.antal+" "+tidligereGæt.værdi+"'ere.");
+            netværk.sendTilAlle("msg:"+navne.get(tidligereSpiller)+" har tabt runden!");
+        } else {
+            netværk.sendTilAlle("msg:"+navne.get(spillerNr)+" har kaldt snyd på "+
+                    navne.get(tidligereSpiller)+"'s gæt." );
+            netværk.sendTilAlle("msg:Terningerne var som følger:");
+            netværk.sendTilAlle("msg:"+tern1);
+            netværk.sendTilAlle("msg:"+tern2);
+            netværk.sendTilAlle("msg:Der var "+tidligereGæt.antal+" "+tidligereGæt.værdi+"'ere.");
+            netværk.sendTilAlle("msg:"+navne.get(spillerNr)+" har tabt runden!");
+        }
+        netværk.sendTilAlle("ctr:runde slut");
     }
 }
