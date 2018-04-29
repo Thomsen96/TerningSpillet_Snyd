@@ -11,6 +11,7 @@ package Server;
  */
 public class ServerLogik {
     public static Spil spilLogik;
+    public static ServerFunk serverLogik;
     /**
      * @param args the command line arguments
      */
@@ -20,25 +21,25 @@ public class ServerLogik {
         int antalSpillere = 2;
         int antalTerninger = 6;
         
-        ServerFunk logik = new ServerFunk(port);
+        serverLogik = new ServerFunk(port);
         spilLogik = new Spil(antalSpillere, antalTerninger);
         
-        logik.modtagForbindelse(antalSpillere);
-        logik.initierSpil();
+        serverLogik.modtagForbindelse(antalSpillere);
+        serverLogik.initierSpil();
         
         
         while(!spilLogik.getSpil_status().equals("spil slut")){
            switch(spilLogik.getSpil_status()) {
                 case "start":
                     spilLogik.printTerninger(0); // Print terninger
-                    logik.initierRunde(Spil.liste_af_raflebaeger, spilLogik.antal_terninger_ialt()); //skriv til spillere runden begynder
+                    serverLogik.initierRunde(Spil.liste_af_raflebaeger, spilLogik.antal_terninger_ialt()); //skriv til spillere runden begynder
                     spilLogik.start_rounde(); // Start runden
                     printstats(); // Viser alle kombi
                     break;
                 case "spil":
                     System.out.println("Følgende kommandoer er tilladt:Guess(#,#), MyDices(#), AllDices! eller Liar!");
-                    logik.runde(spilLogik.getHvis_tur());
-                    læsCommandov2();
+                    String komando = serverLogik.runde(spilLogik.getHvis_tur());
+                    læsCommandov3(komando);
                     break;
                 case "runde_slut":
                     spilLogik.printTerninger(0); // Print terninger
@@ -62,11 +63,12 @@ public class ServerLogik {
      * Behandler en komando fra spille til spillogikken
      * @param streng 
      */
-    private static void læsCommandov2(String streng) {
+    private static void læsCommandov3(String streng) {
         if(streng.startsWith("Guess(") && streng.endsWith(")")){
             streng = streng.substring(6);
             int antal = 0;
             int værdi = 0;
+            int turFørSkift = spilLogik.getHvis_tur();
 
             try {
                 String antal_string = streng.substring(0,streng.indexOf(","));
@@ -99,26 +101,15 @@ public class ServerLogik {
 
             spilLogik.gæt(værdi,antal);
             
+            //Serveren sender beskeder ud om tilstanden af spillet
+            if (spilLogik.getHvis_tur() != turFørSkift){
+                serverLogik.spillerGættede(turFørSkift, antal, værdi);
+            } else {
+                serverLogik.spillerGættedeFejl(turFørSkift, antal, værdi);
+            }
+            //end if - gæt
         }else if(streng.matches("Liar!")){
             spilLogik.løgner();
-        }else if(streng.startsWith("MyDices(") && streng.endsWith(")")){
-            int spiller = 0;
-            streng = streng.substring(8,streng.indexOf(")"));
-
-            for (int i = 0; i < streng.length(); i++) {
-                if(streng.charAt(i) > 57 || streng.charAt(i) < 48){
-                    spiller = -1;
-                    i = streng.length();
-                }else{
-                    spiller += ((int) streng.charAt(i)-48)* (int) Math.pow(10, streng.length()-1-i);
-                }
-            }
-        
-            spilLogik.printTerninger(spiller);
-
-        }else if(streng.trim().matches("AllDices!")){
-            spilLogik.printTerninger(0);
-
         }else{
             System.out.println("Ugyldig kommando!: "+streng);
         }

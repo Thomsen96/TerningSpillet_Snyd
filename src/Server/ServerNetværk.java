@@ -138,6 +138,7 @@ public class ServerNetværk {
     
     public void kickSpiller(int spillerNr){
         SpillerForbindelse spiller = spillere.get(spillerNr);
+        sendTilSpiller("ctr:kick", spillerNr);
         try {
             spiller.lukForbindelse();
         } catch (IOException ioe) {

@@ -57,10 +57,43 @@ public class ServerFunk {
         netværk.sendTilAlle("ctr:start runde");
     }
     
-    public void runde(int spillerNr){
+    public String runde(int spillerNr){
         spillerNr--;
         netværk.sendTilSpiller("ctr:tur", spillerNr);
+        netværk.sendTilAlle("Det er nu "+ navne.get(spillerNr));
+        return netværk.modtagFraSpiller(spillerNr);
     }
     
+    /**
+     * SpillerNr gættede og gættet blev godtaget
+     * @param spillerNr
+     * @param antal
+     * @param værdi 
+     */
+    public void spillerGættede(int spillerNr, int antal, int værdi){
+        spillerNr--;
+        netværk.sendTilSpiller("ctr:gaet accepteret", spillerNr);
+        netværk.sendTilAlle("msg:"+ navne.get(spillerNr)+" gættede på at der er "+ antal+" "+værdi+"'ere.");
+    }
     
+    /**
+     * SpillerNr gættete og gættet blev ikke godtaget
+     * @param spillerNr
+     * @param antal
+     * @param værdi 
+     */
+    public void spillerGættedeFejl(int spillerNr, int antal, int værdi){
+        spillerNr--;
+        netværk.sendTilSpiller("ctr:gaet ikke accepteret", spillerNr);
+        netværk.sendTilSpiller("msg:Dit gæt blev ikke accepteret, da det enten ikke var højere end det forrige gæt eller indeholdt ulovlige værdier", spillerNr);
+    }
+    
+    /**
+     * SpillerNr kaldte snyd på spilleren før ham, boolean viser om det var korrekt.
+     * @param spillerNr
+     * @param sandt 
+     */
+    public void spillerKaldteSnyd(int spillerNr, boolean sandt){
+        
+    }
 }

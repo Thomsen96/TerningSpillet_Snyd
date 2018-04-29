@@ -88,6 +88,7 @@ public class Spil {
 
         while (liste_af_raflebaeger.get(hvis_tur - 1).antalTerninger() == 0) {
             Skift_tur();
+            System.out.println("Skifter tur da spilleren har tomt raflebægre");
         }
         
         if (værdi > 1 && værdi < 7 && antal > 0) {
