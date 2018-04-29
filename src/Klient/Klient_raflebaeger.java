@@ -39,19 +39,20 @@ public class Klient_raflebaeger extends terningspillet_snyd.Raflebaeger{
 
     public void tilføjTerning(String besked) {
 
-            
-            //replace to make space between ints, else scanner.hasNextInt wont work
-            
-            Scanner beskedScanner = new Scanner(besked);
-            
-            System.out.println("modtag terning called; message recived:" +  besked );
-            
-            // if the first number is message, first int read is integer
-            while(beskedScanner.hasNextInt()){
-                Terning t = new Terning(beskedScanner.nextInt());
-                this.tilføjTerning(t);
-                //System.out.println("Ny terning tilføjet");
-            }        
+        Scanner beskedScanner = new Scanner(besked);
+
+        System.out.println("modtag terning called; message recived:" +  besked );
+
+        // if the first number is message, first int read is integer
+        while(beskedScanner.hasNextInt()){
+            Terning t = new Terning(beskedScanner.nextInt());
+            this.tilføjTerning(t);
+            //System.out.println("Ny terning tilføjet");
+        }
+        
+        for (Terning terning : terninger) {
+            System.out.println(" "+terning.getVærdi());
+        }
     }
     
     

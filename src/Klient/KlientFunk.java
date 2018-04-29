@@ -3,9 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package terningspillet_snyd;
+package Klient;
 
+import Klient.SpillerNetværk;
 import Klient.Klient_raflebaeger;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,13 +19,15 @@ public class KlientFunk {
 
     private static SpillerNetværk spiller;
     private static String state = "Tilslut_spil";
-    public static Klient.Klient_raflebaeger baerger;
+    public static Klient_raflebaeger baerger;
             
 
     public KlientFunk(int portnavn, String navn) {
         spiller = new SpillerNetværk(portnavn, navn);
-        baerger = new Klient_raflebaeger(); // Opretter et tomt raflebaerger så der ikke opstår null-pointer exception, hvis der forsøges tilgået raflebærger før det er modtaget
-                
+        
+        // Opretter et tomt raflebaerger så der ikke opstår null-pointer exception, hvis der forsøges tilgået raflebærger før det er modtaget
+        baerger = new Klient_raflebaeger();   
+        
         //System.out.println(spiller.modtag());
         //spiller.send("Hello server");
 
@@ -38,10 +44,23 @@ public class KlientFunk {
     String modtagKommando() {
         String streng = spiller.modtag();
                                     // && streng.endsWith("\n")
+        if(streng == null){
+            System.out.println("Der modtages null.");
+            return "\null";
+        }
         if (streng.startsWith("msg:")) {
                     streng = streng.substring(4, streng.length());
                     System.out.println("Modtog en besked fra server: \""+streng+"\".");
                     return streng;
+        }else if(streng.matches("ctr:kick")){
+            try {
+                spiller.lukforbindelse();
+                streng = "Du er blevet kicket!";
+                System.out.println(""+streng);
+                return streng;
+            } catch (IOException ex) {
+                Logger.getLogger(KlientFunk.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
         switch (state) {
@@ -78,17 +97,21 @@ public class KlientFunk {
                     state = "Ikke_tur";
                     System.out.println("Går fra Initier_runde til Ikke_tur");
                     return "\null";
-                }else if(streng.startsWith("ctr:tern")){
-                streng = streng.substring(7, streng.length());
-                baerger = spiller.modtagTerninger(streng);
+                }else if(streng.startsWith("ctr:tern") && streng.endsWith("]")){ // Modtag klientens terninger
+                    System.out.println("Står i Initier_runde og modtager terninger: "+streng);
+                    streng = streng.substring(8, streng.length()); // Fjerner
+                    baerger = spiller.modtagTerninger(streng);
+                    baerger.toString();
+                    return "\null";
                 
-                }else if(streng.startsWith("ctr:antaltern")){
-                
+                }else if(streng.startsWith("ctr:antaltern")){ // Modtag total antal terninger
+                    System.out.println("Står i Initier_runde og modtager total antal terninger: "+streng);
                 
                 }else{
-                    System.out.println("Ugyldig kommando fra state \"Initier_runde\".");
+                    System.out.println("Ugyldig kommando fra state \"Initier_runde\".: "+streng);
                     return "\null";
                 }
+                
             case "Ikke_tur":
                 if(streng.matches("ctr:tur")){
                     state = "Tur";
@@ -99,7 +122,7 @@ public class KlientFunk {
                     System.out.println("Går fra Ikke_tur til Runde_slut");
                     return "\null";                    
                 }else{
-                    System.out.println("Ugyldig kommando fra state \"Ikke_tur\".");
+                    System.out.println("Ugyldig kommando fra state \"Ikke_tur\".: "+streng);
                     return "\null";
                 }  
             case "Tur":
@@ -145,7 +168,7 @@ public class KlientFunk {
 
     }
 
-    boolean Forbundet() {
+    public boolean Forbundet() {
         return spiller.getisConnected();
     }
 

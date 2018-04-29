@@ -5,6 +5,8 @@
  */
 package terningspillet_snyd;
 
+import Klient.SpillerNetværk;
+
 /**
  *
  * @author john

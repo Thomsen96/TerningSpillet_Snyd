@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package terningspillet_snyd;
+package Klient;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -64,22 +64,26 @@ public class SpillerNetværk {
         udBuffer.println(besked);
         udBuffer.flush();
     }
+    
     /**
      * Modtager raflebæger fra server
      * Afhængig af formatet af Raflebaeger.toString();
      * @return 
      */
-    public Klient.Klient_raflebaeger modtagTerninger(String beskeden){
+    public Klient_raflebaeger modtagTerninger(String beskeden){
         try{
+            /*
             String besked = indBuffer.readLine().replace("[", " ");
             besked = besked.replace(",", "");   //dont need two spaces between ints
             besked = besked.replace("]", "");   //dont need to end on space
-            //ctr:tern[5, 4, 3]
-            Klient.Klient_raflebaeger baeger;
-            baeger = new Klient.Klient_raflebaeger(besked);
+            */
+            beskeden = beskeden.replace("[", " ").replace(",", "").replace("]", "");
+            Klient_raflebaeger baeger;
+            baeger = new Klient_raflebaeger(beskeden);
             return baeger;
-        } catch (IOException ioe){
-            ioe.printStackTrace();
+        } catch (Exception e){ // IOException ioe
+            e.printStackTrace();
+            //ioe.printStackTrace();
         }
         return null;
     }
@@ -98,7 +102,11 @@ public class SpillerNetværk {
         return -1;
     }
     
-    boolean getisConnected() {
-        return forbindelse.isConnected();
+    public boolean getisConnected() {
+        return !forbindelse.isClosed();
+    }
+
+    void lukforbindelse() throws IOException {
+        forbindelse.close();
     }
 }

@@ -27,15 +27,18 @@ public class ServerTest {
         //server.sendTilSpiller("ctr:This is junk.png",0);
         server.sendTilSpiller("ctr:initier spil",0);
         server.sendTilSpiller("ctr:initier runde",0);
+        server.sendTilSpiller("ctr:tern[5, 4, 3]",0);
         server.sendTilSpiller("ctr:start runde",0);
         server.sendTilSpiller("ctr:tur",0);
-        server.sendTilSpiller("ctr:gaetaccepteret",0);
+        server.sendTilSpiller("ctr:gaet accepteret",0);
         server.sendTilSpiller("ctr:runde slut",0);
         server.sendTilSpiller("ctr:spil slut",0);
         server.sendTilSpiller("ctr:tilslut spil",0);
         //server.modtagFraSpiller(0);
         
+        server.sendTilSpiller("ctr:kick",0);
         server.kickSpiller(0);
+        
         
     }
 
