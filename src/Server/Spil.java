@@ -191,6 +191,8 @@ public class Spil {
         taber = -1; //Reset taber hvis spillet ikke er slut.
         runde_nr++;
         spil_status = "spil";
+        forrige_gæt = null;
+        nuværende_gæt = null;
     }
 
     private void runde_slut() {
@@ -209,8 +211,6 @@ public class Spil {
             AntalØjne[i] = 0;
             Kombinationer[i] = 0;
         }
-        forrige_gæt = null;
-        nuværende_gæt = null;
         spil_status = "runde_slut";
 
         int tomme = 0;

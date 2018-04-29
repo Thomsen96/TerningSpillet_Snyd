@@ -28,7 +28,7 @@ public class ServerLogik {
         serverLogik.initierSpil();
         
         
-        while(!spilLogik.getSpil_status().equals("spil slut")){
+        while(true){
            switch(spilLogik.getSpil_status()) {
                 case "start":
                     spilLogik.printTerninger(0); // Print terninger
@@ -42,6 +42,7 @@ public class ServerLogik {
                     læsCommandov3(komando);
                     break;
                 case "runde_slut":
+                    serverLogik.rundeSlut();
                     spilLogik.printTerninger(0); // Print terninger
                     serverLogik.initierRunde(Spil.liste_af_raflebaeger, spilLogik.antal_terninger_ialt()); //skriv til spillere runden begynder
                     spilLogik.start_rounde(); // Start en ny runde
@@ -115,10 +116,18 @@ public class ServerLogik {
             spilLogik.løgner();
             
             //Serverlogikken sender beskeder ud om tilstanden.
-            if (spilLogik.getTaber() != turFørSkift){
-                serverLogik.spillerKaldteSnyd(turFørSkift, true, spilLogik.forrige_gæt, stringStats());
-            } else {
-                serverLogik.spillerKaldteSnyd(turFørSkift, false, spilLogik.forrige_gæt, stringStats());
+            try {
+                
+            if(spilLogik.forrige_gæt != null){ 
+                if (spilLogik.getTaber() != turFørSkift ){
+                    serverLogik.spillerKaldteSnyd(turFørSkift, true, spilLogik.forrige_gæt, stringStats());
+                } else { 
+                    serverLogik.spillerKaldteSnyd(turFørSkift, false, spilLogik.forrige_gæt, stringStats());
+                }
+            }
+            }catch (Exception e) {
+                e.printStackTrace();
+                System.err.println("Streng er: "+streng);
             }
         }else{
             System.out.println("Ugyldig kommando!: "+streng);
@@ -126,6 +135,7 @@ public class ServerLogik {
             //server funk
             serverLogik.spillerUgyldigKomando(turFørSkift);
         }
+
     }
     
     private static void printstats() {

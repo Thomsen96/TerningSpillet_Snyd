@@ -19,8 +19,11 @@ public class ClientTest1 {
     public static void main(String[] args) {
         // TODO code application logic here
         SpillerNetværk spiller = new SpillerNetværk(8998, "James");
-        while(true) System.out.println(spiller.modtag());
-        
+        /*
+        while(true){
+            System.out.println(spiller.modtag());
+        }
+        */
     }
     
 }

@@ -68,7 +68,7 @@ public class KlientFunk {
             ex.printStackTrace();
             return "\null";
         }
-                                    // && streng.endsWith("\n")
+
         if(streng == null || streng.matches("error")){
             System.out.println("Der modtages null eller \"error\".");
             return "\null";
@@ -152,10 +152,17 @@ public class KlientFunk {
                     state = "Tur";
                     System.out.println("Går fra Ikke_tur til Tur");
                     return "\null";
+                }else if(streng.matches("ctr:gaet ikke accepteret")){
+                    state = "Tur_ikke_accepteret";
+                    System.out.println("Dit gæt blev ikke accepteret!");
+                    return "\null";
                 }else if(streng.matches("ctr:runde slut")){
                     state = "Runde_slut";
                     System.out.println("Går fra Ikke_tur til Runde_slut");
                     return "\null";                    
+                }else if(streng.matches("ctr:gaet accepteret")){
+                    System.out.println("Dit gæt blev accepteret og turen skifter til en anden (Bliver i Ikke_tur)");
+                    return "\null";
                 }else{
                     System.out.println("Ugyldig kommando fra state \"Ikke_tur\".: "+streng);
                     return "\null";
@@ -171,6 +178,12 @@ public class KlientFunk {
                     return "\null";                    
                 }else{
                     System.out.println("Ugyldig kommando fra state \"Tur\".");
+                    return "\null";
+                }
+            case "Tur_ikke_accepteret":
+                if(streng.matches("ctr:tur")){
+                    state = "Tur";
+                    System.out.println("Går fra Tur_ikke_accepteret til Tur");
                     return "\null";
                 }
             case "Runde_slut":
@@ -208,13 +221,14 @@ public class KlientFunk {
     }
 
     void sendKommando(String streng) {
-        if (streng.startsWith("ctr:Guess(") && streng.endsWith(")")) {
+        if (streng.startsWith("Guess(") && streng.endsWith(")")) {
             System.out.println("Sender \""+streng+"\" til serveren");
             spiller.send(streng);
-        }else if(streng.contains("ctr:Liar!")){
+        }else if(streng.matches("Liar!")){
             System.out.println("Sender \""+streng+"\" til serveren");
             spiller.send(streng);            
         }
+        state = "Ikke_tur";
     }
 
 

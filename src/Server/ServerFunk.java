@@ -78,8 +78,8 @@ public class ServerFunk {
      */
     public String runde(int spillerNr){
         spillerNr--;
+        netværk.sendTilAlle("msg:Det er nu "+ navne.get(spillerNr));
         netværk.sendTilSpiller("ctr:tur", spillerNr);
-        netværk.sendTilAlle("Det er nu "+ navne.get(spillerNr));
         return netværk.modtagFraSpiller(spillerNr);
     }
     
@@ -115,7 +115,7 @@ public class ServerFunk {
      * @param visTerninger 
      */
     public void spillerKaldteSnyd(int spillerNr, boolean sandt, Tur tidligereGæt, String visTerninger){
-        spillerNr--;
+         spillerNr--;
         int tidligereSpiller = tidligereGæt.spiller;
         tidligereSpiller--;
         //Spilleren kaldte snyd på spilleren før ham(tur.spiller), bolean fortæller om det var korrekt eller ej.
@@ -164,5 +164,9 @@ public class ServerFunk {
             navne.remove(0);        //da de fjernes fra samme liste. Derfor smiddes spiller 0 ud
         }
         
+    }
+
+    void rundeSlut() {
+        netværk.sendTilAlle("ctr:initier runde");
     }
 }

@@ -69,7 +69,7 @@ public class ServerNetværk {
         for (SpillerForbindelse spiller : spillere){
             spiller.send(besked);
         }
-        System.out.println("Message: \""+ besked +" \" Sent to all players.");
+        System.out.println("Message: \""+ besked +"\" Sent to all players.");
     }
     /**
      * sender string til spillerNr.
@@ -83,7 +83,7 @@ public class ServerNetværk {
         */
         
         spillere.get(spillerNr).send(besked);
-        System.out.println("Message: \""+ besked +" \" Sent to player "+spillerNr+".");
+        System.out.println("Message: \""+ besked +"\" Sent to player "+spillerNr+".");
     }
     /**
      * modtager besked fra spiller
@@ -94,7 +94,7 @@ public class ServerNetværk {
         try{
             //String besked = spillerRecive.get(spiller).readLine();
             String besked = spillere.get(spillerNr).modtag();
-            System.out.println("Message: \""+ besked +" \" Recived from player "+spillerNr+".");
+            System.out.println("Message: \""+ besked +"\" Recived from player "+spillerNr+".");
             return besked;
         }catch (IOException ioe){
             ioe.printStackTrace();
@@ -108,8 +108,9 @@ public class ServerNetværk {
      */
     public void sendRaflebaere(Raflebaeger baeger, int spillerNr){
         SpillerForbindelse spiller = spillere.get(spillerNr);
-        spiller.send("ctr:tern"+baeger.toString());
-        System.out.println("Message: \""+ baeger.toString() +" \" Sent to player "+spillerNr+".");
+        String streng = "ctr:tern"+baeger.toString();
+        spiller.send(streng);
+        System.out.println("Message: \""+ streng +"\" Sent to player "+spillerNr+".");
     }
     
     /**
@@ -119,8 +120,9 @@ public class ServerNetværk {
      */
     public void sendAntalTernigerTilSpiller(int antalTerninger, int spillerNr){
         SpillerForbindelse spiller = spillere.get(spillerNr);
-        spiller.send("Antal terninger: "+antalTerninger);
-        System.out.println("Message: \""+"Antal terninger: "+antalTerninger +" \" Sent to player "+spillerNr+".");
+        String streng = "ctr:antaltern "+antalTerninger;
+        spiller.send(streng);
+        System.out.println("Message: \""+streng+"\" Sent to player "+spillerNr+".");
     }
     
     /**
@@ -128,11 +130,12 @@ public class ServerNetværk {
      * @param antalTerninger 
      */
     public void sendAntalTernigerTilAlle(int antalTerninger){
+        String streng = "ctr:antaltern "+antalTerninger;
         for(SpillerForbindelse spiller: spillere){
-        spiller.send("ctr:antaltern "+antalTerninger);
+        spiller.send(streng);
         }
         
-        System.out.println("Message: \""+"Antal terninger: "+antalTerninger +" \" Sent to all players.");
+        System.out.println("Message: \""+streng+"\" Sent to all players.");
     }
     
     
