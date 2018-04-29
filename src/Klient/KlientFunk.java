@@ -8,6 +8,7 @@ package Klient;
 import Klient.SpillerNetværk;
 import Klient.Klient_raflebaeger;
 import java.io.IOException;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,8 +21,13 @@ public class KlientFunk {
     private static SpillerNetværk spiller;
     private static String state = "Tilslut_spil";
     public static Klient_raflebaeger baerger;
+    public static int antal_terninger_ialt = 0;
             
-
+    /**
+     * Kontruktør der opretter et objekt af SpillerNetværk og parser portnavn og navn videre til den. Derudover opretter den også et tomt raflebaeger.
+     * @param portnavn Portnavnet
+     * @param navn Spiller navnet klienten vil bruge
+     */
     public KlientFunk(int portnavn, String navn) {
         spiller = new SpillerNetværk(portnavn, navn);
         
@@ -33,19 +39,38 @@ public class KlientFunk {
 
     }
 
+    /**
+     * Returner tilstandsmaskinens tilstand
+     * @return state
+     */
     public static String getState() {
         return state;
     }
 
+    /**
+     * Angiv tilstanden som man ønsker at sætte tilstandsmaskinen i
+     * @param state Tilstanden
+     */
     public static void setState(String state) {
         KlientFunk.state = state;
     }
-
+    
+    /**
+     * Modtager kommandoer over netværket via SpillerNetværk objektet og udfra tilstandsmaskines
+     * tilstand kan kommandoerne udfører funktioner.
+     * @return String Strengen indeholder beskeder der skal udskrives til brugeren
+     */
     String modtagKommando() {
-        String streng = spiller.modtag();
+        String streng;
+        try {
+            streng = spiller.modtag();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return "\null";
+        }
                                     // && streng.endsWith("\n")
-        if(streng == null){
-            System.out.println("Der modtages null.");
+        if(streng == null || streng.matches("error")){
+            System.out.println("Der modtages null eller \"error\".");
             return "\null";
         }
         if (streng.startsWith("msg:")) {
@@ -59,7 +84,7 @@ public class KlientFunk {
                 System.out.println(""+streng);
                 return streng;
             } catch (IOException ex) {
-                Logger.getLogger(KlientFunk.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
         }
         
@@ -99,14 +124,24 @@ public class KlientFunk {
                     return "\null";
                 }else if(streng.startsWith("ctr:tern") && streng.endsWith("]")){ // Modtag klientens terninger
                     System.out.println("Står i Initier_runde og modtager terninger: "+streng);
-                    streng = streng.substring(8, streng.length()); // Fjerner
+                    streng = streng.substring(8, streng.length()); // Fjerner tekst-karakterne
                     baerger = spiller.modtagTerninger(streng);
                     baerger.toString();
                     return "\null";
                 
                 }else if(streng.startsWith("ctr:antaltern")){ // Modtag total antal terninger
-                    System.out.println("Står i Initier_runde og modtager total antal terninger: "+streng);
-                
+                    System.out.println("Står i Initier_runde og modtager total antal terninger..");
+                    streng = streng.trim().replace(" ", "");
+                    streng = streng.substring(13, streng.length()); // Fjerner "ctr:antaltern"
+                    Scanner beskedScanner = new Scanner(streng);
+                    if(beskedScanner.hasNextInt()){
+                        antal_terninger_ialt = beskedScanner.nextInt();
+                    }else{
+                        System.err.println("Besked scanner læste ikke en int! Så der er: "+antal_terninger_ialt+" terninger registeret!");
+                        return "\null";
+                    }
+                    System.out.println("Der er "+streng+" antal terninger i alt.");
+                    return "Der er "+streng+" antal terninger i alt";
                 }else{
                     System.out.println("Ugyldig kommando fra state \"Initier_runde\".: "+streng);
                     return "\null";
@@ -170,6 +205,16 @@ public class KlientFunk {
 
     public boolean Forbundet() {
         return spiller.getisConnected();
+    }
+
+    void sendKommando(String streng) {
+        if (streng.startsWith("ctr:Guess(") && streng.endsWith(")")) {
+            System.out.println("Sender \""+streng+"\" til serveren");
+            spiller.send(streng);
+        }else if(streng.contains("ctr:Liar!")){
+            System.out.println("Sender \""+streng+"\" til serveren");
+            spiller.send(streng);            
+        }
     }
 
 

@@ -19,8 +19,13 @@ public class ClientTest {
         KlientFunk klient;
         klient = new KlientFunk(8998,"James");
         
+        
+        
         while(klient.Forbundet()){
             klient.modtagKommando();
+            if(klient.getState() == "Tur"){
+                klient.sendKommando("ctr:Guess(4,3)");
+            }
         }
         
     }

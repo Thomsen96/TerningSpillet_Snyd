@@ -10,7 +10,15 @@ public class Raflebaeger {
      * listen af terninger, der er i raflebægeret
      */
     public ArrayList<Terning> terninger;
+
+    /**
+     * Holder styr på om raflebaegeret er tomt
+     */
     public boolean tom = false;
+    
+    /**
+     * Holder styr på om trappe reglen er opfyldt for raflebaegeret
+     */
     public boolean trappe_regel = true;
 
     /**
@@ -109,16 +117,25 @@ public class Raflebaeger {
     public String toString() {// (listens toString() kalder toString() på hver terning)
         return terninger.toString();
     }
-
+    
+    /**
+     * Returner antallet af terninger fra "terninger" listen.
+     */
     public int antalTerninger() {
         return terninger.size();
     }
 
+    /**
+     * Sortere listen "terninger" med terninge objektor i stigende rækkefølge
+     */
     public void Sorter() {
         TerningComparator sammenligner = new TerningComparator();
         Collections.sort(terninger, sammenligner);
     }
-
+    
+    /**
+     * Kontrollere om trappereglen er opfyldt for et Raflebaeger
+     */
     public void Check_for_trapperegel() {
         for (int i = 0; i < terninger.size(); i++) {
             //System.out.println("Terninger:"+terninger.get(i).getVærdi()+" i er: "+i+" terninger.size() er: "+terninger.size());

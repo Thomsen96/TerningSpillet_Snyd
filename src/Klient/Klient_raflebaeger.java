@@ -14,10 +14,18 @@ import terningspillet_snyd.Terning;
  */
 public class Klient_raflebaeger extends terningspillet_snyd.Raflebaeger{
     
+    /**
+     * Opretter et raflebaeger der tilføjer terninger udfra "besked" strengen
+     * @param besked Streng der indeholder terninger på formatet "1 2 3 4 5 6"
+     */
     public Klient_raflebaeger(String besked) {
         super(0,false);
         tilføjTerning(besked);
     }
+
+    /**
+     * Opret et tomt raflebaeger
+     */
     public Klient_raflebaeger() {
         super(0,false);
     }
@@ -25,35 +33,47 @@ public class Klient_raflebaeger extends terningspillet_snyd.Raflebaeger{
     @Override
     public void Sorter() {
         System.err.println("Klienten kan ikke sortere terningerne!!");
+        System.exit(0);
     }
 
     @Override
     public void ryst() {
         System.err.println("Klienten kan ikke ryste raflebærgeret!!");
+        System.exit(0);
     }
 
     @Override
     public void fjernTerning() {
         System.err.println("Klienten kan ikke fjerne terninger!!");
+        System.exit(0);
     }
 
-    public void tilføjTerning(String besked) {
+    /**
+     * Tilføjer terninger til raflebaeret udfra strengen den modtager
+     * @param besked Streng der indeholder terninger
+     */
+    private void tilføjTerning(String besked) {
 
         Scanner beskedScanner = new Scanner(besked);
 
         System.out.println("modtag terning called; message recived:" +  besked );
 
-        // if the first number is message, first int read is integer
         while(beskedScanner.hasNextInt()){
             Terning t = new Terning(beskedScanner.nextInt());
-            this.tilføjTerning(t);
+            super.tilføjTerning(t);
             //System.out.println("Ny terning tilføjet");
         }
         
-        for (Terning terning : terninger) {
-            System.out.println(" "+terning.getVærdi());
-        }
+        System.out.println("Terninger i raflebaeret: "+this.toString());
     }
+
+    @Override
+    public void tilføjTerning(Terning t) {
+        System.err.println("Klienten kan ikke tilføje terninge objekter. Brug tilføjTerning(String besked) i stedet!!");
+        System.exit(0);
+    }
+    
+    
     
     
     

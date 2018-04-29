@@ -34,7 +34,7 @@ public class SpillerNetværk {
         }
     }
     
-    public String modtag(){
+    public String modtag() throws IOException{
         String m = new String();
         try {
             
@@ -56,6 +56,7 @@ public class SpillerNetværk {
             
         } catch (Exception e) {
             e.printStackTrace();
+            lukforbindelse();
         }
         return "error";
     }
