@@ -7,7 +7,6 @@ package Server;
 
 import java.util.ArrayList;
 import terningspillet_snyd.Raflebaeger;
-import terningspillet_snyd.Tur;
 
 /**
  *
@@ -19,7 +18,7 @@ public class Spil {
     private int[] Kombinationer = new int[7];
     private int hvis_tur = 1;
     public static ArrayList<Raflebaeger> liste_af_raflebaeger;
-    private Tur forrige_gæt;
+    public Tur forrige_gæt;
     private Tur nuværende_gæt;
     private int antal_spillere;
     private int antal_terninger;
@@ -39,6 +38,7 @@ public class Spil {
     public Spil(int antal_spillere, int antal_terninger) {
         this.antal_spillere = antal_spillere;
         this.antal_terninger = antal_terninger;
+        taber = -1; //taber nulværdi
 
         liste_af_raflebaeger = new ArrayList<Raflebaeger>(); // opret liste-array af "Raflebaeger" objekter
 
@@ -188,6 +188,7 @@ public class Spil {
             
 
         }
+        taber = -1; //Reset taber hvis spillet ikke er slut.
         runde_nr++;
         spil_status = "spil";
     }
@@ -255,5 +256,8 @@ public class Spil {
     public int getHvis_tur() {
         return hvis_tur;
     }
-
+    
+    public int getTaber() {
+        return taber;
+    }
 }

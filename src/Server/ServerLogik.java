@@ -43,10 +43,12 @@ public class ServerLogik {
                     break;
                 case "runde_slut":
                     spilLogik.printTerninger(0); // Print terninger
+                    serverLogik.initierRunde(Spil.liste_af_raflebaeger, spilLogik.antal_terninger_ialt()); //skriv til spillere runden begynder
                     spilLogik.start_rounde(); // Start en ny runde
                     printstats(); // Viser alle kombi
                     break; 
                 case "spil_slut":
+                    serverLogik.spilSlut(spilLogik.getTaber());
                     System.out.println("Spillet er færdigt!");
                     return; // Afslut spil                
                 default:
@@ -64,12 +66,13 @@ public class ServerLogik {
      * @param streng 
      */
     private static void læsCommandov3(String streng) {
+        int turFørSkift = spilLogik.getHvis_tur();
+        
         if(streng.startsWith("Guess(") && streng.endsWith(")")){
             streng = streng.substring(6);
             int antal = 0;
             int værdi = 0;
-            int turFørSkift = spilLogik.getHvis_tur();
-
+            
             try {
                 String antal_string = streng.substring(0,streng.indexOf(","));
 
@@ -110,8 +113,18 @@ public class ServerLogik {
             //end if - gæt
         }else if(streng.matches("Liar!")){
             spilLogik.løgner();
+            
+            //Serverlogikken sender beskeder ud om tilstanden.
+            if (spilLogik.getTaber() != turFørSkift){
+                serverLogik.spillerKaldteSnyd(turFørSkift, true, spilLogik.forrige_gæt, stringStats());
+            } else {
+                serverLogik.spillerKaldteSnyd(turFørSkift, false, spilLogik.forrige_gæt, stringStats());
+            }
         }else{
             System.out.println("Ugyldig kommando!: "+streng);
+            
+            //server funk
+            serverLogik.spillerUgyldigKomando(turFørSkift);
         }
     }
     
@@ -120,5 +133,14 @@ public class ServerLogik {
             System.out.println("   Terninger    Komb");
             System.out.println(i+"'er: "+spilLogik.getAntalØjne(i)+" \t "+spilLogik.getKombinationer(i));
         }      
+    }
+    
+    private static String stringStats() {
+        String streng = new String();
+        streng += "Terninger  1  2  3  4  5  6;";
+        for (int i = 1; i < 7; i++) {
+            streng += ""+spilLogik.getAntalØjne(i)+"  ";
+        }//end for
+        return streng;
     }
 }
