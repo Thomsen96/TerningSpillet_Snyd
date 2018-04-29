@@ -37,7 +37,8 @@ public class ServerLogik {
                     break;
                 case "spil":
                     System.out.println("Følgende kommandoer er tilladt:Guess(#,#), MyDices(#), AllDices! eller Liar!");
-                    læsCommandov2("");
+                    logik.runde(spilLogik.getHvis_tur());
+                    læsCommandov2();
                     break;
                 case "runde_slut":
                     spilLogik.printTerninger(0); // Print terninger

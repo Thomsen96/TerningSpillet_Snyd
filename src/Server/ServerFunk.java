@@ -57,8 +57,9 @@ public class ServerFunk {
         netværk.sendTilAlle("ctr:start runde");
     }
     
-    public void runde(){
-        
+    public void runde(int spillerNr){
+        spillerNr--;
+        netværk.sendTilSpiller("ctr:tur", spillerNr);
     }
     
     
