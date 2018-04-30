@@ -21,13 +21,26 @@ public class Spil_skærm extends javax.swing.JPanel {
     private int antal_terninger = 6;
     private KlientFunk klient;
     public int[] terninger = new int[6];
+    public static String text_til_tekstboks = "";
+
+    public void tilføjText_til_tekstboks(String tekst) {
+        if(text_til_tekstboks.isEmpty()){
+            text_til_tekstboks = text_til_tekstboks.concat(tekst);
+        }else{
+            text_til_tekstboks = text_til_tekstboks.concat("\n"+tekst);
+        }
+        
+        System.out.println("Teksten til boksen: "+text_til_tekstboks);
+        jTextArea1.setText(text_til_tekstboks);
+        jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+    }
 
     /**
      * Creates new form Spil_skærm
      */
     public Spil_skærm() {
         initComponents();
-
+        //jTextArea1.setText("Test1 \nTest2 \n");
     }
 
     public void tegnTerninger(int antal) {
@@ -132,12 +145,12 @@ public class Spil_skærm extends javax.swing.JPanel {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jSlider1 = new javax.swing.JSlider();
-        jSpinner1 = new javax.swing.JSpinner();
+        jSlider_value = new javax.swing.JSlider();
+        jSpinner_antal = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButton_guess = new javax.swing.JButton();
+        jButton_Liar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
 
@@ -150,17 +163,16 @@ public class Spil_skærm extends javax.swing.JPanel {
             }
         });
 
-        jSlider1.setMajorTickSpacing(1);
-        jSlider1.setMaximum(6);
-        jSlider1.setMinimum(2);
-        jSlider1.setPaintLabels(true);
-        jSlider1.setPaintTicks(true);
-        jSlider1.setSnapToTicks(true);
-        jSlider1.setValue(6);
+        jSlider_value.setMajorTickSpacing(1);
+        jSlider_value.setMaximum(6);
+        jSlider_value.setMinimum(2);
+        jSlider_value.setPaintLabels(true);
+        jSlider_value.setPaintTicks(true);
+        jSlider_value.setSnapToTicks(true);
 
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
-        jSpinner1.setValue(3);
-        jSpinner1.setVerifyInputWhenFocusTarget(false);
+        jSpinner_antal.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
+        jSpinner_antal.setValue(3);
+        jSpinner_antal.setVerifyInputWhenFocusTarget(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Antal");
@@ -168,18 +180,25 @@ public class Spil_skærm extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setText("Værdi");
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 255, 0));
-        jButton2.setText("Gæt!");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButton_guess.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton_guess.setForeground(new java.awt.Color(0, 255, 0));
+        jButton_guess.setText("Gæt!");
+        jButton_guess.setEnabled(false);
+        jButton_guess.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton_guessActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 51, 51));
-        jButton3.setText("Løgner!");
+        jButton_Liar.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jButton_Liar.setForeground(new java.awt.Color(255, 51, 51));
+        jButton_Liar.setText("Løgner!");
+        jButton_Liar.setEnabled(false);
+        jButton_Liar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_LiarActionPerformed(evt);
+            }
+        });
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -199,11 +218,11 @@ public class Spil_skærm extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                                .addComponent(jButton_Liar, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jSpinner_antal, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(56, 56, 56)
@@ -211,8 +230,8 @@ public class Spil_skærm extends javax.swing.JPanel {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                            .addComponent(jButton_guess, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jSlider_value, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                         .addGap(29, 29, 29))))
         );
         layout.setVerticalGroup(
@@ -222,19 +241,18 @@ public class Spil_skærm extends javax.swing.JPanel {
                 .addComponent(jButton1)
                 .addGap(133, 133, 133)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_Liar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSlider_value, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton_guess, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(3, 3, 3)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSpinner_antal, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(54, 54, 54))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -248,24 +266,43 @@ public class Spil_skærm extends javax.swing.JPanel {
        repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton_guessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_guessActionPerformed
+        int antal = (int) jSpinner_antal.getValue();
+        int værdi = (int) jSlider_value.getValue();
+        System.out.println("Antal er: "+antal+" Værdien er: "+værdi);
+        klient.sendKommando("Guess("+antal+","+værdi+")");
+    }//GEN-LAST:event_jButton_guessActionPerformed
+
+    private void jButton_LiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LiarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        System.out.println("Liar!");
+        klient.sendKommando("Liar!");
+    }//GEN-LAST:event_jButton_LiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton_Liar;
+    private javax.swing.JButton jButton_guess;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSlider jSlider1;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSlider jSlider_value;
+    private javax.swing.JSpinner jSpinner_antal;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 
     void setlogik(KlientFunk klient) {
         this.klient = klient;
+    }
+
+    void visknapper() {
+        jButton_guess.setEnabled(true);
+        jButton_Liar.setEnabled(true);
+    }
+
+    void skjulknapper() {
+        jButton_guess.setEnabled(false);
+        jButton_Liar.setEnabled(false);
     }
 }

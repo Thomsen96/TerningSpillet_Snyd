@@ -51,8 +51,14 @@ public class ClientTest {
         
         
         while(klient.Forbundet()){
-            klient.modtagKommando();
+            String msg = klient.modtagKommando();
+            if(!msg.matches("\null")){
+                Spil_skærm.tilføjText_til_tekstboks(msg);
+                System.out.println("Tilføjer teksten: "+msg);
+            }
             if(klient.getState() == "Tur"){
+                Spil_skærm.visknapper();
+                /*
                 antal = læsINTtastatur();
                 
                 if(antal == -1){
@@ -61,6 +67,9 @@ public class ClientTest {
                     værdi = læsINTtastatur();
                     klient.sendKommando("Guess("+antal+","+værdi+")");
                 }
+                */
+                
+                
                 /*
                 if(antal == 11 && værdi == 6){
                     klient.sendKommando("Liar!");
@@ -73,6 +82,8 @@ public class ClientTest {
                     }                    
                 }
                 */
+            }else if(klient.getState() == "Ikke_tur"){
+                Spil_skærm.skjulknapper();
             }
         }
 
