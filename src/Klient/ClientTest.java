@@ -6,8 +6,13 @@
 package Klient;
 
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.plaf.basic.BasicButtonListener;
 
 /**
  *
@@ -22,19 +27,16 @@ public class ClientTest {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        KlientFunk klient;
-        klient = new KlientFunk(8998,"Mark");
+        KlientFunk klient = null;
         
         JTabbedPane faneblade = new JTabbedPane();
         
         Velkomstskærm Velkomstskærm = new Velkomstskærm();
         Spil_skærm Spil_skærm = new Spil_skærm();
-        Grafikdemo Grafikdemo = new Grafikdemo();
+        //Grafikdemo Grafikdemo = new Grafikdemo();
         
-        faneblade.add("Spillet", Spil_skærm);
         faneblade.add("Start", Velkomstskærm);
-        
-        Spil_skærm.setlogik(klient);
+
         
         
         JFrame vindue = new JFrame("Snyd");
@@ -42,56 +44,56 @@ public class ClientTest {
         vindue.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // reagér på luk
         vindue.pack();                  // lad vinduet selv bestemme sin størrelse
         vindue.setVisible(true);
-
-        int antal = 1;
-        int værdi = 2;
         
         
+        while(Velkomstskærm.start == 0){
+            try {
+                Thread.sleep(1000);
+                //System.out.println("Start="+Velkomstskærm.start);
+            } catch (InterruptedException ex) {
                 
+            }
+        }
         
+        String navn = Velkomstskærm.getnavn();
+        int port = Velkomstskærm.getport();
+        String IP = Velkomstskærm.getIP();
         
+        klient = new KlientFunk(port,navn,IP);
+        //klient = new KlientFunk(8998,"John");
+        faneblade.add("Spillet", Spil_skærm);
+        
+        Spil_skærm.setlogik(klient);
+        faneblade.setSelectedIndex(1); // Sætter siden til spillet
+        faneblade.remove(Velkomstskærm);
+        
+        String slut_besked = "";
         while(klient.Forbundet()){
             String msg = klient.modtagKommando();            
             
             if(!msg.matches("\null") && !msg.startsWith("ctr:")){
                 Spil_skærm.tilføjText_til_tekstboks(msg);
+                if(msg.endsWith("omgang!")){
+                    slut_besked = msg;
+                }
+                
             }else if(msg.matches("ctr:start runde")){
                 Spil_skærm.tegnTerninger(klient.baerger.antalTerninger());
-                //Spil_skærm.sætAntalTerningerIAlt();
+                Spil_skærm.sætAntalTerningerIAlt(klient.antal_terninger_ialt);
                 System.out.println("Sender antal terninger til GUI: "+klient.baerger.antalTerninger());
             }
                 
-            if(klient.getState() == "Tur"){
+            if("Tur".equals(klient.getState())){
                 Spil_skærm.visknapper();
-                /*
-                antal = læsINTtastatur();
-                
-                if(antal == -1){
-                    klient.sendKommando("Liar!");
-                }else{
-                    værdi = læsINTtastatur();
-                    klient.sendKommando("Guess("+antal+","+værdi+")");
-                }
-                */
-                
-                
-                /*
-                if(antal == 11 && værdi == 6){
-                    klient.sendKommando("Liar!");
-                }else{
-                    antal++;
-                    klient.sendKommando("Guess("+antal+","+værdi+")");
-                    if(antal >= 12){
-                        værdi++;
-                        antal=1;
-                    }                    
-                }
-                */
-            }else if(klient.getState() == "Ikke_tur"){
+            }else if("Ikke_tur".equals(klient.getState())){
                 Spil_skærm.skjulknapper();
             }
         }
-
+       String taber = "testperson";
+       javax.swing.JOptionPane.showMessageDialog(vindue, ""+slut_besked);
+       vindue.setVisible(false);
+       System.exit(1);
+        
         
     }
      /**

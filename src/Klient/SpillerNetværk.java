@@ -9,6 +9,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -23,7 +25,27 @@ public class SpillerNetværk {
     
     public SpillerNetværk(int port, String navn){
         try{
+            
             forbindelse = new Socket("localhost", port);
+
+            udBuffer  = new PrintWriter(forbindelse.getOutputStream());
+            indBuffer = new BufferedReader(new InputStreamReader(forbindelse.getInputStream()));
+            
+            send(navn);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    SpillerNetværk(int port, String navn, String IP) {
+        try{
+            if("127.0.0.1".equals(IP)){ // Hvis localhost
+               forbindelse = new Socket("localhost", port); 
+            }else{ // Hvis anden IP end localhost
+               InetAddress Ip_addresse = InetAddress.getByName(IP);
+               forbindelse = new Socket(Ip_addresse, port); 
+            }
+            
 
             udBuffer  = new PrintWriter(forbindelse.getOutputStream());
             indBuffer = new BufferedReader(new InputStreamReader(forbindelse.getInputStream()));

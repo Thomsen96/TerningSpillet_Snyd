@@ -11,6 +11,13 @@ package Klient;
  */
 public class Velkomstskærm extends javax.swing.JPanel {
 
+    private KlientFunk klient;
+    public int start = 0;
+    private String navn;
+    private int port;
+    private String IP;
+    
+
     /**
      * Creates new form Velkomstskærm
      */
@@ -27,13 +34,13 @@ public class Velkomstskærm extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextField_ip = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
+        jTextField_port = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jTextField_navn = new javax.swing.JTextField();
 
         setPreferredSize(new java.awt.Dimension(600, 500));
 
@@ -41,10 +48,10 @@ public class Velkomstskærm extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 0, 51));
         jLabel1.setText("Velkommen til terningespillet Snyd!");
 
-        jTextField1.setText("127.0.0.1");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jTextField_ip.setText("127.0.0.1");
+        jTextField_ip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jTextField_ipActionPerformed(evt);
             }
         });
 
@@ -55,10 +62,10 @@ public class Velkomstskærm extends javax.swing.JPanel {
             }
         });
 
-        jTextField2.setText("8008");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        jTextField_port.setText("8998");
+        jTextField_port.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                jTextField_portActionPerformed(evt);
             }
         });
 
@@ -68,10 +75,10 @@ public class Velkomstskærm extends javax.swing.JPanel {
 
         jLabel5.setText("Spillernavn");
 
-        jTextField3.setText("Navn");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        jTextField_navn.setText("Navn");
+        jTextField_navn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                jTextField_navnActionPerformed(evt);
             }
         });
 
@@ -91,12 +98,12 @@ public class Velkomstskærm extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextField_ip, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextField_port, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton1))
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jTextField_navn, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -111,14 +118,14 @@ public class Velkomstskærm extends javax.swing.JPanel {
                         .addComponent(jLabel3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_port, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField_ip, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton1)))
                 .addGap(51, 51, 51)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextField_navn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(144, Short.MAX_VALUE))
         );
 
@@ -129,7 +136,7 @@ public class Velkomstskærm extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addComponent(jLabel1)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -148,19 +155,28 @@ public class Velkomstskærm extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String port_streng = jTextField_port.getText();
+        port = 0;
+        for (int i = 0; i < port_streng.length(); i++) {
+            port += (port_streng.charAt(port_streng.length()-1-i)-48)*Math.pow(10, i);
+        }
+        System.out.println("Port er: "+port);
+        navn = jTextField_navn.getText();
+        IP = jTextField_ip.getText();
+        start = 1;
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jTextField_ipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_ipActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jTextField_ipActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void jTextField_portActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_portActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_jTextField_portActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void jTextField_navnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_navnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_jTextField_navnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -170,8 +186,28 @@ public class Velkomstskærm extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField_ip;
+    private javax.swing.JTextField jTextField_navn;
+    private javax.swing.JTextField jTextField_port;
     // End of variables declaration//GEN-END:variables
+
+    String getnavn() {
+        return navn;
+    }
+
+//    void setlogik(KlientFunk klient) {
+//        this.klient = klient;
+//    }
+
+    int getport() {
+        return port;
+    }
+
+    String getIP() {
+        return IP;
+    }
+
+    void resetstart() {
+        start = 1;
+    }
 }

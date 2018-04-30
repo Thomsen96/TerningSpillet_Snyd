@@ -217,7 +217,7 @@ public class Spil_skærm extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel3.setText("Antal terninger i alt:");
 
-        jLabel_antalterningerialt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel_antalterningerialt.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel_antalterningerialt.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel_antalterningerialt.setText("0");
 
@@ -245,8 +245,7 @@ public class Spil_skærm extends javax.swing.JPanel {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel_antalterningerialt, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addComponent(jLabel_antalterningerialt, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(56, 56, 56)
