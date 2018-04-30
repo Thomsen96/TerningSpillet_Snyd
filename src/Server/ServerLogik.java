@@ -10,8 +10,8 @@ package Server;
  * @author john
  */
 public class ServerLogik {
-    public static Spil spilLogik;
-    public static ServerFunk serverLogik;
+    private static Spil spilLogik;
+    private static ServerFunk serverLogik;
     /**
      * @param args the command line arguments
      */
