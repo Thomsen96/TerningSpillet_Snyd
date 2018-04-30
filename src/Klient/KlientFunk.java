@@ -122,7 +122,7 @@ public class KlientFunk {
                 if(streng.matches("ctr:start runde")){
                     state = "Ikke_tur";
                     System.out.println("Går fra Initier_runde til Ikke_tur");
-                    return "\null";
+                    return "ctr:start runde";
                 }else if(streng.startsWith("ctr:tern") && streng.endsWith("]")){ // Modtag klientens terninger
                     System.out.println("Står i Initier_runde og modtager terninger: "+streng);
                     streng = streng.substring(8, streng.length()); // Fjerner tekst-karakterne
@@ -233,7 +233,7 @@ public class KlientFunk {
     }
 
     int[] getTerninger() {
-        int[] Terninger = new int[6];
+        int[] Terninger = new int[baerger.terninger.size()];
         
         for (int i = 0; i < baerger.terninger.size(); i++) {
             Terninger[i] = baerger.terninger.get(i).getVærdi();

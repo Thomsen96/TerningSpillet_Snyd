@@ -38,8 +38,7 @@ public class Klient_raflebaeger extends terningspillet_snyd.Raflebaeger{
 
     @Override
     public void ryst() {
-        System.err.println("Klienten kan ikke ryste raflebærgeret!!");
-        System.exit(0);
+        throw new IllegalStateException("Klienten kan ikke ryste raflebærgeret!!");
     }
 
     @Override

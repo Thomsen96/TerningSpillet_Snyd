@@ -51,11 +51,16 @@ public class ClientTest {
         
         
         while(klient.Forbundet()){
-            String msg = klient.modtagKommando();
-            if(!msg.matches("\null")){
+            String msg = klient.modtagKommando();            
+            
+            if(!msg.matches("\null") && !msg.startsWith("ctr:")){
                 Spil_skærm.tilføjText_til_tekstboks(msg);
-                System.out.println("Tilføjer teksten: "+msg);
+            }else if(msg.matches("ctr:start runde")){
+                Spil_skærm.tegnTerninger(klient.baerger.antalTerninger());
+                //Spil_skærm.sætAntalTerningerIAlt();
+                System.out.println("Sender antal terninger til GUI: "+klient.baerger.antalTerninger());
             }
+                
             if(klient.getState() == "Tur"){
                 Spil_skærm.visknapper();
                 /*
