@@ -23,7 +23,7 @@ public class ClientTest {
     public static void main(String[] args) {
         // TODO code application logic here
         KlientFunk klient;
-        klient = new KlientFunk(8998,"Mark");
+        klient = new KlientFunk(8998,"Mads");
         
         JTabbedPane faneblade = new JTabbedPane();
         
