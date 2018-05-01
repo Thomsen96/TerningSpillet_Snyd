@@ -120,7 +120,7 @@ public class ServerFunk {
         tidligereSpiller--;
         //Spilleren kaldte snyd på spilleren før ham(tur.spiller), bolean fortæller om det var korrekt eller ej.
         String tern1 = visTerninger.substring(0, visTerninger.indexOf(";"));
-        String tern2 = visTerninger.substring(visTerninger.indexOf(";"), visTerninger.length()-1);
+        String tern2 = visTerninger.substring(visTerninger.indexOf(";")+1, visTerninger.length()-1);
         
         if (sandt){
             netværk.sendTilAlle("msg:"+navne.get(spillerNr)+" har kaldt snyd på "+

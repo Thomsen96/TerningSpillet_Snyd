@@ -18,8 +18,8 @@ public class ServerLogik {
     public static void main(String[] args) {
         // TODO code application logic here
         int port = 8998;
-        int antalSpillere = 2;
-        int antalTerninger = 6;
+        int antalSpillere = 4;
+        int antalTerninger = 2;
         
         serverLogik = new ServerFunk(port);
         spilLogik = new Spil(antalSpillere, antalTerninger);

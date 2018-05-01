@@ -30,7 +30,6 @@ public class Raflebaeger {
     public Raflebaeger(int antalTerninger, boolean trappe) {
         terninger = new ArrayList<Terning>();
         if (!trappe) {
-
             for (int i = 0; i < antalTerninger; i++) {
                 Terning t;
                 t = new Terning();
@@ -92,6 +91,7 @@ public class Raflebaeger {
             t.kast();
         }
         Sorter();
+        trappe_regel = true;
         Check_for_trapperegel();
     }
 
@@ -137,15 +137,21 @@ public class Raflebaeger {
      * Kontrollere om trappereglen er opfyldt for et Raflebaeger
      */
     public void Check_for_trapperegel() {
+        if(terninger.size()== 0){
+                trappe_regel = false;
+                return;
+        }
+        
         for (int i = 0; i < terninger.size(); i++) {
             //System.out.println("Terninger:"+terninger.get(i).getVærdi()+" i er: "+i+" terninger.size() er: "+terninger.size());
+
             if ((i + 1) != terninger.get(i).getVærdi()) {
                 trappe_regel = false;
-                i = terninger.size();
+                return;
             }
         }
-//        if (trappe_regel) {
-//            System.out.println("Trappereglen er opfyldt!");
-//        }
+        if (trappe_regel) {
+            System.out.println("Trappereglen er opfyldt!");
+        }
     }
 }

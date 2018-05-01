@@ -45,7 +45,7 @@ public class Spil {
         for (int i = 0; i < antal_spillere; i++) {
             liste_af_raflebaeger.add(new Raflebaeger(antal_terninger));
             liste_af_raflebaeger.get(i).ryst(); // Ryst raflebageret
-            //liste_af_raflebaeger.get(i).Check_for_trapperegel();
+            liste_af_raflebaeger.get(i).Check_for_trapperegel();
         }        
         
         // Til test af trappereglen
@@ -213,8 +213,6 @@ public class Spil {
                     Kombinationer[i] += raflebaeger.antalDerViser(i) + raflebaeger.antalDerViser(1);
                 }
             }
-            
-
         }
         taber = -1; //Reset taber hvis spillet ikke er slut.
         runde_nr++;
@@ -233,6 +231,7 @@ public class Spil {
                 }
             }
             liste_af_raflebaeger.get(i).ryst(); // Ryst raflebageret
+            //liste_af_raflebaeger.get(i).Check_for_trapperegel();
             //System.out.println("Rystet: "+i);
         }
         

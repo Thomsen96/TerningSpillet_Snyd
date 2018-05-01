@@ -64,7 +64,7 @@ public class ClientTest {
         faneblade.add("Spillet", Spil_skærm);
         
         Spil_skærm.setlogik(klient);
-        faneblade.setSelectedIndex(1); // Sætter siden til spillet
+        faneblade.setSelectedIndex(0); // Sætter siden til spillet
         faneblade.remove(Velkomstskærm);
         
         String slut_besked = "";
