@@ -39,7 +39,11 @@ public class KlientFunk {
         //spiller.send("Hello server");
 
     }
-
+    
+    KlientFunk(int portnavn, String navn, String IP) {
+        spiller = new SpillerNetværk(portnavn, navn, IP);
+    }
+    
     /**
      * Returner tilstandsmaskinens tilstand
      * @return state
@@ -55,7 +59,7 @@ public class KlientFunk {
     public static void setState(String state) {
         KlientFunk.state = state;
     }
-    
+
     /**
      * Modtager kommandoer over netværket via SpillerNetværk objektet og udfra tilstandsmaskines
      * tilstand kan kommandoerne udfører funktioner.
@@ -84,6 +88,7 @@ public class KlientFunk {
                 streng = "Du er blevet kicket!";
                 System.out.println(""+streng);
                 return streng;
+               // return "\null";
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
