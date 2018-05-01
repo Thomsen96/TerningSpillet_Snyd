@@ -159,6 +159,11 @@ public class ServerFunk {
         taber--;
         netværk.sendTilAlle("msg:Spillet er slut.");
         netværk.sendTilAlle("msg:"+navne.get(taber)+" har tabt og skal give en omgang!");
+        try {
+            Thread.sleep(1000); // Så alle klienterne kan nå og modtage sidste msg og vise det i popup boksen.
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
         for (int i = 0; i < navne.size()-1; i++){
             netværk.kickSpiller(0); //Hver gennemløb bliver en ny spiller den første i listen,
             navne.remove(0);        //da de fjernes fra samme liste. Derfor smiddes spiller 0 ud

@@ -270,10 +270,14 @@ public class Spil {
     }
 
     private void Skift_tur() {
-        hvis_tur++;
-        if (hvis_tur > antal_spillere) {
-            hvis_tur = 1;
-        }
+        do { 
+            hvis_tur++;
+        
+            if (hvis_tur > antal_spillere) {
+                hvis_tur = 1;
+            }
+        } while (liste_af_raflebaeger.get(hvis_tur-1).tom);
+        
         Hvis_turErDet();
     }
 
