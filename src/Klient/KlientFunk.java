@@ -147,7 +147,7 @@ public class KlientFunk {
                         return "\null";
                     }
                     System.out.println("Der er "+streng+" antal terninger i alt.");
-                    return "Der er "+streng+" antal terninger i alt";
+                    return "\null";     //"Der er "+streng+" antal terninger i alt";
                 }else{
                     System.out.println("Ugyldig kommando fra state \"Initier_runde\".: "+streng);
                     return "\null";
