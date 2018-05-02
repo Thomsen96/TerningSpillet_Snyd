@@ -18,7 +18,7 @@ public class ServerLogik {
     public static void main(String[] args) {
         // TODO code application logic here
         int port = 8998;
-        int antalSpillere = 4;
+        int antalSpillere = 2;
         int antalTerninger = 6;
         
         serverLogik = new ServerFunk(port);
@@ -68,6 +68,8 @@ public class ServerLogik {
      */
     private static void læsCommandov3(String streng) {
         int turFørSkift = spilLogik.getHvis_tur();
+        if (streng == null) return;     //ikke crashe når spillere lukker forbindelsen
+        
         
         if(streng.startsWith("Guess(") && streng.endsWith(")")){
             streng = streng.substring(6);
@@ -149,9 +151,9 @@ public class ServerLogik {
     
     private static String stringStats() {
         String streng = new String();
-        streng += "Terninger  1  2  3  4  5  6;";
+        streng += "Terninger\t1'ere  2'ere  3'ere  4'ere  5'ere  6'ere;\t";
         for (int i = 1; i < 7; i++) {
-            streng += ""+spilLogik.getAntalØjne(i)+"  ";
+            streng += ""+spilLogik.getAntalØjne(i)+"      ";
         }//end for
         return streng;
     }
