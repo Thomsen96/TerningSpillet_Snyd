@@ -19,8 +19,8 @@ public class Klient_raflebaeger extends terningspillet_snyd.Raflebaeger{
      * @param besked Streng der indeholder terninger på formatet "1 2 3 4 5 6"
      */
     public Klient_raflebaeger(String besked) {
-        super(0,false);
-        tilføjTerning(besked);
+        super(0,false); // Kalder superklassen "Raflebaeger" og opretter et raflebærger med 0 terninger
+        tilføjTerning(besked); 
     }
 
     /**
@@ -30,21 +30,31 @@ public class Klient_raflebaeger extends terningspillet_snyd.Raflebaeger{
         super(0,false);
     }
     
+     /**
+     * Kan ikke bruges af klienten!!
+     */
     @Override
+    @Deprecated
     public void Sorter() {
-        System.err.println("Klienten kan ikke sortere terningerne!!");
-        System.exit(0);
+        throw new IllegalStateException("Klienten kan ikke sortere terningerne!!");
     }
-
+    
+     /**
+     * Kan ikke bruges af klienten!!
+     */
     @Override
+    @Deprecated
     public void ryst() {
         throw new IllegalStateException("Klienten kan ikke ryste raflebærgeret!!");
     }
 
+     /**
+     * Kan ikke bruges af klienten!!
+     */
     @Override
+    @Deprecated
     public void fjernTerning() {
-        System.err.println("Klienten kan ikke fjerne terninger!!");
-        System.exit(0);
+        throw new IllegalStateException("Klienten kan ikke fjerne terninger!!");
     }
 
     /**
@@ -59,24 +69,19 @@ public class Klient_raflebaeger extends terningspillet_snyd.Raflebaeger{
 
         while(beskedScanner.hasNextInt()){
             Terning t = new Terning(beskedScanner.nextInt());
-            super.tilføjTerning(t);
-            //System.out.println("Ny terning tilføjet");
+            super.tilføjTerning(t); // Kalder superklassen "Raflebaeger"'s tilføjTerning
         }
         
         System.out.println("Terninger i raflebaeret: "+this.toString());
     }
 
+    
+     /**
+     * Kan ikke bruges af klienten!!
+     */
     @Override
+    @Deprecated
     public void tilføjTerning(Terning t) {
-        System.err.println("Klienten kan ikke tilføje terninge objekter. Brug tilføjTerning(String besked) i stedet!!");
-        System.exit(0);
-    }
-    
-    
-    
-    
-    
-    
-    
-    
+        throw new IllegalStateException("Klienten kan ikke tilføje terninge objekter. Brug tilføjTerning(String besked) i stedet!!");
+    }  
 }
