@@ -95,7 +95,7 @@ public class ClientTest {
        String taber = "testperson";
        javax.swing.JOptionPane.showMessageDialog(vindue, ""+slut_besked);
        vindue.setVisible(false);
-       System.exit(1);
+       System.exit(0);
         
         
     }
