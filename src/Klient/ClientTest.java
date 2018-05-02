@@ -5,16 +5,9 @@
  */
 package Klient;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.plaf.basic.BasicButtonListener;
 
 /**
  *

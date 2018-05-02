@@ -5,13 +5,8 @@
  */
 package Klient;
 
-import Klient.SpillerNetværk;
-import Klient.Klient_raflebaeger;
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import terningspillet_snyd.Terning;
 
 /**
  *
