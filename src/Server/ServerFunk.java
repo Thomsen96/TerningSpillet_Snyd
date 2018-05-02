@@ -28,7 +28,7 @@ public class ServerFunk {
     }
     
     /**
-     * Tilføjer antallet af spillere til spillet
+     * Venter på at det angivne antal spillere forbinder sig.
      * 
      * @param antalSpillere 
      */
@@ -45,7 +45,7 @@ public class ServerFunk {
     }
     
     /**
-     * Skriver til spillerene at spillet starter
+     * Skriver til spillerene hvem der deltager og at spillet starter.
      * Herefter gåes til "initier runde"
      */
     public void initierSpil(){
@@ -84,7 +84,7 @@ public class ServerFunk {
     }
     
     /**
-     * SpillerNr gættede og gættet blev godtaget
+     * SpillerNr gættede på antal og værdi og gættet blev godkendt
      * @param spillerNr
      * @param antal
      * @param værdi 
@@ -96,7 +96,7 @@ public class ServerFunk {
     }
     
     /**
-     * SpillerNr gættete og gættet blev ikke godtaget
+     * SpillerNr gættete på antal og værdi men gættet blev ikke godtaget
      * @param spillerNr
      * @param antal
      * @param værdi 
@@ -108,7 +108,8 @@ public class ServerFunk {
     }
     
     /**
-     * SpillerNr kaldte snyd på spilleren før ham, boolean viser om det var korrekt.
+     * SpillerNr kaldte snyd på spilleren før ham, boolean viser om det var sandt at det var løgn.
+     * Alle informeres om hvem der har tabt, og hvis spillet fortsætter 
      * @param spillerNr
      * @param sandt 
      * @param tidligereGæt 
@@ -118,7 +119,7 @@ public class ServerFunk {
          spillerNr--;
         int tidligereSpiller = tidligereGæt.spiller;
         tidligereSpiller--;
-        //Spilleren kaldte snyd på spilleren før ham(tur.spiller), bolean fortæller om det var korrekt eller ej.
+        
         String tern1 = visTerninger.substring(0, visTerninger.indexOf(";"));
         String tern2 = visTerninger.substring(visTerninger.indexOf(";")+1, visTerninger.length()-1);
         
@@ -172,11 +173,20 @@ public class ServerFunk {
         }
         
     }
-
+    
+    /**
+     * Køres når runden er slut.
+     * Bringer spillerne til "initier runde"
+     */
     void rundeSlut() {
         netværk.sendTilAlle("ctr:initier runde");
     }
-
+    
+    /**
+     * Køres hvis en spiller kalder snyd på sig selv.
+     * 
+     * @param spillerNr 
+     */
     void spillerKaldteSnydUgyldigt(int spillerNr) {
         spillerNr--;
         netværk.sendTilAlle("msg:"+navne.get(spillerNr)+" kaldte snyd på sig selv, det måes man ikke!");
