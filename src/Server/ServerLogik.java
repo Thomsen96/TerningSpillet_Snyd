@@ -162,7 +162,7 @@ public class ServerLogik {
     
     private static String stringStats() {
         String streng = new String();
-        streng += "Terninger\t1'ere  2'ere  3'ere  4'ere  5'ere  6'ere;\t";
+        streng += "Terninger\t1'ere  2'ere  3'ere  4'ere  5'ere  6'ere;\t  ";
         for (int i = 1; i < 7; i++) {
             streng += ""+spilLogik.getAntalØjne(i)+"         ";
         }//end for
