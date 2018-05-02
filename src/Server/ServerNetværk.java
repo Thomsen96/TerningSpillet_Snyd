@@ -32,8 +32,8 @@ public class ServerNetværk {
     
     public ServerNetværk(int port){
         try {
-        server_socket = new ServerSocket(port);
-        
+            server_socket = new ServerSocket(port);
+            System.out.println("Server initiated on port: "+ port);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -45,7 +45,7 @@ public class ServerNetværk {
         */
         
         spillere = new ArrayList<>();
-        System.out.println("Server initiated");
+        
     }
     /**
      * Modtager forbindelse udefra og tilføjer denne til spiller listen.
