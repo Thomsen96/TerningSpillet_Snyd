@@ -57,7 +57,9 @@ public class ClientTest {
                 
             }
         }
-        
+        if (!vindue.isShowing()){
+            System.exit(0);
+        }
         String navn = Velkomstskærm.getnavn();
         int port = Velkomstskærm.getport();
         String IP = Velkomstskærm.getIP();
@@ -70,7 +72,7 @@ public class ClientTest {
         faneblade.setSelectedIndex(0); // Sætter siden til spillet
         faneblade.remove(Velkomstskærm);
         
-        String slut_besked = "";
+        String slut_besked = "Fejl!";
         while(klient.Forbundet() && vindue.isShowing()){
             String msg = klient.modtagKommando();            
             
@@ -93,6 +95,9 @@ public class ClientTest {
             }
         }
        String taber = "testperson";
+       if (!vindue.isShowing()){
+            System.exit(0);
+       }
        javax.swing.JOptionPane.showMessageDialog(vindue, ""+slut_besked);
        vindue.setVisible(false);
        System.exit(0);
