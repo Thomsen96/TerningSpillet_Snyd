@@ -223,7 +223,7 @@ public class KlientFunk {
     }
 
     public boolean Forbundet() {
-        if (spiller.getForbindelse() == null){
+        if (spiller.isForbindelseNull()){
             return false;
         } else {
             return spiller.getisConnected();
