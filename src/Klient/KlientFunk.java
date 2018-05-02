@@ -223,7 +223,12 @@ public class KlientFunk {
     }
 
     public boolean Forbundet() {
-        return spiller.getisConnected();
+        if (spiller.getForbindelse() == null){
+            return false;
+        } else {
+            return spiller.getisConnected();
+        }
+        
     }
 
     void sendKommando(String streng) {
@@ -245,6 +250,6 @@ public class KlientFunk {
         }
         return Terninger;
     }
-
-
+    
+    
 }
