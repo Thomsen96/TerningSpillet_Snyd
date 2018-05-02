@@ -174,4 +174,8 @@ public class ServerFunk {
     void rundeSlut() {
         netværk.sendTilAlle("ctr:initier runde");
     }
+
+    void spillerKaldteSnydUgyldigt(int turFørSkift) {
+        netværk.sendTilAlle("msg:"+navne.get(turFørSkift)+" kaldte snyd på sig selv, det måes man ikke!");
+    }
 }

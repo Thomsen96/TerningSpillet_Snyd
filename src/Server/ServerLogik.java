@@ -124,6 +124,8 @@ public class ServerLogik {
                 } else { 
                     serverLogik.spillerKaldteSnyd(turFørSkift, false, spilLogik.forrige_gæt, stringStats());
                 }
+            } else {
+                serverLogik.spillerKaldteSnydUgyldigt(turFørSkift);
             }
             }catch (Exception e) {
                 e.printStackTrace();
