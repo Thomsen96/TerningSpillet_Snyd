@@ -160,7 +160,6 @@ public class Velkomstskærm extends javax.swing.JPanel {
         for (int i = 0; i < port_streng.length(); i++) {
             port += (port_streng.charAt(port_streng.length()-1-i)-48)*Math.pow(10, i);
         }
-        System.out.println("Port er: "+port);
         navn = jTextField_navn.getText();
         IP = jTextField_ip.getText();
         start = 1;
