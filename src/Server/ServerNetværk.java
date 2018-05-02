@@ -10,7 +10,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import terningspillet_snyd.Raflebaeger;
-import terningspillet_snyd.SpillerForbindelse;
 
 /**Klassen holder styr på at kører serveren og en liste af klienter.
  * Den har funktioner til at sende til klienterne og modtage fra dem ud fra deres nr i listen.
