@@ -5,6 +5,8 @@
  */
 package Server;
 
+import java.util.Scanner;
+
 /**
  *
  * @author john
@@ -12,14 +14,23 @@ package Server;
 public class ServerLogik {
     private static Spil spilLogik;
     private static ServerFunk serverLogik;
+    private static Scanner tastatur = new Scanner(System.in);
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        int port = 8998;
-        int antalSpillere = 4;
-        int antalTerninger = 6;
+        System.out.println("Indtast porten du vil åbne på:");
+        
+        int port = læsINTtastatur();
+        System.out.println("Indtast antallet af spillere:");
+        int antalSpillere = læsINTtastatur();
+        System.out.println("Indtast antallet af terninger:");
+        int antalTerninger = læsINTtastatur();
+        //int port = 8998;
+//        int antalSpillere = 2;
+//        int antalTerninger = 6;
+        
         
         serverLogik = new ServerFunk(port);
         spilLogik = new Spil(antalSpillere, antalTerninger);
@@ -68,6 +79,8 @@ public class ServerLogik {
      */
     private static void læsCommandov3(String streng) {
         int turFørSkift = spilLogik.getHvis_tur();
+        if (streng == null) return;     //ikke crashe når spillere lukker forbindelsen
+        
         
         if(streng.startsWith("Guess(") && streng.endsWith(")")){
             streng = streng.substring(6);
@@ -124,6 +137,8 @@ public class ServerLogik {
                 } else { 
                     serverLogik.spillerKaldteSnyd(turFørSkift, false, spilLogik.forrige_gæt, stringStats());
                 }
+            } else {
+                serverLogik.spillerKaldteSnydUgyldigt(turFørSkift);
             }
             }catch (Exception e) {
                 e.printStackTrace();
@@ -147,10 +162,23 @@ public class ServerLogik {
     
     private static String stringStats() {
         String streng = new String();
-        streng += "Terninger  1  2  3  4  5  6;";
+        streng += "Terninger\t1'ere  2'ere  3'ere  4'ere  5'ere  6'ere;\t";
         for (int i = 1; i < 7; i++) {
-            streng += ""+spilLogik.getAntalØjne(i)+"  ";
+            streng += ""+spilLogik.getAntalØjne(i)+"      ";
         }//end for
         return streng;
+    }
+    public static int læsINTtastatur() {
+        int læstint = 0;
+
+        try {
+            læstint = tastatur.nextInt();
+        } catch (Exception e) {
+            tastatur.nextLine(); // Læs linjeskift
+            return -1; // Returner et ugyldt menu valg
+        }
+
+        tastatur.nextLine(); // Læs linjeskift
+        return læstint;
     }
 }

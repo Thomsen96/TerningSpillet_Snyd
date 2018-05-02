@@ -5,16 +5,9 @@
  */
 package Klient;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.plaf.basic.BasicButtonListener;
 
 /**
  *
@@ -57,7 +50,9 @@ public class ClientTest {
                 
             }
         }
-        
+        if (!vindue.isShowing()){
+            System.exit(0);
+        }
         String navn = Velkomstskærm.getnavn();
         int port = Velkomstskærm.getport();
         String IP = Velkomstskærm.getIP();
@@ -70,7 +65,7 @@ public class ClientTest {
         faneblade.setSelectedIndex(0); // Sætter siden til spillet
         faneblade.remove(Velkomstskærm);
         
-        String slut_besked = "";
+        String slut_besked = "Fejl!";
         while(klient.Forbundet() && vindue.isShowing()){
             String msg = klient.modtagKommando();            
             
@@ -93,6 +88,9 @@ public class ClientTest {
             }
         }
        String taber = "testperson";
+       if (!vindue.isShowing()){
+            System.exit(0);
+       }
        javax.swing.JOptionPane.showMessageDialog(vindue, ""+slut_besked);
        vindue.setVisible(false);
        System.exit(0);

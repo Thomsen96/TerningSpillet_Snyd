@@ -104,7 +104,7 @@ public class ServerFunk {
     public void spillerGættedeFejl(int spillerNr, int antal, int værdi){
         spillerNr--;
         netværk.sendTilSpiller("ctr:gaet ikke accepteret", spillerNr);
-        netværk.sendTilSpiller("msg:Dit gæt blev ikke accepteret, da det enten ikke var højere end det forrige gæt eller indeholdt ulovlige værdier", spillerNr);
+        netværk.sendTilSpiller("msg:Dit gæt blev ikke accepteret.", spillerNr);
     }
     
     /**
@@ -139,6 +139,8 @@ public class ServerFunk {
             netværk.sendTilAlle("msg:Der var "+tidligereGæt.antal+" "+tidligereGæt.værdi+"'ere.");
             netværk.sendTilAlle("msg:"+navne.get(spillerNr)+" har tabt runden!");
         }
+        netværk.sendTilAlle("msg: - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ");
+        netværk.sendTilAlle("msg: ");
         netværk.sendTilAlle("ctr:runde slut");
     }
     
@@ -173,5 +175,10 @@ public class ServerFunk {
 
     void rundeSlut() {
         netværk.sendTilAlle("ctr:initier runde");
+    }
+
+    void spillerKaldteSnydUgyldigt(int spillerNr) {
+        spillerNr--;
+        netværk.sendTilAlle("msg:"+navne.get(spillerNr)+" kaldte snyd på sig selv, det måes man ikke!");
     }
 }

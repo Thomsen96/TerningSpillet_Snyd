@@ -9,7 +9,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Scanner;
@@ -49,7 +48,9 @@ public class SpillerNetværk {
 
             udBuffer  = new PrintWriter(forbindelse.getOutputStream());
             indBuffer = new BufferedReader(new InputStreamReader(forbindelse.getInputStream()));
-            
+            if (navn.equals("")){
+                navn = "Jeg kan ikke finde ud af at angive et navn fordi jeg er dum!";
+            }
             send(navn);
         } catch (Exception e) {
             e.printStackTrace();
@@ -134,8 +135,12 @@ public class SpillerNetværk {
         forbindelse.close();
     }
 
-    public Socket getForbindelse() {
-        return forbindelse;
+    public boolean isForbindelseNull() {
+        if (forbindelse == null){
+            return true;
+        } else {
+            return false;
+        }
     }
     
 }

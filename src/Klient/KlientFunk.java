@@ -5,13 +5,8 @@
  */
 package Klient;
 
-import Klient.SpillerNetværk;
-import Klient.Klient_raflebaeger;
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import terningspillet_snyd.Terning;
 
 /**
  *
@@ -147,7 +142,7 @@ public class KlientFunk {
                         return "\null";
                     }
                     System.out.println("Der er "+streng+" antal terninger i alt.");
-                    return "Der er "+streng+" antal terninger i alt";
+                    return "\null";     //"Der er "+streng+" antal terninger i alt";
                 }else{
                     System.out.println("Ugyldig kommando fra state \"Initier_runde\".: "+streng);
                     return "\null";
@@ -223,7 +218,7 @@ public class KlientFunk {
     }
 
     public boolean Forbundet() {
-        if (spiller.getForbindelse() == null){
+        if (spiller.isForbindelseNull()){
             return false;
         } else {
             return spiller.getisConnected();
