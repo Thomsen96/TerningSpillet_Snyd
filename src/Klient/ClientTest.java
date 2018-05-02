@@ -86,7 +86,7 @@ public class ClientTest {
             if("Tur".equals(klient.getState())){
                 Spil_skærm.visknapper();
             }else if("Ikke_tur".equals(klient.getState())){
-                Spil_skærm.skjulknapper();
+                //Spil_skærm.skjulknapper(); // Implementeret i Spil_skærm
             }
         }
        String taber = "testperson";
