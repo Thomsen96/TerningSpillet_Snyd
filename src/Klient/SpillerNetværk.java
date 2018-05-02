@@ -53,6 +53,7 @@ public class SpillerNetværk {
             send(navn);
         } catch (Exception e) {
             e.printStackTrace();
+            System.err.println("Error creating the socket");
         }
     }
     
@@ -132,4 +133,9 @@ public class SpillerNetværk {
     void lukforbindelse() throws IOException {
         forbindelse.close();
     }
+
+    public Socket getForbindelse() {
+        return forbindelse;
+    }
+    
 }

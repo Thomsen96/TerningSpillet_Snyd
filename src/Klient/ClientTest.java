@@ -5,6 +5,8 @@
  */
 package Klient;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +24,7 @@ public class ClientTest {
     
    static Scanner tastatur = new Scanner(System.in);
    static int antal_terninger;
+   static boolean running = true;
     /**
      * @param args the command line arguments
      */
@@ -46,7 +49,7 @@ public class ClientTest {
         vindue.setVisible(true);
         
         
-        while(Velkomstskærm.start == 0){
+        while(Velkomstskærm.start == 0 && vindue.isShowing()){
             try {
                 Thread.sleep(1000);
                 //System.out.println("Start="+Velkomstskærm.start);
@@ -68,7 +71,7 @@ public class ClientTest {
         faneblade.remove(Velkomstskærm);
         
         String slut_besked = "";
-        while(klient.Forbundet()){
+        while(klient.Forbundet() && vindue.isShowing()){
             String msg = klient.modtagKommando();            
             
             if(!msg.matches("\null") && !msg.startsWith("ctr:")){
@@ -92,7 +95,7 @@ public class ClientTest {
        String taber = "testperson";
        javax.swing.JOptionPane.showMessageDialog(vindue, ""+slut_besked);
        vindue.setVisible(false);
-       System.exit(1);
+       System.exit(0);
         
         
     }
