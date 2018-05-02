@@ -10,26 +10,20 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import terningspillet_snyd.Raflebaeger;
-import terningspillet_snyd.SpillerForbindelse;
 
-/**
+/**Klassen holder styr på at kører serveren og en liste af klienter.
+ * Den har funktioner til at sende til klienterne og modtage fra dem ud fra deres nr i listen.
  *
  * @author john
  */
 public class ServerNetværk {
     private ServerSocket server_socket;
-    
     private final ArrayList<SpillerForbindelse> spillere;
-//    public final ArrayList<SpillerForbindelse> spillere;        //for testing
-    /*
-    private ArrayList<Socket> spillerSocket;
-    private ArrayList<PrintWriter> spillerSend;
-    private ArrayList<BufferedReader> spillerRecive;
-    private ArrayList<String> spillerNavn;
-    */
-    
-    
-    
+
+    /**
+     * Opretter objektet og en server socket på den angivne port.
+     * @param port 
+     */
     public ServerNetværk(int port){
         try {
             server_socket = new ServerSocket(port);
@@ -37,12 +31,6 @@ public class ServerNetværk {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        /*
-        spillerSocket = new ArrayList<>();
-        spillerSend = new ArrayList<>();
-        spillerRecive = new ArrayList<>();
-        spillerNavn = new ArrayList<>();
-        */
         
         spillere = new ArrayList<>();
         
@@ -62,7 +50,7 @@ public class ServerNetværk {
     }
     
     /**
-     * sender string til alle spillere
+     * Sender string til alle spillere
      * @param besked 
      */
     public void sendTilAlle(String besked){
@@ -72,7 +60,7 @@ public class ServerNetværk {
         System.out.println("Message: \""+ besked +"\" Sent to all players.");
     }
     /**
-     * sender string til spillerNr.
+     * Sender string til spillerNr.
      * @param besked
      * @param spillerNr 
      */
@@ -86,7 +74,7 @@ public class ServerNetværk {
         System.out.println("Message: \""+ besked +"\" Sent to player "+spillerNr+".");
     }
     /**
-     * modtager besked fra spiller
+     * Modtager besked fra spillerNr
      * @param spillerNr
      * @return 
      */
@@ -103,6 +91,7 @@ public class ServerNetværk {
     }
     /**
      * Sender raflebære til spiller nr.
+     * Det sendes som string og konverteres hos spilleren
      * @param baeger
      * @param spillerNr 
      */
@@ -138,7 +127,11 @@ public class ServerNetværk {
         System.out.println("Message: \""+streng+"\" Sent to all players.");
     }
     
-    
+    /**
+     * Lukker forbindelsen til en spiller og fjerner dem fra listen
+     * Der sendes en "cte:kick" før spilleren fjernes
+     * @param spillerNr 
+     */
     public void kickSpiller(int spillerNr){
         SpillerForbindelse spiller = spillere.get(spillerNr);
         sendTilSpiller("ctr:kick", spillerNr);
