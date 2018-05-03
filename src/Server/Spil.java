@@ -133,7 +133,7 @@ public class Spil {
      * @param værdi
      * @param antal
      */
-    void gæt(int værdi, int antal) {
+    public void gæt(int værdi, int antal) {
 
         // Hvis spillet er slut kan der ikke angives gæt
         if (test_spilstatus()) {
@@ -166,7 +166,7 @@ public class Spil {
     /**
      * Spilleren der har turen kan angive at den forrige spiller lyver:
      */
-    void løgner() {
+    public void løgner() {
 
         // Hvis spillet er slut kan der ikke angives en løgner
         if (test_spilstatus()) {
@@ -199,7 +199,7 @@ public class Spil {
     /**
      * Printer en bestemt spillers eller alle spillers terninger
      */
-    void printTerninger(int spiller) {
+    public void printTerninger(int spiller) {
 
         // Hvis spillet er slut kan der ikke udprintes terninger
         if (test_spilstatus()) {
@@ -224,7 +224,7 @@ public class Spil {
     /**
      * Starter en runde. Dette indebærer: -Reset AntalØjne og Kombinationer arrrys -Udskriver hvis tur det er -Sætter AntalØjne og Kombinationer arrrys udfra terningerne i runden -Sætter spil_status til "spil" -Fjerner forrige rundes gæt
      */
-    void start_rounde() {
+    public void start_rounde() {
 
         // Hvis spillet er slut kan der ikke startes en ny runde, der skal startes et nyt SPIL!
         if (test_spilstatus()) {
@@ -320,7 +320,7 @@ public class Spil {
     /**
      * @return antallet af terninger
      */
-    int antal_terninger_ialt() {
+    public int antal_terninger_ialt() {
         int antal_terninger_ialt = 0;
         for (int i = 0; i < antal_spillere; i++) {
             antal_terninger_ialt += liste_af_raflebaeger.get(i).antalTerninger();
