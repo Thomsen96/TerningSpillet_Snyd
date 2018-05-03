@@ -40,7 +40,13 @@ public class ClientTest {
         vindue.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // reagér på luk
         vindue.pack();                  // lad vinduet selv bestemme sin størrelse
         vindue.setVisible(true);
-        
+        //Denne kode kommer fra Jakob Falk
+//        faneblade.setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI(){
+//                protected int calculateTapAreaHight(int t, int h, int m){
+//                    return 0;
+//                }
+//            }
+//        );
         
         while(Velkomstskærm.start == 0 && vindue.isShowing()){
             try {
