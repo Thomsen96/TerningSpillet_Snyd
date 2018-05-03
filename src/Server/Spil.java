@@ -222,7 +222,10 @@ public class Spil {
     }
 
     /**
-     * Starter en runde. Dette indebærer: -Reset AntalØjne og Kombinationer arrrys -Udskriver hvis tur det er -Sætter AntalØjne og Kombinationer arrrys udfra terningerne i runden -Sætter spil_status til "spil" -Fjerner forrige rundes gæt
+     * Starter en runde. Dette indebærer:
+     * -Reset AntalØjne og Kombinationer arrrys -Udskriver hvis tur det er
+     * -Sætter AntalØjne og Kombinationer arrrys udfra terningerne i runden
+     * -Sætter spil_status til "spil" -Fjerner forrige rundes gæt
      */
     public void start_rounde() {
 
@@ -267,7 +270,9 @@ public class Spil {
     }
 
     /**
-     * Angiver at en runde er slut. Dette indebærer: - Fjern terninger fra vinderne af runden og ryst alles bærgere - Sæt spil_status til "runde_slut" - Tjekker om spillet er slut, angiver en taber og sætter spil_status til "spil_slut"
+     * Angiver at en runde er slut. Dette indebærer:
+     * - Fjern terninger fra vinderne af runden og ryst alles bærgere
+     * - Sæt spil_status til "runde_slut" - Tjekker om spillet er slut, angiver en taber og sætter spil_status til "spil_slut"
      */
     private void runde_slut() {
 
@@ -310,7 +315,7 @@ public class Spil {
      * @return om spillet er slut
      */
     public boolean test_spilstatus() {
-        if (spil_status == "spil_slut") {
+        if (spil_status.equals("spil_slut")) { // Hvis spillet er slut
             System.out.println("Genstart spillet! Spiller " + taber + " har tabt!");
             return true;
         }
