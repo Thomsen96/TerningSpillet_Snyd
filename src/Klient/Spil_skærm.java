@@ -60,13 +60,6 @@ public class Spil_skærm extends javax.swing.JPanel {
         // Herunder referer g til et Graphics-objekt man kan tegne med
         super.paintComponent(g);                // tegn først baggrunden på panelet
         
-//        terninger[0] = 1;
-//        terninger[1] = 2;
-//        terninger[2] = 3;
-//        terninger[3] = 4;
-//        terninger[4] = 5;
-//        terninger[5] = 6;
-
         int hjørne = 0;
         int xpos = 50;
         int ypos = 60;

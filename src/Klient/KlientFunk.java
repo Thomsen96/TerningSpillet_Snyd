@@ -30,9 +30,6 @@ public class KlientFunk {
         // Opretter et tomt raflebaerger så der ikke opstår null-pointer exception, hvis der forsøges tilgået raflebærger før det er modtaget
         baerger = new Klient_raflebaeger();   
         
-        //System.out.println(spiller.modtag());
-        //spiller.send("Hello server");
-
     }
     
     KlientFunk(int portnavn, String navn, String IP) {

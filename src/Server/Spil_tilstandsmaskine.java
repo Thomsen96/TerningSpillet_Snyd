@@ -25,137 +25,6 @@ public class Spil_tilstandsmaskine {
                 }            
             }    
         }
-/*
-    public static void SeSpil() {
-        Spil = new Spil(3,6);
-        Spil.printTerninger(0);
-        Spil.start_rounde();
-        printstats();
-        
-        Spil.løgner(Spil.getHvis_tur());
-        
-        for (int i = 0; i < 10; i++) {
-            Spil.gæt((int) (Math.random()* 6 + 1),(int) (Math.random()* 6 + 1),Spil.getHvis_tur());
-        }
-        
-        Spil.løgner(Spil.getHvis_tur());
-        
-        for (int j = 0; j < 10; j++) {
-            Spil.start_rounde();
-            Spil.printTerninger(0);
-            //printstats();
-
-            for (int i = 0; i < 3; i++) {
-                Spil.gæt((int) (Math.random()* 6 + 1),(int) (Math.random()* 6 + 1),Spil.getHvis_tur());
-            }
-
-            Spil.løgner(Spil.getHvis_tur());
-        
-        }    }
-       
-
-
-    public static void Spilselv() {
-        Spil = new Spil(3,6);
-        Spil.printTerninger(1);
-        Spil.start_rounde();
-        
-        int spil_status = 1;
-        String streng;
-        int spiller2 = 6;
-        int spiller3 = 7;
-        
-        while(true){
-           switch(spil_status) {
-               case 1:
-                        System.out.println("Skriv f.eks Guess(4,3) for 4 3'ere, MyDices!, AllDices! eller Liar!");
-                        streng = læsINTtastatur();
-                        if(streng.startsWith("Guess(") && streng.endsWith(")")){
-                            streng = streng.substring(6);
-                            int antal = 0;
-                            int værdi = 0;
-                            
-                            try {
-                                String antal_string = streng.substring(0,streng.indexOf(","));
-                                
-                                for (int i = 0; i < antal_string.length(); i++) {
-                                    if(antal_string.charAt(i) > 57 || antal_string.charAt(i) < 48){
-                                        antal = -1;
-                                        i = antal_string.length();
-                                    }else
-                                        antal += ((int) antal_string.charAt(i)-48)* (int) Math.pow(10, antal_string.length()-1-i);
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                antal = 0;
-                            }
-                            
-                            try {
-                                String værdi_string = streng.substring(streng.indexOf(",")+1,streng.indexOf(")"));
-                                for (int i = 0; i < værdi_string.length(); i++) {
-                                    if(værdi_string.charAt(i) > 57 || værdi_string.charAt(i) < 48){
-                                        værdi = -1;
-                                        i = værdi_string.length();
-                                    }else
-                                        værdi += ((int) værdi_string.charAt(i)-48)* (int) Math.pow(10, værdi_string.length()-1-i);
-                                }                                
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                værdi = 0;
-                            }
-                            
-                            Spil.gæt(værdi,antal,1);
-                            if(Spil.getHvis_tur() != spil_status){
-                                spil_status++;
-                            }
-                            
-                        }else if(streng.matches("Liar!")){
-                            Spil.løgner(Spil.getHvis_tur());
-                            if(Spil.getSpil_status().matches("runde_slut")){
-                                Spil.printTerninger(1);
-                                Spil.start_rounde();
-                                spil_status = Spil.getHvis_tur();
-                            }else if(Spil.getSpil_status().matches("spil_færdig")){
-                                spil_status = 4;
-                            }
-                        }else if(streng.trim().matches("MyDices!")){
-                            Spil.printTerninger(1);
-                            
-                        }else if(streng.trim().matches("AllDices!")){
-                            Spil.printTerninger(0);
-                            
-                        }else{
-                            System.out.println("Ugyldig kommando!: "+streng);
-                        }
-                        break;
-                case 2:
-                        // Spiller 2
-                        Spil.gæt(6,spiller2,2);
-                        if(Spil.getHvis_tur() != spil_status){
-                            spil_status = 3;
-                        } 
-                        spiller2=spiller2+1;
-                        break;
-                case 3:
-                        // Spiller 3
-                        Spil.gæt(6,spiller3,3);
-                        if(Spil.getHvis_tur() != spil_status){
-                            spil_status = 1;
-                        }
-                        spiller3=spiller2+1;
-                        break;                    
-                case 4:
-                        // Spil færdig
-                        System.out.println("Spillet er færdigt!");
-                        return;                         
-           }
-
-       }
-       
-
-       
-    }
-*/
     
     /**
      * Opretter et Spil objekt og udgør tilstandsmaskinen der styrer spillet
@@ -192,7 +61,11 @@ public class Spil_tilstandsmaskine {
         }
     }
 
-    private static void læsCommandov2(String streng) {
+    /**
+     * Modtager en streng som indeholder en kommando som skal "trækkes ud" af strengen
+     * @param streng
+     */
+    public static void læsCommandov2(String streng) {
         if(streng.startsWith("Guess(") && streng.endsWith(")")){
             streng = streng.substring(6);
             int antal = 0;

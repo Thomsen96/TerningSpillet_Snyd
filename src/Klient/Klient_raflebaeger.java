@@ -20,7 +20,7 @@ public class Klient_raflebaeger extends terningspillet_snyd.Raflebaeger{
      */
     public Klient_raflebaeger(String besked) {
         super(0,false); // Kalder superklassen "Raflebaeger" og opretter et raflebærger med 0 terninger
-        tilføjTerning(besked); 
+        tilføjTerning(besked);
     }
 
     /**

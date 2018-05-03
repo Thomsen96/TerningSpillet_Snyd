@@ -1,50 +1,93 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Klient;
+
+import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
 /**
- *
- * @author chris
+ * Klientens program
  */
 public class Klient {
-
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
-
+        KlientFunk klient = null;
+        
         JTabbedPane faneblade = new JTabbedPane();
         
         Velkomstskærm Velkomstskærm = new Velkomstskærm();
         Spil_skærm Spil_skærm = new Spil_skærm();
-        Grafikdemo Grafikdemo = new Grafikdemo();
         
-        faneblade.add("Spillet", Spil_skærm);
         faneblade.add("Start", Velkomstskærm);
-        
         
         JFrame vindue = new JFrame("Snyd");
         vindue.add( faneblade );
         vindue.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // reagér på luk
         vindue.pack();                  // lad vinduet selv bestemme sin størrelse
-        vindue.setVisible(true);   
+        vindue.setVisible(true);
+        //Denne kode kommer fra Jakob Falk
+//        faneblade.setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI(){
+//                protected int calculateTapAreaHight(int t, int h, int m){
+//                    return 0;
+//                }
+//            }
+//        );
         
-        /*
-        JFrame vindue = new JFrame("Snyd");
-        Velkomstskærm Velkomstskærm = new Velkomstskærm();
-        Spil_skærm Spil_skærm = new Spil_skærm();
-        vindue.add(Velkomstskærm);
-        vindue.add(Spil_skærm);
+        // Vent på at spillet startes
+        while(Velkomstskærm.start == 0 && vindue.isShowing()){
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException ex) {
+                
+            }
+        }
         
-        vindue.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE); // reagér på luk
-	vindue.setSize(600,500);                      // sæt vinduets størrelse
-	vindue.setVisible(true);                      // åbn vinduet
-        */
-    }
-    
+        // Hvis vinduet bliver lukket
+        if (!vindue.isShowing()){
+            System.exit(0);
+        }
+        
+        
+        String navn = Velkomstskærm.getnavn();
+        int port = Velkomstskærm.getport();
+        String IP = Velkomstskærm.getIP();
+        
+        klient = new KlientFunk(port,navn,IP);
+        faneblade.add("Spillet", Spil_skærm);
+        
+        Spil_skærm.setlogik(klient); // Giver Spil_skærmen et KlientFunk objekt
+        faneblade.remove(Velkomstskærm); // Fjerner Velkomstskærmen så spillet vises
+        
+        String slut_besked = "Fejl!"; // Besked der skal vises i popup-boken
+        
+        while(klient.Forbundet() && vindue.isShowing()){ // Hvis der er en forbindelse og vinduet bliver vist
+            String msg = klient.modtagKommando(); // Modtag kommandoer og hvis det er en "message" ("msg:...") gem den i msg      
+            
+            if(!msg.matches("\null") && !msg.startsWith("ctr:")){ // Hvis beskeden er en msg
+                Spil_skærm.tilføjText_til_tekstboks(msg);
+                if(msg.endsWith("omgang!")){ // Hvis spillet er slut og en taber er udpejet
+                    slut_besked = msg;
+                }
+                
+            }else if(msg.matches("ctr:start runde")){ // Hvis runden skal startes
+                Spil_skærm.tegnTerninger(klient.baerger.antalTerninger()); // Send klientens terninger til GUI
+                Spil_skærm.sætAntalTerningerIAlt(klient.antal_terninger_ialt); // Send terninger i alt til GUI
+                System.out.println("Sender antal terninger til GUI: "+klient.baerger.antalTerninger());
+            }
+                
+            if("Tur".equals(klient.getState())){ // Hvis klienten får af vide at det er dens tur
+                Spil_skærm.visknapper(); // Enable "Gæt" og "Løgner!" knaperne i GUI
+            }
+        }
+        
+       String taber = "testperson";
+       if (!vindue.isShowing()){ // Hvis vinduet er lukket ved "velkomstskærm", luk programmet
+            System.exit(0);
+       }
+       
+       javax.swing.JOptionPane.showMessageDialog(vindue, ""+slut_besked); // Vis besked vindue
+       vindue.setVisible(false); // Fjern vinduet
+       System.exit(0); // Luk programmet
+        
+        
+    }   
 }

@@ -36,12 +36,12 @@ public class SpillerNetværk {
         }
     }
 
-    SpillerNetværk(int port, String navn, String IP) {
+    public SpillerNetværk(int port, String navn, String IP) {
         try{
             if("127.0.0.1".equals(IP)){ // Hvis localhost
                forbindelse = new Socket("localhost", port); 
             }else{ // Hvis anden IP end localhost
-               InetAddress Ip_addresse = InetAddress.getByName(IP);
+               InetAddress Ip_addresse = InetAddress.getByName(IP); // Et InetAddress objekt som indeholder IP addressen klienten har angivet
                forbindelse = new Socket(Ip_addresse, port); 
             }
             

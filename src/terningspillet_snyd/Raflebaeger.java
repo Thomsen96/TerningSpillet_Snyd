@@ -1,9 +1,9 @@
 package terningspillet_snyd;
-
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
+/** Fil oprindelig skrevet af Jacob Nordfalk
+ * En klasse der beskriver et Raflebærger med Terninger */
 public class Raflebaeger {
 
     /**

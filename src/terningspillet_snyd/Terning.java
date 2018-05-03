@@ -1,5 +1,6 @@
 package terningspillet_snyd;
-/** En klasse der beskriver 6-sidede terninger */
+/** Fil oprindelig skrevet af Jacob Nordfalk
+ * En klasse der beskriver 6-sidede terninger */
 public class Terning
 {
 	/** antallet af øjne på den side på terningen, der vender opad lige nu */

@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package terningspillet_snyd;
+package Test_klasser;
 
 import Klient.SpillerNetværk;
 
@@ -14,7 +9,7 @@ import Klient.SpillerNetværk;
 public class ClientTest1 {
     
     /**
-     * @param args the command line arguments
+     * Til test af SpillerNetværk
      */
     public static void main(String[] args) {
         // TODO code application logic here
