@@ -7,7 +7,6 @@ package Test_klasser;
  */
 
 
-import Server.Spil_tilstandsmaskine;
 import java.util.ArrayList;
 
 /**
