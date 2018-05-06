@@ -25,10 +25,21 @@ public class ServerLogik {
         System.out.println("Indtast porten du vil åbne på:");
 
         int port = læsINTtastatur();
-        System.out.println("Indtast antallet af spillere:");
-        int antalSpillere = læsINTtastatur();
-        System.out.println("Indtast antallet af terninger:");
-        int antalTerninger = læsINTtastatur();
+        
+        int antalSpillere = 0;
+        do{
+            System.out.println("Indtast antallet af spillere:");
+            antalSpillere = læsINTtastatur();
+        
+        }while(antalSpillere < 2);
+        
+        
+        int antalTerninger = 0;
+        do{
+            System.out.println("Indtast antallet af terninger:");
+            antalTerninger = læsINTtastatur();
+        
+        }while(antalTerninger < 1);        
         //int port = 8998;
         //int antalSpillere = 2;
         //int antalTerninger = 6;
