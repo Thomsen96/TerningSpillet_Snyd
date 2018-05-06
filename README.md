@@ -1,7 +1,6 @@
 # TerningSpillet_Snyd
-Terningspillet Snyd
 
-Velkommen til terningespillet "Snyd"
+Velkommen til terningespillet "Snyd".
 
 Terningespillet er et klassisk terningespil, hvor det ligesom i Meyer gælder om at gætte på kombinationer af terninger.
 Spillet spilles typisk af 2-5 spillere, hvor hver spiller starter med 6 terninger i hver af deres raflebærger. Runden starter ved, at alle ryster deres terninger og kigger på dem.
@@ -25,10 +24,8 @@ Hvis der er det antal som der blev gættet på, taber ham der kaldte snyd og omv
 Alle andre end taberen kan nu fjerne en terning fra deres bærger og runden starter igen ved, at taberen af forrige runde starter.
 Spillet slutter når der kun er en spiller tilbage med terninger i raflebærgeret og han har så tabt spillet.
 
-Hent klienten her!
-Hent serveren her!
 
-Serveren skal køres fra terminalen da man skal angive port, antal spillere og terninger med tastaturet. Når man er i den mappe, hvor filen ligger i kan man bruge
-kommandoen "Java -jar TerningSpillet_Snyd_Server.jar" for at starte serveren.
-Java projektet kan hentes på Github!
+Serveren skal køres fra terminalen da man skal angive port, antal spillere og terninger med tastaturet. Når man er i den mappe, hvor filen ligger i kan man bruge kommandoen "Java -jar TerningSpillet_Snyd_Server.jar" for at starte serveren.
+
+
 Lavet af Mads og Christian 
