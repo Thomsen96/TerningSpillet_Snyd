@@ -9,17 +9,23 @@ import javax.swing.JTabbedPane;
  */
 public class Klient {
     
+    private static JTabbedPane faneblade;
+    private static KlientFunk klient;
+    private static Velkomstskærm Velkomstskærm;
+    private static Spil_skærm spil_skærm;
+    private static JFrame vindue;
+    
     public static void main(String[] args) {
-        KlientFunk klient = null;
+        klient = null;
         
-        JTabbedPane faneblade = new JTabbedPane();
+        faneblade = new JTabbedPane();
         
-        Velkomstskærm Velkomstskærm = new Velkomstskærm();
-        Spil_skærm Spil_skærm = new Spil_skærm();
+        Velkomstskærm = new Velkomstskærm();
+        spil_skærm = new Spil_skærm();
         
         faneblade.add("Start", Velkomstskærm);
         
-        JFrame vindue = new JFrame("Snyd");
+        vindue = new JFrame("Snyd");
         vindue.add( faneblade );
         vindue.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // reagér på luk
         vindue.pack();                  // lad vinduet selv bestemme sin størrelse
@@ -52,9 +58,9 @@ public class Klient {
         String IP = Velkomstskærm.getIP();
         
         klient = new KlientFunk(port,navn,IP);
-        faneblade.add("Spillet", Spil_skærm);
+        faneblade.add("Spillet", spil_skærm);
         
-        Spil_skærm.setlogik(klient); // Giver Spil_skærmen et KlientFunk objekt
+        spil_skærm.setlogik(klient); // Giver Spil_skærmen et KlientFunk objekt
         faneblade.remove(Velkomstskærm); // Fjerner Velkomstskærmen så spillet vises
         
         String slut_besked = "Fejl!"; // Besked der skal vises i popup-boken
@@ -63,19 +69,19 @@ public class Klient {
             String msg = klient.modtagKommando(); // Modtag kommandoer og hvis det er en "message" ("msg:...") gem den i msg      
             
             if(!msg.matches("\null") && !msg.startsWith("ctr:")){ // Hvis beskeden er en msg
-                Spil_skærm.tilføjText_til_tekstboks(msg);
+                spil_skærm.tilføjText_til_tekstboks(msg);
                 if(msg.endsWith("omgang!")){ // Hvis spillet er slut og en taber er udpejet
                     slut_besked = msg;
                 }
                 
             }else if(msg.matches("ctr:start runde")){ // Hvis runden skal startes
-                Spil_skærm.tegnTerninger(klient.baerger.antalTerninger()); // Send klientens terninger til GUI
-                Spil_skærm.sætAntalTerningerIAlt(klient.antal_terninger_ialt); // Send terninger i alt til GUI
+                spil_skærm.tegnTerninger(klient.baerger.antalTerninger()); // Send klientens terninger til GUI
+                spil_skærm.sætAntalTerningerIAlt(klient.antal_terninger_ialt); // Send terninger i alt til GUI
                 System.out.println("Sender antal terninger til GUI: "+klient.baerger.antalTerninger());
             }
                 
             if("Tur".equals(klient.getState())){ // Hvis klienten får af vide at det er dens tur
-                Spil_skærm.visknapper(); // Enable "Gæt" og "Løgner!" knaperne i GUI
+                spil_skærm.visknapper(); // Enable "Gæt" og "Løgner!" knaperne i GUI
             }
         }
         
