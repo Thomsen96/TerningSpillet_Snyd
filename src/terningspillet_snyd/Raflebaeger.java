@@ -81,7 +81,7 @@ public class Raflebaeger {
 
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Kunne ikke fjerne terningen!");
+            System.err.println("Kunne ikke fjerne terningen!");
         }
     }
 
@@ -153,7 +153,7 @@ public class Raflebaeger {
             }
         }
         if (trappe_regel) {
-            System.out.println("Trappereglen er opfyldt!");
+            //System.out.println("Trappereglen er opfyldt!");
         }
     }
 }

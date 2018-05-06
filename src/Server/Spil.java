@@ -198,6 +198,7 @@ public class Spil {
 
     /**
      * Printer en bestemt spillers eller alle spillers terninger
+     * @param spiller
      */
     public void printTerninger(int spiller) {
 
