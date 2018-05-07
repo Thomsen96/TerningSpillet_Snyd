@@ -31,7 +31,7 @@ public class Spil_skærm extends javax.swing.JPanel {
             text_til_tekstboks = text_til_tekstboks.concat("\n"+tekst);
         }
         
-        System.out.println("Teksten til boksen: "+text_til_tekstboks);
+        System.out.println("Teksten til boksen: "+tekst);
         jTextArea1.setText(text_til_tekstboks);
         jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
     }
@@ -42,6 +42,7 @@ public class Spil_skærm extends javax.swing.JPanel {
     public Spil_skærm() {
         initComponents();jLabel_antalterningerialt.setText(""+antal_terninger_i_alt);
         sætAntalTerningerIAlt(antal_terninger_i_alt);
+        jTextArea1.setEditable(false);
         //jTextArea1.setText("Test1 \nTest2 \n");
     }
 
