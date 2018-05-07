@@ -151,7 +151,6 @@ public class KlientFunk {
                     System.out.println("Går fra Ikke_tur til Tur");
                     return "\null";
                 }else if(streng.matches("ctr:gaet ikke accepteret")){
-                    state = "Tur_ikke_accepteret";
                     System.out.println("Dit gæt blev ikke accepteret!");
                     return "\null";
                 }else if(streng.matches("ctr:runde slut")){
@@ -176,12 +175,6 @@ public class KlientFunk {
                     return "\null";                    
                 }else{
                     System.out.println("Ugyldig kommando fra state \"Tur\".");
-                    return "\null";
-                }
-            case "Tur_ikke_accepteret":
-                if(streng.matches("ctr:tur")){
-                    state = "Tur";
-                    System.out.println("Går fra Tur_ikke_accepteret til Tur");
                     return "\null";
                 }
             case "Runde_slut":
