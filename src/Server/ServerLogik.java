@@ -22,6 +22,7 @@ public class ServerLogik {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
         System.out.println("Indtast porten du vil åbne på:");
 
         int port = læsINTtastatur();
@@ -40,9 +41,10 @@ public class ServerLogik {
             antalTerninger = læsINTtastatur();
         
         }while(antalTerninger < 1);        
-        //int port = 8998;
-        //int antalSpillere = 2;
-        //int antalTerninger = 6;
+        
+//        int port = 8998;
+//        int antalSpillere = 2;
+//        int antalTerninger = 2;
 
         serverLogik = new ServerFunk(port);
         spilLogik = new Spil(antalSpillere, antalTerninger);
