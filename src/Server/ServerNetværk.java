@@ -6,11 +6,11 @@
 package Server;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketAddress;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import terningspillet_snyd.Raflebaeger;
 
 /**Klassen holder styr på at kører serveren og en liste af klienter.
@@ -154,5 +154,9 @@ public class ServerNetværk {
         } catch (IOException ex) {
             System.out.println("Server.ServerNetværk.kickAlle()"+"  ALLE er blevet kicket");
         }
+    }
+
+    InetAddress getIP() {
+        return spillere.get(spillere.size()-1).getip();
     }
 }

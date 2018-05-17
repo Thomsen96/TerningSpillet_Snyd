@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.Socket;
 
 /**Klassen indeholder en socket en printwriter og en buffere reader.
@@ -60,5 +61,9 @@ public class SpillerForbindelse {
      */
     public void lukForbindelse() throws IOException{
         spillerSocket.close();
+    }
+
+    InetAddress getip() {
+        return spillerSocket.getInetAddress();
     }
 }

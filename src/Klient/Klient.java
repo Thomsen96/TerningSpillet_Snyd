@@ -79,6 +79,7 @@ public class Klient {
                     spil_skærm.sætAntalTerningerIAlt(klient.antal_terninger_ialt); // Send terninger i alt til GUI
                     System.out.println("Sender antal terninger til GUI: "+klient.baerger.antalTerninger());
                 }
+                
 
                 if("Tur".equals(klient.getState())){ // Hvis klienten får af vide at det er dens tur
                     spil_skærm.visknapper(); // Enable "Gæt" og "Løgner!" knaperne i GUI

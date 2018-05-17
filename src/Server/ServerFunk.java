@@ -195,11 +195,14 @@ public class ServerFunk {
         netværk.sendTilAlle("msg:"+navne.get(spillerNr)+" kaldte snyd på sig selv, det måes man ikke!");
     }
 
-    void kickefternolere(){           
+    void kickefternolere(){       
+        int tal = 0;
         while (!spil_slut) {
-            System.out.println("MyThread running");
             netværk.modtagForbindelse();
+            String streng = netværk.getIP().toString();
             netværk.kickSpiller(antalSpillere);
+            tal++;
+            System.out.println("En spiller med IP:"+streng+" prøvede at tilslutte sig spillet, efter spillet var igang sat. \"Spiller udsmidnings Thread\" kørt: "+tal+" gange");
         }
     }
     
