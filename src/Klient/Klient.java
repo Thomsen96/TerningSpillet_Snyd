@@ -70,7 +70,7 @@ public class Klient {
 
                 if(!msg.matches("\null") && !msg.startsWith("ctr:")){ // Hvis beskeden er en msg
                     spil_skærm.tilføjText_til_tekstboks(msg);
-                    if(msg.endsWith("omgang!")){ // Hvis spillet er slut og en taber er udpejet
+                    if(msg.endsWith("omgang!") || msg.endsWith("kicket!")){ // Hvis spillet er slut og en taber er udpejet
                         slut_besked = msg;
                     }
 
@@ -90,7 +90,7 @@ public class Klient {
                 System.exit(0);
            }
         } catch (Exception e) {
-            slut_besked = "Forbindelsen til serveren kunne ikke oprettes";
+            slut_besked = "Forbindelsen til serveren kunne ikke oprettes! \nKlienten lukkes ned!";
             System.err.println("Error creating the socket");
         }      
         

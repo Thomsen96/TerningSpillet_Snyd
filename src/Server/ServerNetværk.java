@@ -145,6 +145,7 @@ public class ServerNetværk {
         spillere.remove(spillerNr);
         
         
+        
     }
     
     public void kickAlle(){
