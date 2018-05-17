@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import terningspillet_snyd.Raflebaeger;
 
 /**Klassen holder styr på at kører serveren og en liste af klienter.
@@ -143,5 +145,13 @@ public class ServerNetværk {
         spillere.remove(spillerNr);
         
         
+    }
+    
+    public void kickAlle(){
+        try {
+            server_socket.close();
+        } catch (IOException ex) {
+            System.out.println("Server.ServerNetværk.kickAlle()"+"  ALLE er blevet kicket");
+        }
     }
 }

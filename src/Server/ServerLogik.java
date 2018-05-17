@@ -48,8 +48,17 @@ public class ServerLogik {
         spilLogik = new Spil(antalSpillere, antalTerninger);
 
         serverLogik.modtagForbindelse(antalSpillere);
+        
+        Thread t = new Thread(new Runnable() {
+                public void run() {
+                    serverLogik.kickefternolere();
+                }
+        });
+        t.start();
+        
+        
         serverLogik.initierSpil();
-
+      
         while (true) {
             switch (spilLogik.getSpil_status()) {
                 case "start":
@@ -73,6 +82,7 @@ public class ServerLogik {
                 case "spil_slut":
                     serverLogik.spilSlut(spilLogik.getTaber());
                     System.out.println("Spillet er færdigt!");
+                    t.stop();
                     return; // Afslut spil                
                 default:
                     System.out.println("Fejl, ugyldig tilstand");

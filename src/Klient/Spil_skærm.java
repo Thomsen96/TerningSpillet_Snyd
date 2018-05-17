@@ -22,7 +22,7 @@ public class Spil_skærm extends javax.swing.JPanel {
     private int antal_terninger_i_alt = 0;
     private KlientFunk klient;
     public int[] terninger = new int[6];
-    public static String text_til_tekstboks = "";
+    public String text_til_tekstboks = "";
 
     public void tilføjText_til_tekstboks(String tekst) {
         if(text_til_tekstboks.isEmpty()){

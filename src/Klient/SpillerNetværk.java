@@ -36,8 +36,8 @@ public class SpillerNetværk {
         }
     }
 
-    public SpillerNetværk(int port, String navn, String IP) {
-        try{
+    public SpillerNetværk(int port, String navn, String IP) throws IOException {
+
             if("127.0.0.1".equals(IP)){ // Hvis localhost
                forbindelse = new Socket("localhost", port); 
             }else{ // Hvis anden IP end localhost
@@ -48,14 +48,11 @@ public class SpillerNetværk {
 
             udBuffer  = new PrintWriter(forbindelse.getOutputStream());
             indBuffer = new BufferedReader(new InputStreamReader(forbindelse.getInputStream()));
+            
             if (navn.equals("")){
                 navn = "Jeg kan ikke finde ud af at angive et navn fordi jeg er dum!";
             }
-            send(navn);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println("Error creating the socket");
-        }
+            send(navn);       
     }
     
     public String modtag() throws IOException{

@@ -11,6 +11,7 @@ public class ServerFunk {
     private ServerNetværk netværk;
     private ArrayList<String> navne;
     private int antalSpillere;
+    private boolean spil_slut;
     
     /**
      * Serveren oprettes på port, og er herefter klar til at modtage forbindelser
@@ -19,6 +20,7 @@ public class ServerFunk {
     public ServerFunk(int port){
         netværk = new ServerNetværk(port);
         navne = new ArrayList<>();
+        spil_slut = false;
         
     }
     
@@ -36,6 +38,7 @@ public class ServerFunk {
             System.out.println("Player "+ navne.size() +" added to list, with name: " + navne.get(i));
             netværk.sendTilAlle("msg:Spilleren "+ navne.get(i)+" har tilsluttet sig spillet som spiller " + navne.size());
         }
+                
         netværk.sendTilAlle("ctr:initier spil");
     }
     
@@ -162,10 +165,15 @@ public class ServerFunk {
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
+        /*
         for (int i = 0; i < navne.size()-1; i++){
             netværk.kickSpiller(0); //Hver gennemløb bliver en ny spiller den første i listen,
             navne.remove(0);        //da de fjernes fra samme liste. Derfor smiddes spiller 0 ud
-        }
+        }*/
+        
+        netværk.kickAlle();
+        
+        spil_slut = true;
         
     }
     
@@ -186,4 +194,14 @@ public class ServerFunk {
         spillerNr--;
         netværk.sendTilAlle("msg:"+navne.get(spillerNr)+" kaldte snyd på sig selv, det måes man ikke!");
     }
+
+    void kickefternolere(){           
+        while (!spil_slut) {
+            System.out.println("MyThread running");
+            netværk.modtagForbindelse();
+            netværk.kickSpiller(antalSpillere);
+        }
+    }
+    
+    
 }

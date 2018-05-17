@@ -14,10 +14,10 @@ import java.util.Scanner;
  */
 public class KlientFunk {
 
-    private static SpillerNetværk spiller;
-    private static String state = "Tilslut_spil";
-    public static Klient_raflebaeger baerger;
-    public static int antal_terninger_ialt = 0;
+    private SpillerNetværk spiller;
+    private String state = "Tilslut_spil";
+    public Klient_raflebaeger baerger;
+    public int antal_terninger_ialt = 0;
             
     /**
      * Kontruktør der opretter et objekt af SpillerNetværk og parser portnavn og navn videre til den. Derudover opretter den også et tomt raflebaeger.
@@ -32,7 +32,7 @@ public class KlientFunk {
         
     }
     
-    KlientFunk(int portnavn, String navn, String IP) {
+    KlientFunk(int portnavn, String navn, String IP) throws IOException {
         spiller = new SpillerNetværk(portnavn, navn, IP);
     }
     
@@ -40,7 +40,7 @@ public class KlientFunk {
      * Returner tilstandsmaskinens tilstand
      * @return state
      */
-    public static String getState() {
+    public String getState() {
         return state;
     }
 
@@ -48,8 +48,8 @@ public class KlientFunk {
      * Angiv tilstanden som man ønsker at sætte tilstandsmaskinen i
      * @param state Tilstanden
      */
-    public static void setState(String state) {
-        KlientFunk.state = state;
+    public void setState(String state) {
+        this.state = state;
     }
 
     /**

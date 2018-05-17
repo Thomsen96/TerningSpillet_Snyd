@@ -48,7 +48,7 @@ public class Spil {
     private int[] AntalØjne = new int[7];
     private int[] Kombinationer = new int[7];
     private int hvis_tur = 1;
-    public static ArrayList<Raflebaeger> liste_af_raflebaeger;
+    public static  ArrayList<Raflebaeger> liste_af_raflebaeger;
     public Tur forrige_gæt;
     private Tur nuværende_gæt;
     private int antal_spillere;
