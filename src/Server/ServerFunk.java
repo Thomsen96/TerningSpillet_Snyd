@@ -165,11 +165,11 @@ public class ServerFunk {
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
-        /*
-        for (int i = 0; i < navne.size()-1; i++){
-            netværk.kickSpiller(0); //Hver gennemløb bliver en ny spiller den første i listen,
-            navne.remove(0);        //da de fjernes fra samme liste. Derfor smiddes spiller 0 ud
-        }*/
+        
+        for (int i = navne.size()-1; i >= 0; i--){
+            netværk.kickSpiller(i); //Hver gennemløb bliver en ny spiller den første i listen,
+            navne.remove(i);        //da de fjernes fra samme liste. Derfor smiddes spiller 0 ud
+        }
         
         netværk.kickAlle();
         
@@ -194,15 +194,23 @@ public class ServerFunk {
         spillerNr--;
         netværk.sendTilAlle("msg:"+navne.get(spillerNr)+" kaldte snyd på sig selv, det måes man ikke!");
     }
-
-    void kickefternolere(){       
+    
+    /**
+     * Håndtere kliententer der prøver at tilslutte sig efter, at et spil er startet.
+     * 
+     */
+    void handleLateConnections(){       
         int tal = 0;
-        while (!spil_slut) {
-            netværk.modtagForbindelse();
-            String streng = netværk.getIP().toString();
-            netværk.kickSpiller(antalSpillere);
-            tal++;
-            System.out.println("En spiller med IP:"+streng+" prøvede at tilslutte sig spillet, efter spillet var igang sat. \"Spiller udsmidnings Thread\" kørt: "+tal+" gange");
+        while (!spil_slut) { // Hvis spillet er slut
+            try {
+                netværk.afvisForsinkedeForbindelser();
+                String streng = netværk.getIP().toString();
+                netværk.spillere_udsmides_kick();
+                tal++;
+                System.out.println("En spiller med IP:"+streng+" prøvede at tilslutte sig spillet, efter spillet var igangsat. \"Spiller udsmidnings Thread\" kørt: "+tal+" gange");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
     

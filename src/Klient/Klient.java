@@ -26,7 +26,7 @@ public class Klient {
         
         vindue = new JFrame("Snyd");
         vindue.add( faneblade );
-        vindue.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // reagér på luk
+        vindue.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // reagér på luk
         vindue.pack();                  // lad vinduet selv bestemme sin størrelse
         vindue.setVisible(true);
         //Denne kode kommer fra Jakob Falk
@@ -38,9 +38,11 @@ public class Klient {
 //        );
         
         // Vent på at spillet startes
+        
+        
         while(Velkomstskærm.start == 0 && vindue.isShowing()){
             try {
-                Thread.sleep(500);
+                Thread.sleep(100);
             } catch (InterruptedException ex) {
                 
             }
@@ -62,7 +64,7 @@ public class Klient {
             klient = new KlientFunk(port,navn,IP);
             faneblade.add("Spillet", spil_skærm);     
 
-            spil_skærm.setlogik(klient); // Giver Spil_skærmen et KlientFunk objekt
+            spil_skærm.setlogik(klient,navn); // Giver Spil_skærmen et KlientFunk objekt og navnet brugeren har opgivet
             faneblade.remove(Velkomstskærm); // Fjerner Velkomstskærmen så spillet vises
 
             while(klient.Forbundet() && vindue.isShowing()){ // Hvis der er en forbindelse og vinduet bliver vist
@@ -70,7 +72,7 @@ public class Klient {
 
                 if(!msg.matches("\null") && !msg.startsWith("ctr:")){ // Hvis beskeden er en msg
                     spil_skærm.tilføjText_til_tekstboks(msg);
-                    if(msg.endsWith("omgang!") || msg.endsWith("kicket!")){ // Hvis spillet er slut og en taber er udpejet
+                    if(msg.endsWith("omgang!") /*|| msg.endsWith("kicket!")*/){ // Hvis spillet er slut og en taber er udpejet
                         slut_besked = msg;
                     }
 

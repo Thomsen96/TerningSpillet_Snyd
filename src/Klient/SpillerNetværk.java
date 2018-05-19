@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Scanner;
 
 /**
@@ -42,16 +43,13 @@ public class SpillerNetværk {
                forbindelse = new Socket("localhost", port); 
             }else{ // Hvis anden IP end localhost
                InetAddress Ip_addresse = InetAddress.getByName(IP); // Et InetAddress objekt som indeholder IP addressen klienten har angivet
-               forbindelse = new Socket(Ip_addresse, port); 
+               forbindelse = new Socket(Ip_addresse, port);
             }
             
 
             udBuffer  = new PrintWriter(forbindelse.getOutputStream());
             indBuffer = new BufferedReader(new InputStreamReader(forbindelse.getInputStream()));
             
-            if (navn.equals("")){
-                navn = "Jeg kan ikke finde ud af at angive et navn fordi jeg er dum!";
-            }
             send(navn);       
     }
     
@@ -138,6 +136,24 @@ public class SpillerNetværk {
         } else {
             return false;
         }
+    }
+    
+    /**
+     * Metode der returnere IP-adressen på serveren
+     * @return serverens IP
+     */
+    public String getSocketIP(){
+        String hostAddress = forbindelse.getInetAddress().getHostAddress();
+        
+        if(hostAddress.equals("127.0.0.1")){ // Hvis det denne klient der har hostet serveren
+            try {
+                return InetAddress.getLocalHost().getHostAddress(); // Returner Ip-addressen på Host
+            } catch (UnknownHostException ex) {
+                ex.printStackTrace();
+                return "fejl";
+            }
+        }
+        return hostAddress; // Returner Ip-addressen på Serveren
     }
     
 }

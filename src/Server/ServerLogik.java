@@ -21,8 +21,16 @@ public class ServerLogik {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
         
+        int antalSpillere = Integer.parseInt(args[0]);
+        int antalTerninger = Integer.parseInt(args[1]);
+        int port = Integer.parseInt(args[2]);
+        
+        //System.out.println("antalSpillere: "+antalSpillere);
+        //System.out.println("antalTerninger: "+antalTerninger);
+        
+        // TODO code application logic here
+        /*
         System.out.println("Indtast porten du vil åbne på:");
 
         int port = læsINTtastatur();
@@ -41,6 +49,7 @@ public class ServerLogik {
             antalTerninger = læsINTtastatur();
         
         }while(antalTerninger < 1);        
+        */
         
 //        int port = 8998;
 //        int antalSpillere = 2;
@@ -53,7 +62,9 @@ public class ServerLogik {
         
         Thread t = new Thread(new Runnable() {
                 public void run() {
-                    serverLogik.kickefternolere();
+                    System.out.println(".kickefternolere() er kaldt");
+                    serverLogik.handleLateConnections();
+                    System.out.println(".kickefternolere() er færdig");
                 }
         });
         t.start();
@@ -84,7 +95,7 @@ public class ServerLogik {
                 case "spil_slut":
                     serverLogik.spilSlut(spilLogik.getTaber());
                     System.out.println("Spillet er færdigt!");
-                    t.stop();
+                    //t.stop();
                     return; // Afslut spil                
                 default:
                     System.out.println("Fejl, ugyldig tilstand");

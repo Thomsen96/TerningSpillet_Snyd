@@ -18,6 +18,8 @@ public class KlientFunk {
     private String state = "Tilslut_spil";
     public Klient_raflebaeger baerger;
     public int antal_terninger_ialt = 0;
+    private String IP;
+    private int port;
             
     /**
      * Kontruktør der opretter et objekt af SpillerNetværk og parser portnavn og navn videre til den. Derudover opretter den også et tomt raflebaeger.
@@ -33,6 +35,7 @@ public class KlientFunk {
     }
     
     KlientFunk(int portnavn, String navn, String IP) throws IOException {
+        this.port = portnavn;
         spiller = new SpillerNetværk(portnavn, navn, IP);
     }
     
@@ -226,7 +229,11 @@ public class KlientFunk {
         }
         state = "Ikke_tur";
     }
-
+    
+    /**
+     * Returnere et int[] af terninger 
+     * @return int[] array af terninger
+     */
     int[] getTerninger() {
         int[] Terninger = new int[baerger.terninger.size()];
         
@@ -235,6 +242,22 @@ public class KlientFunk {
         }
         return Terninger;
     }
+
     
+    /**
+     * Returnere IP adressen på serveren
+     * @return String Strengen indeholder IP adressen på serveren
+     */
+    String getServerIP() {
+        return spiller.getSocketIP();
+    }
+    
+     /**
+     * Returnere port nummeret på serveren
+     * @return Int port nummeret
+     */   
+    int getServerPort() {
+        return port;
+    }    
     
 }

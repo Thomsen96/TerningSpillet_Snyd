@@ -6,10 +6,10 @@
 package Server;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import terningspillet_snyd.Raflebaeger;
 
@@ -21,12 +21,14 @@ import terningspillet_snyd.Raflebaeger;
 public class ServerNetværk {
     private ServerSocket server_socket;
     private final ArrayList<SpillerForbindelse> spillere;
+    private final ArrayList<SpillerForbindelse> spillere_udsmides;
 
     /**
      * Opretter objektet og en server socket på den angivne port.
      * @param port 
      */
     public ServerNetværk(int port){
+        System.out.println(""+isPortInUse("127.0.0.1", port));
         try {
             server_socket = new ServerSocket(port);
             System.out.println("Server initiated on port: "+ port);
@@ -35,8 +37,9 @@ public class ServerNetværk {
         }
         
         spillere = new ArrayList<>();
-        
+        spillere_udsmides = new ArrayList<>();
     }
+    
     /**
      * Modtager forbindelse udefra og tilføjer denne til spiller listen.
      * Denne funktion venter på forbindelse fra klient, uden timeout.
@@ -46,6 +49,18 @@ public class ServerNetværk {
             Socket nySpiller = server_socket.accept();
             SpillerForbindelse nySpillerForbindelse = new SpillerForbindelse(nySpiller);
             spillere.add(nySpillerForbindelse);
+        } catch (Exception e) {
+           e.printStackTrace(); 
+        }
+    }
+    /**
+     * Modtager forbindelse udefra og smider dem ud når spillet allerede er begyndt
+     */
+    public void afvisForsinkedeForbindelser() {
+        try{
+            Socket nySpiller = server_socket.accept();
+            SpillerForbindelse nySpillerForbindelse = new SpillerForbindelse(nySpiller);
+            spillere_udsmides.add(nySpillerForbindelse);
         } catch (Exception e) {
            e.printStackTrace(); 
         }
@@ -142,21 +157,65 @@ public class ServerNetværk {
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-        spillere.remove(spillerNr);
-        
-        
-        
+        spillere.remove(spillerNr);   
     }
     
+     /**
+     * Lukker forbindelsen til spillere på udsmidningslisten
+     */
+    public void spillere_udsmides_kick(){
+        if(spillere_udsmides.size() > 0){
+            spillere_udsmides.get(0).send("ctr:kick");
+            try {
+                spillere_udsmides.get(0).lukForbindelse();
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+            spillere_udsmides.remove(0); 
+        }
+    }
+    
+     /**
+     * Smid alle af server socket'en
+     */   
     public void kickAlle(){
         try {
             server_socket.close();
         } catch (IOException ex) {
-            System.out.println("Server.ServerNetværk.kickAlle()"+"  ALLE er blevet kicket");
+            
         }
     }
 
-    InetAddress getIP() {
-        return spillere.get(spillere.size()-1).getip();
+     /**
+     * Returnere Host/IP på folk der prøver at tilslutte et spil efter at det er gået igang
+     */
+    String getIP() {
+        try {
+            return spillere.get(spillere.size()-1).getip().toString();
+        } catch (Exception e) {
+            return null;
+        }
+        
+    }
+    
+     /**
+     * Tester om en Port er i brug. Dette gør, at folk der prøver køre to instancer af programmet og laver
+     * spil der kører på den samme port vil få en fejl
+     */    
+    private boolean isPortInUse(String host, int port){
+        boolean result = false;
+        
+        try {
+            (new Socket(host, port)).close();
+            result = true;
+        } catch (SocketException e) {
+            
+        } catch (UnknownHostException e) {
+            
+        }catch (IOException e) {
+            
+        }
+        
+        return result;
     }
 }
