@@ -122,6 +122,10 @@ public class RESTServerResource {
         if(Storage.tokenMap.get(username).equals(token)){
             //TODO: Code here to gennerate game over RMI
             
+            
+            response.put("port", 2); //return port
+            response.put("spillere", recived.optString("spillere")); //return spillere
+            response.put("terninger", recived.optString("terninger")); //return spillere
             return Response.ok(response.toString(), MediaType.APPLICATION_JSON).build();
         }else {
             //not valid user/token
