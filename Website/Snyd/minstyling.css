@@ -1,0 +1,28 @@
+/*Selector: element: */
+h1 {color:green;}
+
+
+
+/*Selector: id: */
+
+#minid {color: red;}
+
+/*Selector: klasse: */
+
+.minklasse {
+	color:blue;
+}
+.sort{color:black;}
+.roed {color: red;}
+
+.minklasse2{
+	font-size: 200%;
+}
+
+
+
+.indryk{
+margin-left:60px;
+margin-right: 60px;
+border-style: solid;
+}
