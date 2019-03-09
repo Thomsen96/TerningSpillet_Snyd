@@ -58,7 +58,7 @@ public class Klient {
         int port = Velkomstskærm.getport();
         String IP = Velkomstskærm.getIP();
         
-        String slut_besked = "Fejl!"; // Besked der skal vises i popup-boken
+        String slut_besked = "Fejl! Nogle narrøve gik ud af spillet!"; // Besked der skal vises i popup-boken
         
         try {
             klient = new KlientFunk(port,navn,IP);

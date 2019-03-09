@@ -181,7 +181,7 @@ public class ServerFunk {
      * Køres når runden er slut.
      * Bringer spillerne til "initier runde"
      */
-    void rundeSlut() {
+    public void rundeSlut() {
         netværk.sendTilAlle("ctr:initier runde");
     }
     
@@ -190,7 +190,7 @@ public class ServerFunk {
      * 
      * @param spillerNr 
      */
-    void spillerKaldteSnydUgyldigt(int spillerNr) {
+    public void spillerKaldteSnydUgyldigt(int spillerNr) {
         spillerNr--;
         netværk.sendTilAlle("msg:"+navne.get(spillerNr)+" kaldte snyd på sig selv, det måes man ikke!");
     }
@@ -199,7 +199,7 @@ public class ServerFunk {
      * Håndtere kliententer der prøver at tilslutte sig efter, at et spil er startet.
      * 
      */
-    void handleLateConnections(){       
+    public void handleLateConnections(){       
         int tal = 0;
         while (!spil_slut) { // Hvis spillet er slut
             try {
@@ -213,6 +213,14 @@ public class ServerFunk {
             }
         }
     }
-    
-    
+
+    /**
+     * Kick all players because of an Error!
+     */
+    public void udsmidspillereFEJL() {
+        int spillere = netværk.getAntalSpillere();
+        for (int i = 0; i < spillere; i++) {
+            netværk.kickSpiller(0);
+        }
+    }    
 }

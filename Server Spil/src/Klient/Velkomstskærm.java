@@ -93,21 +93,21 @@ public class Velkomstskærm extends javax.swing.JPanel {
             }
         });
 
-        jTextField_port.setText("8998");
+        jTextField_port.setText("9000");
         jTextField_port.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField_portActionPerformed(evt);
             }
         });
         jTextField_port.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField_portKeyTyped(evt);
+            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextField_portKeyPressed(evt);
             }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField_portKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField_portKeyTyped(evt);
             }
         });
 

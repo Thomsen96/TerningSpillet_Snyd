@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public interface ServerSpil_Interface extends java.rmi.Remote {
     
-    int createGame(int spillere,int terninger)    throws java.rmi.RemoteException;
+    int createGame(int spillere,int startTerninger)    throws java.rmi.RemoteException;
     ArrayList<SpilData> getGames()    throws java.rmi.RemoteException;
     SpilData getGame(int ID) throws java.rmi.RemoteException;
     ArrayList<SpilData> closegames() throws java.rmi.RemoteException;

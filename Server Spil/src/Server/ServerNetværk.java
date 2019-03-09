@@ -21,6 +21,11 @@ import terningspillet_snyd.Raflebaeger;
 public class ServerNetværk {
     private ServerSocket server_socket;
     private final ArrayList<SpillerForbindelse> spillere;
+
+    public int getAntalSpillere() {
+        return spillere.size();
+    }
+    
     private final ArrayList<SpillerForbindelse> spillere_udsmides;
 
     /**
@@ -47,6 +52,7 @@ public class ServerNetværk {
     public void modtagForbindelse() {
         try{
             Socket nySpiller = server_socket.accept();
+            System.out.println(""+nySpiller.getLocalPort()+" eller "+nySpiller.getLocalSocketAddress()+" thread: "+Thread.currentThread().getName());
             SpillerForbindelse nySpillerForbindelse = new SpillerForbindelse(nySpiller);
             spillere.add(nySpillerForbindelse);
         } catch (Exception e) {
@@ -72,7 +78,12 @@ public class ServerNetværk {
      */
     public void sendTilAlle(String besked){
         for (SpillerForbindelse spiller : spillere){
-            spiller.send(besked);
+            try {
+                spiller.send(besked);
+            } catch (Exception e) {
+                e.printStackTrace(); 
+            }
+            
         }
         System.out.println("Message: \""+ besked +"\" Sent to all players.");
     }
@@ -86,9 +97,13 @@ public class ServerNetværk {
         spillerSend.get(spiller).println(besked);
         spillerSend.get(spiller).flush();
         */
+        try {
+            spillere.get(spillerNr).send(besked);
+            System.out.println("Message: \""+ besked +"\" Sent to player "+spillerNr+".");
+        } catch (Exception e) {
+            e.printStackTrace(); 
+        }
         
-        spillere.get(spillerNr).send(besked);
-        System.out.println("Message: \""+ besked +"\" Sent to player "+spillerNr+".");
     }
     /**
      * Modtager besked fra spillerNr
@@ -157,7 +172,12 @@ public class ServerNetværk {
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-        spillere.remove(spillerNr);   
+        
+        try {
+            spillere.remove(spillerNr);   
+        } catch (Exception e) {
+        }
+        
     }
     
      /**
