@@ -1,0 +1,129 @@
+09-Mar-2019 11:48:17.605 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.5.38
+09-Mar-2019 11:48:17.608 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Feb 5 2019 11:42:42 UTC
+09-Mar-2019 11:48:17.608 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.5.38.0
+09-Mar-2019 11:48:17.608 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Linux
+09-Mar-2019 11:48:17.608 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            4.15.0-45-generic
+09-Mar-2019 11:48:17.608 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+09-Mar-2019 11:48:17.608 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /home/john/jdk1.8.0_161/jre
+09-Mar-2019 11:48:17.609 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_161-b12
+09-Mar-2019 11:48:17.609 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+09-Mar-2019 11:48:17.609 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /home/john/NetBeansProjects/REST_Terning_server/apache-tomcat-8.5.38
+09-Mar-2019 11:48:17.609 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /home/john/NetBeansProjects/REST_Terning_server/apache-tomcat-8.5.38
+09-Mar-2019 11:48:17.609 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/home/john/NetBeansProjects/REST_Terning_server/apache-tomcat-8.5.38/conf/logging.properties
+09-Mar-2019 11:48:17.609 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+09-Mar-2019 11:48:17.610 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dhttp.nonProxyHosts=localhost|127.0.0.1|john
+09-Mar-2019 11:48:17.610 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+09-Mar-2019 11:48:17.610 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+09-Mar-2019 11:48:17.610 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+09-Mar-2019 11:48:17.610 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+09-Mar-2019 11:48:17.610 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/home/john/NetBeansProjects/REST_Terning_server/apache-tomcat-8.5.38
+09-Mar-2019 11:48:17.610 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/home/john/NetBeansProjects/REST_Terning_server/apache-tomcat-8.5.38
+09-Mar-2019 11:48:17.610 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/home/john/NetBeansProjects/REST_Terning_server/apache-tomcat-8.5.38/temp
+09-Mar-2019 11:48:17.611 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/home/john/jdk1.8.0_161/jre/lib/amd64:/home/john/jdk1.8.0_161/jre/lib/i386::/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib]
+09-Mar-2019 11:48:17.792 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+09-Mar-2019 11:48:17.836 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-Mar-2019 11:48:17.888 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+09-Mar-2019 11:48:17.890 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-Mar-2019 11:48:17.890 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 830 ms
+09-Mar-2019 11:48:17.952 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+09-Mar-2019 11:48:17.953 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.5.38
+09-Mar-2019 11:48:17.971 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/john/NetBeansProjects/REST_Terning_server/apache-tomcat-8.5.38/webapps/host-manager]
+09-Mar-2019 11:48:18.327 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/john/NetBeansProjects/REST_Terning_server/apache-tomcat-8.5.38/webapps/host-manager] has finished in [356] ms
+09-Mar-2019 11:48:18.328 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/john/NetBeansProjects/REST_Terning_server/apache-tomcat-8.5.38/webapps/ROOT]
+09-Mar-2019 11:48:18.344 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/john/NetBeansProjects/REST_Terning_server/apache-tomcat-8.5.38/webapps/ROOT] has finished in [15] ms
+09-Mar-2019 11:48:18.346 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/john/NetBeansProjects/REST_Terning_server/apache-tomcat-8.5.38/webapps/examples]
+09-Mar-2019 11:48:18.604 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/john/NetBeansProjects/REST_Terning_server/apache-tomcat-8.5.38/webapps/examples] has finished in [260] ms
+09-Mar-2019 11:48:18.604 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/john/NetBeansProjects/REST_Terning_server/apache-tomcat-8.5.38/webapps/manager]
+09-Mar-2019 11:48:18.625 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/john/NetBeansProjects/REST_Terning_server/apache-tomcat-8.5.38/webapps/manager] has finished in [21] ms
+09-Mar-2019 11:48:18.625 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/john/NetBeansProjects/REST_Terning_server/apache-tomcat-8.5.38/webapps/docs]
+09-Mar-2019 11:48:18.639 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/john/NetBeansProjects/REST_Terning_server/apache-tomcat-8.5.38/webapps/docs] has finished in [14] ms
+09-Mar-2019 11:48:18.642 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+09-Mar-2019 11:48:18.720 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+09-Mar-2019 11:48:18.734 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 843 ms
+09-Mar-2019 11:48:37.711 INFO [http-nio-8080-exec-1] org.apache.catalina.startup.HostConfig.undeploy Undeploying context []
+09-Mar-2019 11:48:37.724 INFO [http-nio-8080-exec-2] org.apache.catalina.startup.HostConfig.deployDescriptor Deploying configuration descriptor [/home/john/NetBeansProjects/REST_Terning_server/apache-tomcat-8.5.38/conf/Catalina/localhost/ROOT.xml]
+09-Mar-2019 11:48:38.993 INFO [http-nio-8080-exec-2] org.glassfish.jersey.servlet.init.JerseyServletContainerInitializer.addServletWithApplication Registering the Jersey servlet application, named helloworld.ApplicationConfig, at the servlet mapping /resources/*, with the Application class of the same name.
+09-Mar-2019 11:48:39.026 INFO [http-nio-8080-exec-2] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+09-Mar-2019 11:48:39.435 INFO [http-nio-8080-exec-2] org.glassfish.jersey.server.ApplicationHandler.initialize Initiating Jersey application, version Jersey: 2.5.1 2014-01-02 13:43:00...
+09-Mar-2019 11:48:40.113 INFO [http-nio-8080-exec-2] org.apache.catalina.startup.HostConfig.deployDescriptor Deployment of configuration descriptor [/home/john/NetBeansProjects/REST_Terning_server/apache-tomcat-8.5.38/conf/Catalina/localhost/ROOT.xml] has finished in [2,388] ms
+09-Mar-2019 11:48:40.121 INFO [http-nio-8080-exec-9] org.apache.catalina.util.LifecycleBase.start The start() method was called on component [StandardEngine[Catalina].StandardHost[localhost].StandardContext[]] after start() had already been called. The second call will be ignored.
+09-Mar-2019 11:51:35.885 SEVERE [ajp-nio-8009-exec-11] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature [18245]
+09-Mar-2019 11:51:35.886 SEVERE [ajp-nio-8009-exec-8] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature [18245]
+09-Mar-2019 11:51:35.888 SEVERE [ajp-nio-8009-exec-1] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature [18245]
+09-Mar-2019 11:51:35.894 SEVERE [ajp-nio-8009-exec-6] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature [18245]
+09-Mar-2019 11:51:35.896 SEVERE [ajp-nio-8009-exec-4] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature [18245]
+09-Mar-2019 11:51:35.897 SEVERE [ajp-nio-8009-exec-3] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature [18245]
+09-Mar-2019 11:51:35.898 SEVERE [ajp-nio-8009-exec-7] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature [18245]
+09-Mar-2019 11:51:35.899 SEVERE [ajp-nio-8009-exec-5] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature [18245]
+09-Mar-2019 11:51:35.900 SEVERE [ajp-nio-8009-exec-9] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature [18245]
+09-Mar-2019 11:51:35.902 SEVERE [ajp-nio-8009-exec-12] org.apache.coyote.ajp.AjpMessage.processHeader Invalid message received with signature [18245]
+09-Mar-2019 11:53:53.082 INFO [http-nio-8080-exec-17] org.apache.catalina.core.StandardContext.reload Reloading Context with name [] has started
+09-Mar-2019 11:53:54.513 INFO [http-nio-8080-exec-17] org.glassfish.jersey.servlet.init.JerseyServletContainerInitializer.addServletWithApplication Registering the Jersey servlet application, named helloworld.ApplicationConfig, at the servlet mapping /resources/*, with the Application class of the same name.
+09-Mar-2019 11:53:54.532 INFO [http-nio-8080-exec-17] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+09-Mar-2019 11:53:54.836 INFO [http-nio-8080-exec-17] org.glassfish.jersey.server.ApplicationHandler.initialize Initiating Jersey application, version Jersey: 2.5.1 2014-01-02 13:43:00...
+09-Mar-2019 11:53:55.489 INFO [http-nio-8080-exec-17] org.apache.catalina.core.StandardContext.reload Reloading Context with name [] is completed
+09-Mar-2019 11:54:42.614 INFO [http-nio-8080-exec-14] org.apache.catalina.core.StandardContext.reload Reloading Context with name [] has started
+09-Mar-2019 11:54:43.577 INFO [http-nio-8080-exec-14] org.glassfish.jersey.servlet.init.JerseyServletContainerInitializer.addServletWithApplication Registering the Jersey servlet application, named helloworld.ApplicationConfig, at the servlet mapping /resources/*, with the Application class of the same name.
+09-Mar-2019 11:54:43.591 INFO [http-nio-8080-exec-14] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+09-Mar-2019 11:54:43.821 INFO [http-nio-8080-exec-14] org.glassfish.jersey.server.ApplicationHandler.initialize Initiating Jersey application, version Jersey: 2.5.1 2014-01-02 13:43:00...
+09-Mar-2019 11:54:44.367 INFO [http-nio-8080-exec-14] org.apache.catalina.core.StandardContext.reload Reloading Context with name [] is completed
+09-Mar-2019 11:54:54.518 INFO [http-nio-8080-exec-12] org.apache.catalina.core.StandardContext.reload Reloading Context with name [] has started
+09-Mar-2019 11:54:55.429 INFO [http-nio-8080-exec-12] org.glassfish.jersey.servlet.init.JerseyServletContainerInitializer.addServletWithApplication Registering the Jersey servlet application, named helloworld.ApplicationConfig, at the servlet mapping /resources/*, with the Application class of the same name.
+09-Mar-2019 11:54:55.439 INFO [http-nio-8080-exec-12] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+09-Mar-2019 11:54:55.685 INFO [http-nio-8080-exec-12] org.glassfish.jersey.server.ApplicationHandler.initialize Initiating Jersey application, version Jersey: 2.5.1 2014-01-02 13:43:00...
+09-Mar-2019 11:54:56.150 INFO [http-nio-8080-exec-12] org.apache.catalina.core.StandardContext.reload Reloading Context with name [] is completed
+09-Mar-2019 11:59:26.894 INFO [http-nio-8080-exec-38] org.apache.catalina.startup.HostConfig.undeploy Undeploying context []
+09-Mar-2019 12:05:52.349 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+09-Mar-2019 12:05:52.349 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+09-Mar-2019 12:05:52.357 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+09-Mar-2019 12:05:52.363 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+09-Mar-2019 12:05:52.372 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+09-Mar-2019 12:05:52.374 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+09-Mar-2019 12:05:52.375 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+09-Mar-2019 12:05:52.376 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]
+09-Mar-2019 12:15:14.442 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.5.38
+09-Mar-2019 12:15:14.449 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Feb 5 2019 11:42:42 UTC
+09-Mar-2019 12:15:14.450 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.5.38.0
+09-Mar-2019 12:15:14.450 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Linux
+09-Mar-2019 12:15:14.450 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            4.15.0-45-generic
+09-Mar-2019 12:15:14.450 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+09-Mar-2019 12:15:14.450 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /home/john/jdk1.8.0_161/jre
+09-Mar-2019 12:15:14.450 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_161-b12
+09-Mar-2019 12:15:14.450 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+09-Mar-2019 12:15:14.450 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /home/john/NetBeansProjects/TerningSpillet_Snyd/REST_server/REST_Terning_server/apache-tomcat-8.5.38
+09-Mar-2019 12:15:14.451 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /home/john/NetBeansProjects/TerningSpillet_Snyd/REST_server/REST_Terning_server/apache-tomcat-8.5.38
+09-Mar-2019 12:15:14.451 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/home/john/NetBeansProjects/TerningSpillet_Snyd/REST_server/REST_Terning_server/apache-tomcat-8.5.38/conf/logging.properties
+09-Mar-2019 12:15:14.451 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+09-Mar-2019 12:15:14.451 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dhttp.nonProxyHosts=localhost|127.0.0.1|john
+09-Mar-2019 12:15:14.451 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+09-Mar-2019 12:15:14.451 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+09-Mar-2019 12:15:14.452 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+09-Mar-2019 12:15:14.452 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+09-Mar-2019 12:15:14.452 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/home/john/NetBeansProjects/TerningSpillet_Snyd/REST_server/REST_Terning_server/apache-tomcat-8.5.38
+09-Mar-2019 12:15:14.452 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/home/john/NetBeansProjects/TerningSpillet_Snyd/REST_server/REST_Terning_server/apache-tomcat-8.5.38
+09-Mar-2019 12:15:14.452 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/home/john/NetBeansProjects/TerningSpillet_Snyd/REST_server/REST_Terning_server/apache-tomcat-8.5.38/temp
+09-Mar-2019 12:15:14.452 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/home/john/jdk1.8.0_161/jre/lib/amd64:/home/john/jdk1.8.0_161/jre/lib/i386::/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib]
+09-Mar-2019 12:15:14.615 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+09-Mar-2019 12:15:14.624 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-Mar-2019 12:15:14.640 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+09-Mar-2019 12:15:14.642 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-Mar-2019 12:15:14.643 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 622 ms
+09-Mar-2019 12:15:14.681 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+09-Mar-2019 12:15:14.682 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.5.38
+09-Mar-2019 12:15:14.696 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/john/NetBeansProjects/TerningSpillet_Snyd/REST_server/REST_Terning_server/apache-tomcat-8.5.38/webapps/host-manager]
+09-Mar-2019 12:15:15.155 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/john/NetBeansProjects/TerningSpillet_Snyd/REST_server/REST_Terning_server/apache-tomcat-8.5.38/webapps/host-manager] has finished in [459] ms
+09-Mar-2019 12:15:15.155 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/john/NetBeansProjects/TerningSpillet_Snyd/REST_server/REST_Terning_server/apache-tomcat-8.5.38/webapps/examples]
+09-Mar-2019 12:15:15.465 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/john/NetBeansProjects/TerningSpillet_Snyd/REST_server/REST_Terning_server/apache-tomcat-8.5.38/webapps/examples] has finished in [310] ms
+09-Mar-2019 12:15:15.465 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/john/NetBeansProjects/TerningSpillet_Snyd/REST_server/REST_Terning_server/apache-tomcat-8.5.38/webapps/manager]
+09-Mar-2019 12:15:15.492 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/john/NetBeansProjects/TerningSpillet_Snyd/REST_server/REST_Terning_server/apache-tomcat-8.5.38/webapps/manager] has finished in [26] ms
+09-Mar-2019 12:15:15.492 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/home/john/NetBeansProjects/TerningSpillet_Snyd/REST_server/REST_Terning_server/apache-tomcat-8.5.38/webapps/docs]
+09-Mar-2019 12:15:15.509 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/home/john/NetBeansProjects/TerningSpillet_Snyd/REST_server/REST_Terning_server/apache-tomcat-8.5.38/webapps/docs] has finished in [17] ms
+09-Mar-2019 12:15:15.512 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+09-Mar-2019 12:15:15.564 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+09-Mar-2019 12:15:15.573 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 929 ms
+09-Mar-2019 12:15:28.017 INFO [http-nio-8080-exec-1] org.apache.catalina.startup.HostConfig.deployDescriptor Deploying configuration descriptor [/home/john/NetBeansProjects/TerningSpillet_Snyd/REST_server/REST_Terning_server/apache-tomcat-8.5.38/conf/Catalina/localhost/ROOT.xml]
+09-Mar-2019 12:15:29.347 INFO [http-nio-8080-exec-1] org.glassfish.jersey.servlet.init.JerseyServletContainerInitializer.addServletWithApplication Registering the Jersey servlet application, named helloworld.ApplicationConfig, at the servlet mapping /*, with the Application class of the same name.
+09-Mar-2019 12:15:29.369 INFO [http-nio-8080-exec-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+09-Mar-2019 12:15:29.837 INFO [http-nio-8080-exec-1] org.glassfish.jersey.server.ApplicationHandler.initialize Initiating Jersey application, version Jersey: 2.5.1 2014-01-02 13:43:00...
+09-Mar-2019 12:15:30.568 INFO [http-nio-8080-exec-1] org.apache.catalina.startup.HostConfig.deployDescriptor Deployment of configuration descriptor [/home/john/NetBeansProjects/TerningSpillet_Snyd/REST_server/REST_Terning_server/apache-tomcat-8.5.38/conf/Catalina/localhost/ROOT.xml] has finished in [2,550] ms
+09-Mar-2019 12:15:30.577 INFO [http-nio-8080-exec-2] org.apache.catalina.util.LifecycleBase.start The start() method was called on component [StandardEngine[Catalina].StandardHost[localhost].StandardContext[]] after start() had already been called. The second call will be ignored.
