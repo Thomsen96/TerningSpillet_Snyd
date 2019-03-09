@@ -52,6 +52,11 @@ import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * REST Web Service
@@ -60,7 +65,7 @@ import javax.ws.rs.Consumes;
  */
 
 @Stateless
-@Path("/greeting")
+@Path("")
 public class HelloWorldResource {
 
     @EJB
@@ -84,5 +89,49 @@ public class HelloWorldResource {
     @Consumes("text/plain")
     public void setName(String content) {
         nameStorage.setName(content);
+    }
+    
+    @Path("games")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getGames() {
+        //TODO return proper representation object
+        JSONArray games = new JSONArray();
+        JSONObject game = new JSONObject();
+        game.put("spillere", 22022);
+        game.put("terninger", 22);
+        game.put("token", 44);
+        JSONObject game2 = new JSONObject();
+        game2.put("spillere", 3300);
+        game2.put("terninger", 6);
+        game2.put("token", 5);
+        
+        
+        
+        games.put(game);
+        games.put(game2);
+        return games.toString();
+    }
+    
+    
+    @Path("login")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String postLogin(String content) {
+        //TODO return proper representation object
+        JSONObject login = new JSONObject(content);
+        JSONObject response = new JSONObject();
+        
+        
+        String brugernavn = login.optString("username");
+        String adgangskode = login.getString("password");
+        
+        //System.out.println("Recived login: " + brugernavn + "@" +adgangskode);
+        
+        response.put("status", "OK");
+        response.put("token", "OK");
+        
+        
+        return response.toString();//Response.ok(response.toString(), MediaType.APPLICATION_JSON).build();
     }
 }
