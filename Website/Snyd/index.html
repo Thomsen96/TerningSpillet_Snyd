@@ -1,0 +1,134 @@
+ <!DOCTYPE html>
+<html>
+	
+	<head>
+		<meta charset="UTF-8">
+		<title>Titel vises foroven i browservinduet og/eller på fanebladet</title>
+		<link rel="stylesheet" type="text/css" href="minstyling.css">
+
+
+	</head>
+
+	<body>
+
+		Helt almindelig tekst som ikke er formateret. Ret kedeligt.
+
+		<!--her er en kommentar som ignoreres af browseren-->
+
+		<h1>En stor overskrift H1 </h1>
+		<h2>En lidt mindre overskrift H2</h2>
+
+		<p>Et afsnit (P for "paragraph")</p>	
+		<p>Et afsnit med lidt mere tekst lidt mere tekst lidt mere tekst og et tvunget linjeskift lige HER: <br/> osv osv osv her fortsætter teksten </p>	
+		<p>Et  <b>afsnit med b-tag</b> og med <i>i-tag og med</i> lidt mere tekst lidt mere tekst lidt mere tekst og et linjeskift: <br> (uden slut virker fint) osv osv osv her fortsætter teksten </p>	
+		<p>Et 
+afsnit
+med
+en
+masse
+linjeskift
+som
+ignoreres
+af
+browseren
+.
+Brug almindelige linjeskift og TAB til at gøre din kode læselig. <br> Brug BR-tagget til linjeskift som skal vises.
+</p>
+
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<h1>---------------------------Og nu til CSS ---------------------------</h1>
+		<br>
+		<p id="minid">Et afsnit som har en id-attribut. Derfor er den kun tags med denne id som får den definerede formatering. Tjek hvad der står under "minid" i minstyling.css </p>
+		
+		
+		<h2>en mindre overskrift uden klasse</h2>	
+		<h2 class="minklasse">en mindre overskrift med klasse (blå)</h2>	
+		<h2>en mindre overskrift uden klasse</h2>	
+		<h2 class="minklasse">en mindre overskrift med klasse (blå)</h2>	
+		<h2 class="minklasse2">en mindre overskrift med en anden klasse (stor)</h2>	
+		<h2 class="minklasse minklasse2" >en mindre overskrift med to klasser (blå og stor)</h2>	
+		<br/><br/><br/>
+
+
+		<!-- 1: DIV-elementer-->
+		<div> 
+			<p> DIV-elementer er gode som containere</p>	
+					
+		</div>
+		
+		<div class="minklasse indryk"> 
+			<p> Og ALT kan have en klasse og kan have nok så mange elementer i sig</p>
+			<h2 class="sort">en mindre overskrift med klassen "sort" (overtrumfer klasse blå)</h2>	<h2 class="sort roed">en mindre overskrift med klassen "sort" OG "roed" (rækkefølgen i css-filen har betydning)</h2>		
+			<p> Denne DIV har en venstre-margin og en ramme</p>
+			Man kan også bruge rå tekst herinde. Så arver den egenskaber fra sin container
+		</div>
+
+		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+		<h1>---------------------------Og nu til Links og Forms ---------------------------</h1>
+		<br/><br/><br/>
+
+		<!-- 2: Link-elementer: <a>
+			Bemærk at adressen er en attribut: href
+		-->
+
+		<a class="roed" href="http://www.w3schools.com/html/html_forms.asp">Links: a-tagget: Tjek forskellige FORM-elementer på W3Schools</a>
+
+
+
+
+ 
+		<p>Bemærk at der kan du også se hvordan du bruger HTTP-metoderne GET og POST med method-attributten</p>
+			
+		<br/><br/><br/>
+		<!-- 3: FORM-elementer-->
+
+		<br/>
+		<br/>
+
+		<form>
+		  	Navn
+			<br/>
+		  	<input type="text" name="fornavn">
+		</form> 
+		<p> Hvis du skriver noget her og trykker Enter, vil teksten <b>?fornavn=plus-det-du-skrev</b> blive tilføjet i adresselinien. Prøv engang!</p>
+
+		<br/>
+		<br/>
+
+		<form class="indryk">
+		  	Navn
+			<br/>
+		  	<input type="text" name="efternavn">
+			<p>En version som er rykket ind og har ramme vha CSS-klasse. <br/>Bemærk desuden name-attributten</p>
+		</form> 
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+<p>To elementer i samme FORM-element. Reagerer umiddelbart ikke på ENTER. Derfor bruges action-attributten og Submit-button og SÅ virker Enter igen</p>
+		<form action="https://www.w3schools.com/action_page.php">
+		  	Fornavn
+			<br/>
+		  	<input type="text" name="fornavn">
+			<br/>
+			Efternavn
+			<br/>
+		  	<input type="text" name="efternavn" value="Udfyldt på forhånd med value-attributten">
+			<br/>
+			<input type="submit" value="Submit">
+			
+
+		</form> 
+
+
+
+</body>
+</html> 
