@@ -296,7 +296,7 @@ public class Velkomstskærm extends javax.swing.JPanel {
             public void run() {
                 System.out.println(".run() er kaldt");
                 String[] args = {""+jSpinner_antal_spillere.getValue(),""+jSlider_value.getValue(),""+jTextField_port.getText()};
-                Server.ServerLogik.main(args);
+                Server_old.ServerLogik.main(args);
                 System.out.println(".run() er færdig");
             }
             });

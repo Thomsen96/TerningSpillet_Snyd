@@ -5,7 +5,8 @@
  */
 package Server_RMI;
 
-import Server.*;
+import Server_old.Spil;
+import Server_old.ServerFunk;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketException;

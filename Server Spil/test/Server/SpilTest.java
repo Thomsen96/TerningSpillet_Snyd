@@ -5,6 +5,7 @@
  */
 package Server;
 
+import Server_old.Spil;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

@@ -9,11 +9,19 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.rmi.RemoteException;
 import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
+
+import java.io.File;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 /**
  *
  * @author root
@@ -60,6 +68,7 @@ public class ServerSpil_implementation extends UnicastRemoteObject implements Se
         }
         */
         
+
         
         try {
             SpilData SD = new SpilData(port+port_min, spillere, terninger);
@@ -79,9 +88,9 @@ public class ServerSpil_implementation extends UnicastRemoteObject implements Se
                         System.out.println("Fjerner spillet fra listen");
                     }
                     
-                    /*    We use the SpilDataArray to find the index of the server instance
-                     *  we are looking for.
-                     */
+                    //    We use the SpilDataArray to find the index of the server instance
+                    //  we are looking for.
+                    
                     int i = 0;
                     for (SpilData SpilData : SpilDataArray) {
 
@@ -103,8 +112,7 @@ public class ServerSpil_implementation extends UnicastRemoteObject implements Se
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
-        }
-        
+        }     
         
     }
 
@@ -120,7 +128,19 @@ public class ServerSpil_implementation extends UnicastRemoteObject implements Se
 
     @Override
     public ArrayList<SpilData> closegames() throws RemoteException {
+        //kør følgende kommando "kill $(ps aux | grep 'java -cp /home/chris/Desktop/test' | awk '{print $2}')"
+        //Process p = Runtime.getRuntime().exec("../killall.sh");
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    @Override
+    public ArrayList<SpilData> closegame(int port) throws RemoteException {
+        //port skal indsættes i kommandoen
+        //kør følgende scriptkiddy Process p = Runtime.getRuntime().exec("../killspecific.sh "+port);
+        //kør følgende kommando "kill $(ps aux | grep 'Server.ServerLogik [0-9]* [0-9] port' | awk '{print $2}')"
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    //Htop på linux og filter på "java -cp"
     
 }

@@ -5,7 +5,7 @@
  */
 package Test_klasser;
 
-import Server.Spil;
+import Server_old.Spil;
 
 
 /**

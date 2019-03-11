@@ -1,6 +1,6 @@
 package Test_klasser;
 
-import Server.ServerNetværk;
+import Server_old.ServerNetværk;
 
 /**
  *

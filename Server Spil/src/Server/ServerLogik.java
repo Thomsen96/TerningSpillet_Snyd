@@ -5,7 +5,12 @@
  */
 package Server;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,6 +26,22 @@ public class ServerLogik {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        PrintStream o = null; 
+        try {
+            o = new PrintStream(new File("A.txt"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ServerLogik.class.getName()).log(Level.SEVERE, null, ex);
+        }
+  
+        // Store current System.out before assigning a new value 
+        PrintStream console = System.out; 
+  
+        // Assign o to output stream 
+        System.setOut(o); 
+        System.out.println("This will be written to the text file!"); 
+        o.close();
+  
         
         int antalSpillere = Integer.parseInt(args[0]);
         int antalTerninger = Integer.parseInt(args[1]);
@@ -110,8 +131,12 @@ public class ServerLogik {
      */
     private static void læsCommandov3(String streng) {
         int turFørSkift = spilLogik.getHvis_tur();
-        if (streng == null) return;     //for ikke crashe når spillere lukker forbindelsen
-                                        //der bør laves en funktion der enten kicker spilleren eller informerer spillerne og lukker spillet
+        if (streng == null){
+            //error
+            serverLogik.udsmidspillereFEJL();
+            System.exit(1337);
+            throw new Error("Illgal action from player\nA player probably left the game ");
+        }     
         
         //hvis spilleren sender et gæt "Guess(antal,værdi)"
         if(streng.startsWith("Guess(") && streng.endsWith(")")){
