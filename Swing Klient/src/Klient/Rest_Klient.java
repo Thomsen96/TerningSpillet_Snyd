@@ -50,6 +50,7 @@ public class Rest_Klient {
         jResponse.put("token", token);
         jResponse.put("spillere", spillere);
         jResponse.put("terninger", tern);
+        jResponse.put("username", user);
 
         target = client.target(url + "games");
         response = target.request(MediaType.APPLICATION_JSON)
