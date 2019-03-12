@@ -5,13 +5,8 @@
  */
 package Klient;
 
-import java.awt.Color;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,6 +15,7 @@ import javax.ws.rs.client.ClientBuilder;
 public class Velkomstskærm extends javax.swing.JPanel {
 
     private KlientFunk klient;
+    private Rest_Klient rest;
     public int start = 0;
     private String navn;
     private int port;
@@ -33,13 +29,71 @@ public class Velkomstskærm extends javax.swing.JPanel {
      */
     public Velkomstskærm() {
         initComponents();
+        this.rest = new Rest_Klient();
 
         model = (DefaultTableModel) jTable_games.getModel();
 
-        model.addRow(new Object[]{"Column 1", "Column 2", "Column 3", "column 4"});
-        model.addRow(new Object[]{"Column 12", "Column 22", "Column 32", "column 42"});
-        model.addRow(new Object[]{"Column 1", "Column 23", "Column 33", "column 43"});
+                
+        Thread t = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            while (true) {
+                updateGames();
+                System.out.println("Update table");
+                try {
+                    Thread.sleep(30000);
+                } catch (InterruptedException e) {
 
+                }
+
+            }
+        }
+    });
+
+    t.start();
+        
+    }
+
+    
+
+    void updateGames() {
+        ArrayList<SpilData> spil = rest.getGames();
+        if (spil.isEmpty()) {
+            model.addRow(new Object[]{"CONNECTION FAILED"});
+        } else {
+            int x = jTable_games.getSelectedColumn();
+            int y = jTable_games.getSelectedRow();
+            
+            int size = model.getRowCount();
+            for (int i = 0; i < size; i++) {
+                model.removeRow(0);
+            }
+            for (int i = 0; i < spil.size(); i++) {
+                model.addRow(new Object[]{
+                    spil.get(i).getBrugernavn(),
+                    spil.get(i).getSpillere(),
+                    spil.get(i).getTerninger(),
+                    spil.get(i).getPort()});
+            }
+            try {
+                jTable_games.setRowSelectionInterval(y, y);
+            } catch (Exception e) {
+                jTable_games.setRowSelectionInterval(0, 0);
+            }
+
+        }
+    }
+    
+    void createGame() {
+        String user = jTextField_username.getText();
+        String pass = new String(jPasswordField_password.getPassword());
+        int tern = diceChoice.getSelectedIndex() + 1;
+        int spillere = (int) jSpinner_playerNum.getValue();
+        
+        System.out.println("Dette kaldes med:" + user + " " + pass + " " + tern + " " + spillere);
+        SpilData nytSpil = rest.createGame(user, pass, tern, spillere);
+        System.out.println(nytSpil.getBrugernavn());
+        
     }
 
     /**
@@ -135,6 +189,29 @@ public class Velkomstskærm extends javax.swing.JPanel {
             }
         });
         jTable_games.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jTable_games.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable_gamesMouseClicked(evt);
+            }
+        });
+        jTable_games.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                jTable_gamesCaretPositionChanged(evt);
+            }
+        });
+        jTable_games.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTable_gamesKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable_gamesKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable_gamesKeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable_games);
         if (jTable_games.getColumnModel().getColumnCount() > 0) {
             jTable_games.getColumnModel().getColumn(0).setResizable(false);
@@ -231,7 +308,7 @@ public class Velkomstskærm extends javax.swing.JPanel {
                                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(25, 25, 25)
                                 .addComponent(JButton_create)))))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,7 +353,7 @@ public class Velkomstskærm extends javax.swing.JPanel {
                                 .addComponent(jLabel7)
                                 .addGap(5, 5, 5)
                                 .addComponent(jPasswordField_password, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(29, 29, 29))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -329,8 +406,29 @@ public class Velkomstskærm extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField_ipActionPerformed
 
     private void JButton_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButton_createActionPerformed
-        // TODO add your handling code here:
+        createGame();
     }//GEN-LAST:event_JButton_createActionPerformed
+
+    private void jTable_gamesCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTable_gamesCaretPositionChanged
+        //InputFraJtable();
+    }//GEN-LAST:event_jTable_gamesCaretPositionChanged
+
+    private void jTable_gamesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_gamesKeyTyped
+        //InputFraJtable();
+
+    }//GEN-LAST:event_jTable_gamesKeyTyped
+
+    private void jTable_gamesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_gamesKeyPressed
+        // InputFraJtable();
+    }//GEN-LAST:event_jTable_gamesKeyPressed
+
+    private void jTable_gamesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_gamesMouseClicked
+        InputFraJtable();
+    }//GEN-LAST:event_jTable_gamesMouseClicked
+
+    private void jTable_gamesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_gamesKeyReleased
+        InputFraJtable();
+    }//GEN-LAST:event_jTable_gamesKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JButton_create;
@@ -393,5 +491,17 @@ public class Velkomstskærm extends javax.swing.JPanel {
         } else {
             navn = navn_valid;
         }
+    }
+
+    /**
+     * Kaldes når der sker et input på de aktive spil og opdatere porten som at
+     * det køre på.
+     */
+    void InputFraJtable() {
+        int i = jTable_games.getSelectedRow();
+        Object port;
+        port = model.getValueAt(i, 3);
+        jTextField_port.setText(port.toString());
+        System.out.println("Klient.Velkomstskærm.InputFraJtable()");
     }
 }
