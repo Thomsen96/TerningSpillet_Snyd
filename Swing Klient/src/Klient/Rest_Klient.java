@@ -12,7 +12,7 @@ import org.json.JSONObject;
 
 public class Rest_Klient {
 
-    String url = "http://130.225.170.205:8080/REST_Terning_server/";
+    String url;
 
     Client client;
     WebTarget target;
@@ -20,9 +20,9 @@ public class Rest_Klient {
     //JSONObject jResponse, jRecived;
     String token;
 
-    public Rest_Klient(Client client) {
+    public Rest_Klient() {
+        this.url = "http://130.225.170.205:8080/REST_Terning_server/";
         this.client = ClientBuilder.newClient();
-
     }
 
     SpilData createGame(String user, String pass, int tern, int spillere) {
