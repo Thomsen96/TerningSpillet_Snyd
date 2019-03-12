@@ -1,0 +1,27 @@
+Dokumentation til REST service
+
+
+POST http://130.225.170.205:8080/REST_Terning_server/login
+ 	recives:
+ 	JSON:	{	"username":"casam",
+ 				"password":"password123" }
+ 	returns:
+ 	JSON:	{	"token":"abc-def-g" }			200
+ 			{	"url":"error url"	}			401
+
+GET http://130.225.170.205:8080/REST_Terning_server/games
+	JSON Array list
+	JSON:	[	{"terninger":22,	"spillere":22022,	"token":44	},
+				{"terninger":6,		"spillere":3300,	"token":5	}	]
+
+POST http://130.225.170.205:8080/REST_Terning_server/games
+ 	recives:
+ 	JSON:	{	"username":"casam",
+ 				"token": "????",
+ 				"terninger":22,	
+ 				"spillere":22022,"	}
+ 	returns:
+ 	JSON:	{	"port":80, "spillere":22022, "terninger":22	}	200
+ 			{	"url":"error url"	}							401
+
+

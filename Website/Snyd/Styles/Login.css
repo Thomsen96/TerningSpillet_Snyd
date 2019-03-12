@@ -1,0 +1,40 @@
+
+#minid {color: red;}
+
+/*Selector: klasse: */
+
+
+#loginBox {
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    width:30em;
+    height:18em;
+    margin-top: -9em; /*set to a negative number 1/2 of your height*/
+    margin-left: -15em; /*set to a negative number 1/2 of your width*/
+    border: 1px solid #ccc;
+    background-color: #f3f3f3;
+}
+
+.center {
+	text-align: center;
+}
+.minklasse {
+	color:blue;
+}
+.sort{
+	color:black;
+}
+.roed {
+	color: red;
+}
+
+.minklasse2{
+	font-size: 200%;
+}
+
+.indryk{
+margin-left:100px;
+margin-right: 100px;
+border-style: solid;
+}

@@ -1,0 +1,40 @@
+ <!DOCTYPE html>
+<html>
+	
+	<head>
+		<meta charset="UTF-8">
+		<title>Terninge Spillet Snyd</title>
+		<link rel="stylesheet" type="text/css" href="Styles/Global.css">
+		<link rel="stylesheet" type="text/css" href="Styles/Login.css">
+		
+	</head>
+
+	<body>
+
+		<div>
+			<h1>Create new game</h1>
+			<script type="text/javascript" src="JavaScript/createGame.js"></script>
+			<p>Username </p>
+			<input id="userID" type="text" name="username" value="s174867">
+			<br>
+			<p>Password </p>
+			<input id="PassID" type="Password" name="password" value="opåqwe">
+			<br>
+			<p>Spillere </p>
+			<input id="spillereID" type="text" name="Spillere" value="2">
+			<br>
+			<p>Terninger </p>
+			<input id="terningerID" type="text" name="Terninger" value="4">
+			<br>
+			<button onclick="createGame()">newGame</button>
+		</div>
+		<div>
+			<h1>Current running games</h1>
+			<script type="text/javascript" src="JavaScript/GetGames.js"></script>
+			<button onclick="updateCurrentGames()">Update</button>
+			<p id="currentGames"></p>
+		</div>
+
+
+</body>
+</html> 
