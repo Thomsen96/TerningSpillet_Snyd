@@ -5,23 +5,9 @@
  */
 package Server_RMI;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.SocketException;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.rmi.RemoteException;
-import java.rmi.server.RMISocketFactory;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-
-
-import java.io.File;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.util.Arrays;
-import java.util.stream.Collectors;
 /**
  *
  * @author root
@@ -41,7 +27,7 @@ public class ServerSpil_implementation extends UnicastRemoteObject implements Se
     }
 
     @Override
-    public int createGame(int spillere, int terninger) throws RemoteException {
+    public int createGame(int spillere, int terninger, String brugernavn) throws RemoteException {
         
         // Check if port exceedes the max amount of ports
         if(port+port_min >= port_max){
@@ -71,7 +57,7 @@ public class ServerSpil_implementation extends UnicastRemoteObject implements Se
 
         
         try {
-            SpilData SD = new SpilData(port+port_min, spillere, terninger);
+            SpilData SD = new SpilData(port + port_min, spillere, terninger, brugernavn);
             SpilDataArray.add(SD);
             Server_instance S = new Server_instance(spillere, terninger, port+port_min);
             

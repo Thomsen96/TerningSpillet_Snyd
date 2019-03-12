@@ -11,37 +11,31 @@ package Server_RMI;
  */
 class SpilData {
     
-    private int ID;
-    private int Spillere;
-    private int terninger;
+    private final int ID;
+    private final int Spillere;
+    private final int terninger;
+    private final String brugernavn;
 
-    public SpilData(int ID, int Spillere, int terninger) {
+    public SpilData(int ID, int Spillere, int terninger, String brugernavn) {
         this.ID = ID;
         this.Spillere = Spillere;
         this.terninger = terninger;
+        this.brugernavn = brugernavn;
+    }
+
+    public String getBrugernavn() {
+        return brugernavn;
     }
 
     public int getID() {
         return ID;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
     public int getSpillere() {
         return Spillere;
     }
 
-    public void setSpillere(int Spillere) {
-        this.Spillere = Spillere;
-    }
-
     public int getTerninger() {
         return terninger;
-    }
-
-    public void setTerninger(int terninger) {
-        this.terninger = terninger;
     }
 }

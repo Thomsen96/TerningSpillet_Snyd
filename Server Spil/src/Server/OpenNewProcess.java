@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class OpenNewProcess {
     public static void main(String[] args) {
         int port = 9000;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 2; i++) {
             System.out.println("Server åbnet med port "+port);
 
 
@@ -28,7 +28,7 @@ public class OpenNewProcess {
             try {
                 System.out.println("Startet");
                 // java -cp /home/chris/Desktop/test_Snyd/TerningSpillet_Snyd_server.jar Server.ServerLogik 2 2 9001 > logfile_2_2_9001.log &
-                Process p = Runtime.getRuntime().exec("java -cp /home/chris/Desktop/test_Snyd/TerningSpillet_Snyd_server.jar Server.ServerLogik " + arg);
+                Process p = Runtime.getRuntime().exec("java -cp /home/chris/Desktop/test_Snyd/TerningSpillet_Snyd_server2.jar Server.ServerLogik " + arg);
 
                 //Process p = Runtime.getRuntime().exec("java -cp /home/chris/Desktop/test_Snyd/TerningSpillet_Snyd_server2.jar Server.ServerLogik " + arg);
                 //Process p = Runtime.getRuntime().exec("java -cp /home/s164833/TerningSpillet_Snyd_server.jar Server.ServerLogik " + arg);
