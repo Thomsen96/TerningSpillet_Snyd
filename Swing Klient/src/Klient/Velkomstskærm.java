@@ -59,7 +59,7 @@ public class Velkomstskærm extends javax.swing.JPanel {
     void updateGames() {
         ArrayList<SpilData> spil = rest.getGames();
         if (spil.isEmpty()) {
-            model.addRow(new Object[]{"CONNECTION FAILED"});
+            model.addRow(new Object[]{"No games up"});
         } else {
             int x = jTable_games.getSelectedColumn();
             int y = jTable_games.getSelectedRow();
