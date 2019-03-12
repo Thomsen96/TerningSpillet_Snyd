@@ -10,14 +10,14 @@ package Klient;
  * @author root
  */
 class SpilData {
-    
+
     private final int port;
     private final int Spillere;
     private final int terninger;
     private final String brugernavn;
 
-    public SpilData(int ID, int Spillere, int terninger, String brugernavn) {
-        this.port = ID;
+    public SpilData(int port, int Spillere, int terninger, String brugernavn) {
+        this.port = port;
         this.Spillere = Spillere;
         this.terninger = terninger;
         this.brugernavn = brugernavn;
