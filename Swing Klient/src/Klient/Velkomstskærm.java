@@ -8,6 +8,10 @@ package Klient;
 import java.awt.Color;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
 
 /**
  *
@@ -22,6 +26,7 @@ public class Velkomstskærm extends javax.swing.JPanel {
     private String IP;
     public boolean server_started = false;
     private final short MAX_NAME_LENGTH = 38;
+    DefaultTableModel model;
 
     /**
      * Creates new form Velkomstskærm
@@ -29,22 +34,12 @@ public class Velkomstskærm extends javax.swing.JPanel {
     public Velkomstskærm() {
         initComponents();
 
-        /**/
-        String IP = "Kunne ikke få din IP";;
-        try {
-            IP = InetAddress.getLocalHost().getHostAddress();
-            //JLabel_Din_ip.setForeground(Color.BLACK);
-            //throw new UnknownHostException();
-        } catch (UnknownHostException ex) {
-            IP = "kunne ikke finde din IP-adresse";
-            //JLabel_Din_ip.setForeground(Color.red);
-        } finally {
-            if (IP.matches("127.0.0.1")) {
-                IP = "der er noget galt med dit netværksinterface. Tjek at du har internet!";
-                //JLabel_Din_ip.setForeground(Color.red);
-            }
-            //JLabel_Din_ip.setText("Din IP-adresse: " + IP);
-        }
+        model = (DefaultTableModel) jTable_games.getModel();
+
+        model.addRow(new Object[]{"Column 1", "Column 2", "Column 3", "column 4"});
+        model.addRow(new Object[]{"Column 12", "Column 22", "Column 32", "column 42"});
+        model.addRow(new Object[]{"Column 1", "Column 23", "Column 33", "column 43"});
+
     }
 
     /**
@@ -125,10 +120,7 @@ public class Velkomstskærm extends javax.swing.JPanel {
 
         jTable_games.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Skaber", "Spillere", "Terninger", "Port"
@@ -142,6 +134,7 @@ public class Velkomstskærm extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable_games.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jScrollPane2.setViewportView(jTable_games);
         if (jTable_games.getColumnModel().getColumnCount() > 0) {
             jTable_games.getColumnModel().getColumn(0).setResizable(false);
