@@ -75,11 +75,13 @@
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                          <Component id="diceChoice" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="jSpinner_playerNum" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="diceChoice" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jSpinner_playerNum" max="32767" attributes="0"/>
+                                  <Component id="jLabel9" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                               <Component id="JButton_create" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
