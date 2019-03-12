@@ -23,7 +23,6 @@ public class Klient {
         spil_skærm = new Spil_skærm();
         
         faneblade.add("Start", Velkomstskærm);
-        
         vindue = new JFrame("Snyd");
         vindue.add( faneblade );
         vindue.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // reagér på luk
