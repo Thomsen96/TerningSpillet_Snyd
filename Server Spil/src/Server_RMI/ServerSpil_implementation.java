@@ -120,7 +120,7 @@ public class ServerSpil_implementation extends UnicastRemoteObject implements Se
     }
     
     @Override
-    public ArrayList<SpilData> closegame(int port) throws RemoteException {
+    public ArrayList<SpilData> closegame(int port, String brugernavn) throws RemoteException {
         //port skal indsættes i kommandoen
         //kør følgende scriptkiddy Process p = Runtime.getRuntime().exec("../killspecific.sh "+port);
         //kør følgende kommando "kill $(ps aux | grep 'Server.ServerLogik [0-9]* [0-9] port' | awk '{print $2}')"

@@ -17,5 +17,5 @@ public interface ServerSpil_Interface extends java.rmi.Remote {
     ArrayList<SpilData> getGames()    throws java.rmi.RemoteException;
     SpilData getGame(int ID) throws java.rmi.RemoteException;
     ArrayList<SpilData> closegames() throws java.rmi.RemoteException;
-    ArrayList<SpilData> closegame(int port) throws java.rmi.RemoteException;
+    ArrayList<SpilData> closegame(int port, String brugernavn) throws java.rmi.RemoteException;
 }
