@@ -7,12 +7,13 @@ POST http://130.225.170.205:8080/REST_Terning_server/login
  				"password":"password123" }
  	returns:
  	JSON:	{	"token":"abc-def-g" }			200
+
  			{	"url":"error url"	}			401
 
 GET http://130.225.170.205:8080/REST_Terning_server/games
 	JSON Array list
-	JSON:	[	{"terninger":22,	"spillere":22022,	"token":44	},
-				{"terninger":6,		"spillere":3300,	"token":5	}	]
+	JSON:	[	{"terninger":22,	"spillere":22022,	"port":44, "brugernavn":casam	},
+				{"terninger":6,		"spillere":3300,	"port":5, "brugernavn":casam	}	]
 
 POST http://130.225.170.205:8080/REST_Terning_server/games
  	recives:

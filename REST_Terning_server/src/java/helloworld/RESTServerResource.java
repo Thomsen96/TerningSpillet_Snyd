@@ -93,12 +93,12 @@ public class RESTServerResource {
         JSONObject game = new JSONObject();
         game.put("spillere", 22022);
         game.put("terninger", 22);
-        game.put("token", 44);
+        game.put("port", 44);
         game.put("brugernavn", "madas");
         JSONObject game2 = new JSONObject();
         game2.put("spillere", 3300);
         game2.put("terninger", 6);
-        game2.put("token", 5);
+        game2.put("port", 5);
         game2.put("brugernavn", "casam");
 
         games.put(game);
