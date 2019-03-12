@@ -22,7 +22,7 @@ POST http://130.225.170.205:8080/REST_Terning_server/games
  				"terninger":22,	
  				"spillere":22022,"	}
  	returns:
- 	JSON:	{	"port":80, "spillere":22022, "terninger":22	}	200
- 			{	"url":"error url"	}							401
+ 	JSON:	{	"port":80, "spillere":22022, "terninger":22, "username":"casam"	}	200
+ 			{	"url":"error url"	}												401
 
 
