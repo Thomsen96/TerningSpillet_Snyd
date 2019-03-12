@@ -122,6 +122,7 @@ public class RESTServerResource {
             response.put("port", 2); //return port
             response.put("spillere", recived.optString("spillere")); //return spillere
             response.put("terninger", recived.optString("terninger")); //return spillere
+            response.put("brugernavn", "madas");
             return Response.ok(response.toString(), MediaType.APPLICATION_JSON).build();
         } else {
             //not valid user/token
