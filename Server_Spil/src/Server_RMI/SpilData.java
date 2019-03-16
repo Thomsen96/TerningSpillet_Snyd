@@ -9,18 +9,23 @@ package Server_RMI;
  *
  * @author root
  */
-class SpilData {
-    
+public class SpilData implements java.io.Serializable {
+
+    private static final long serialVersionUID = 12345;
+
     private final int ID;
     private final int Spillere;
     private final int terninger;
     private final String brugernavn;
+    private transient Process process;
 
-    public SpilData(int ID, int Spillere, int terninger, String brugernavn) {
+    public SpilData(int ID, int Spillere, int terninger, String brugernavn, Process process) {
         this.ID = ID;
         this.Spillere = Spillere;
         this.terninger = terninger;
         this.brugernavn = brugernavn;
+        this.process = process;
+
     }
 
     public String getBrugernavn() {
@@ -38,4 +43,14 @@ class SpilData {
     public int getTerninger() {
         return terninger;
     }
+
+    public Process getProcess() {
+        return process;
+    }
+
+    public String toString() {
+        return "Port/id: \"" + ID + "\", bruger: \"" + brugernavn + "\", antal spiller: \""
+                + Spillere + "\", terninger: \"" + terninger + "\"";
+    }
+
 }
