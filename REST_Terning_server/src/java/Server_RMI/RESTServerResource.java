@@ -61,6 +61,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
+//import com.sun.xml.internal.ws.streaming.XMLStreamReaderException;
 
 /**
  * REST Web Service
@@ -351,12 +352,12 @@ public class RESTServerResource {
             Bruger user = hentBruger(username, password);
             System.out.println("User: " + user.getBrugernavn() + " - Sucessfull login");
             loginSucess = Boolean.TRUE;
-        } catch( com.sun.xml.internal.ws.streaming.XMLStreamReaderException e){
+        } /*catch( XMLStreamReaderException e){   //Casam user fix
             //Fucking casam igen !!
             System.out.println("Casam skal fikse sin bruger nu!");
             System.out.println("User: " +username + " - Sucessfull login");
             loginSucess = Boolean.TRUE;
-        } catch (Exception e) {
+        }*/ catch (Exception e) {
             e.printStackTrace();
         }
 
