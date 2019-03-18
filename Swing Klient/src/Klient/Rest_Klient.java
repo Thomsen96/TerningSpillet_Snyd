@@ -21,8 +21,8 @@ public class Rest_Klient {
     String token;
 
     public Rest_Klient() {
-        //this.url = "http://130.225.170.205:8080/REST_Terning_server/";
-        this.url = "http://localhost:8080/";
+        this.url = "http://130.225.170.205:8080/REST_Terning_server/";
+        //this.url = "http://localhost:8080/";
         this.client = ClientBuilder.newClient();
     }
 
