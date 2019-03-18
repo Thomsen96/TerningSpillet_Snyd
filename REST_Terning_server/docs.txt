@@ -26,3 +26,23 @@ POST http://130.225.170.205:8080/REST_Terning_server/games
  			{	"url":"error url"	}												401
 
 
+
+POST http://130.225.170.205:8080/REST_Terning_server/closeGame
+ 	recives:
+ 	JSON:	{	"username":"casam",
+ 				"token": "????",
+ 				"port" : 9226 }
+
+POST http://130.225.170.205:8080/REST_Terning_server/closeAllGames
+ 	recives:
+ 	JSON:	{	"username":"casam",
+ 				"token": "????"	}
+
+ 	returns:
+ 	JSON:	{	"gamesClosed", gamesClosed	}	200
+ 			{	"url":"error url"	}	
+
+
+ 				
+
+
