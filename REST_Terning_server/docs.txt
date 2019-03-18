@@ -43,8 +43,9 @@ POST http://130.225.170.205:8080/REST_Terning_server/closeAllGames
  				"token": string	}
 
  	returns:
- 	JSON:	{	"gamesClosed", int	}	200
- 			{	"url":"error url"	}			401/500
+ 	JSON:	{	"gamesClosed": int	}						200
+ 			{	"gamesClosed": int,	"pictureUrl":	url	}	201
+ 			{	"pictureUrl":	url	}						401/500
 
 
  				

@@ -81,6 +81,8 @@ public class RESTServerResource {
     public RESTServerResource() {
         Storage.admins.add("madas");
         Storage.admins.add("casam");
+        Storage.admins.add("s164920");
+        Storage.admins.add("s174867");
     }
    
     
@@ -118,7 +120,6 @@ public class RESTServerResource {
             
             int gamesClosed;
             try {
-                //System.out.println("Start");
                 ServerSpil_Interface ServerSpil_inst = (ServerSpil_Interface) Naming.lookup("rmi://130.225.170.205:1099/ServerSpil_Snyd_RMI");
                 gamesClosed = (ServerSpil_inst.closegames());
                 
@@ -135,6 +136,7 @@ public class RESTServerResource {
                 //Der var ingen spil
                 //e.printStackTrace();
                 System.out.println("No running games to close. By user: "+username);
+                response.put("gamesClosed", 0);
                 response.put("pictureUrl", "https://http.cat/200");
                 return Response.ok(response.toString(), MediaType.APPLICATION_JSON).build();
                 //return Response.noContent().build();
@@ -176,7 +178,6 @@ public class RESTServerResource {
 
             int port;
             try {
-                //System.out.println("Start");
                 ServerSpil_Interface ServerSpil_inst = (ServerSpil_Interface) Naming.lookup("rmi://130.225.170.205:1099/ServerSpil_Snyd_RMI");
                 port = (ServerSpil_inst.closegame(recived.getInt("port"), username));
                 
@@ -230,7 +231,6 @@ public class RESTServerResource {
         ArrayList<SpilData> SDA = new ArrayList<SpilData>();
         
         try {
-            System.out.println("Start");
             ServerSpil_Interface ServerSpil_inst = (ServerSpil_Interface) Naming.lookup("rmi://130.225.170.205:1099/ServerSpil_Snyd_RMI");
             SDA = (ServerSpil_inst.getGames());
             System.out.println("RMI returned a list that was not empty");
@@ -350,6 +350,11 @@ public class RESTServerResource {
         try {
             Bruger user = hentBruger(username, password);
             System.out.println("User: " + user.getBrugernavn() + " - Sucessfull login");
+            loginSucess = Boolean.TRUE;
+        } catch( com.sun.xml.internal.ws.streaming.XMLStreamReaderException e){
+            //Fucking casam igen !!
+            System.out.println("Casam skal fikse sin bruger nu!");
+            System.out.println("User: " +username + " - Sucessfull login");
             loginSucess = Boolean.TRUE;
         } catch (Exception e) {
             e.printStackTrace();
