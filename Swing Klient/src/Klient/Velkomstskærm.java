@@ -433,6 +433,7 @@ public class Velkomstskærm extends javax.swing.JPanel {
         // TODO add your handling code here:
         closeGame();
         updateGames();
+        System.out.println("Update game finished");
         inputFraJtable();
         
     }//GEN-LAST:event_jButton_ClosegameActionPerformed
@@ -532,17 +533,17 @@ public class Velkomstskærm extends javax.swing.JPanel {
     void closeGame() {
         String user = jTextField_username.getText();
         String pass = new String(jPasswordField_password.getPassword());
-        int port;
+        int tempPort;
         try {
-            port = Integer.parseInt(jTextField_port.getText());
+            tempPort = Integer.parseInt(jTextField_port.getText());
         } catch (java.lang.NumberFormatException e){
             System.out.println("No port selected.");
             return;
         }
         
-        System.out.println("closeGame kaldes med:" + user + " " + pass + " " + port + ".");
-        port = rest.closeGame(port, user, pass);
-        System.out.println("Closed game returned with: "+ port);
+        System.out.println("closeGame kaldes med:" + user + " " + pass + " " + tempPort + ".");
+        tempPort = rest.closeGame(tempPort, user, pass);
+        System.out.println("Closed game returned with: "+ tempPort);
         
     }
 
@@ -578,7 +579,7 @@ public class Velkomstskærm extends javax.swing.JPanel {
     void inputFraJtable() {
         int i = jTable_games.getSelectedRow();
         
-        if (jTable_games.getSize().height < 1){
+        if (jTable_games.getSize().height < 1|| i < 0){
             return;
         }
         
