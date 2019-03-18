@@ -34,7 +34,7 @@ POST http://130.225.170.205:8080/REST_Terning_server/closeGame
  				"token": 	string,
  				"port" : 	int }
  	returns:
- 	JSON:	{	"port": 		int }						200
+ 	JSON:	{	"port": 		int }		200
  			{	"pictureUrl":	url	}		401/500
 
 POST http://130.225.170.205:8080/REST_Terning_server/closeAllGames

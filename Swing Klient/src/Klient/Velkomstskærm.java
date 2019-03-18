@@ -23,6 +23,8 @@ public class Velkomstskærm extends javax.swing.JPanel {
     public boolean server_started = false;
     private final short MAX_NAME_LENGTH = 38;
     DefaultTableModel model;
+    
+    private boolean noGamesOnline = Boolean.FALSE;
 
     /**
      * Creates new form Velkomstskærm
@@ -32,69 +34,42 @@ public class Velkomstskærm extends javax.swing.JPanel {
         this.rest = new Rest_Klient();
 
         model = (DefaultTableModel) jTable_games.getModel();
-
+        jSpinner_playerNum.setValue(2);
+        
+        updateGames();
+        inputFraJtable();
                 
         Thread t = new Thread(new Runnable() {
-        @Override
-        public void run() {
-            while (true) {
-                updateGames();
-                System.out.println("Update table");
-                try {
-                    Thread.sleep(30000);
-                } catch (InterruptedException e) {
+            @Override
+            public void run() {
+                while (true) {
+                    updateGames();
+                    System.out.println("Async: Update table");
+                    try {
+                        Thread.sleep(30000);
+                    } catch (InterruptedException e) {
+
+                    }
 
                 }
-
             }
-        }
-    });
+        });
 
-    t.start();
+        t.start();
         
-    }
-
-    
-
-    void updateGames() {
-        ArrayList<SpilData> spil = rest.getGames();
-        if (spil.isEmpty()) {
-            model.addRow(new Object[]{"No games up"});
-        } else {
-            int x = jTable_games.getSelectedColumn();
-            int y = jTable_games.getSelectedRow();
+        //update game has to be run before taking imput from the table.
+        /*try{
+            Thread.sleep(500);
+        } catch (Exception e){
             
-            int size = model.getRowCount();
-            for (int i = 0; i < size; i++) {
-                model.removeRow(0);
-            }
-            for (int i = 0; i < spil.size(); i++) {
-                model.addRow(new Object[]{
-                    spil.get(i).getBrugernavn(),
-                    spil.get(i).getSpillere(),
-                    spil.get(i).getTerninger(),
-                    spil.get(i).getPort()});
-            }
-            try {
-                jTable_games.setRowSelectionInterval(y, y);
-            } catch (Exception e) {
-                jTable_games.setRowSelectionInterval(0, 0);
-            }
+        }*/
+        
+       
+    }
 
-        }
-    }
     
-    void createGame() {
-        String user = jTextField_username.getText();
-        String pass = new String(jPasswordField_password.getPassword());
-        int tern = diceChoice.getSelectedIndex() + 1;
-        int spillere = (int) jSpinner_playerNum.getValue();
-        
-        System.out.println("Dette kaldes med:" + user + " " + pass + " " + tern + " " + spillere);
-        SpilData nytSpil = rest.createGame(user, pass, tern, spillere);
-        System.out.println(nytSpil.getBrugernavn());
-        
-    }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -123,7 +98,8 @@ public class Velkomstskærm extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jSpinner_playerNum = new javax.swing.JSpinner();
-        JButton_create = new javax.swing.JButton();
+        jButton_create = new javax.swing.JButton();
+        jButton_Closegame = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(600, 500));
 
@@ -224,7 +200,7 @@ public class Velkomstskærm extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 0, 51));
         jLabel1.setText("Velkommen til terningespillet Snyd!");
 
-        jTextField_username.setText("Navn");
+        jTextField_username.setText("madas");
         jTextField_username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField_usernameActionPerformed(evt);
@@ -235,7 +211,12 @@ public class Velkomstskærm extends javax.swing.JPanel {
 
         jLabel7.setText("Kode");
 
-        jPasswordField_password.setText("jPasswordField1");
+        jPasswordField_password.setText("madsersej");
+        jPasswordField_password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField_passwordActionPerformed(evt);
+            }
+        });
 
         diceChoice.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6" }));
         diceChoice.setSelectedIndex(5);
@@ -249,10 +230,19 @@ public class Velkomstskærm extends javax.swing.JPanel {
 
         jLabel9.setText("Spillere");
 
-        JButton_create.setText("Opret Server");
-        JButton_create.addActionListener(new java.awt.event.ActionListener() {
+        jSpinner_playerNum.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jButton_create.setText("Opret Server");
+        jButton_create.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JButton_createActionPerformed(evt);
+                jButton_createActionPerformed(evt);
+            }
+        });
+
+        jButton_Closegame.setText("Luk Server");
+        jButton_Closegame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ClosegameActionPerformed(evt);
             }
         });
 
@@ -262,7 +252,7 @@ public class Velkomstskærm extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 586, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -307,8 +297,11 @@ public class Velkomstskærm extends javax.swing.JPanel {
                                     .addComponent(jSpinner_playerNum)
                                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(25, 25, 25)
-                                .addComponent(JButton_create)))))
-                .addContainerGap(26, Short.MAX_VALUE))
+                                .addComponent(jButton_create)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton_Closegame)
+                                .addGap(73, 73, 73)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,7 +310,9 @@ public class Velkomstskærm extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(JButton_create))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton_create)
+                            .addComponent(jButton_Closegame)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -352,8 +347,7 @@ public class Velkomstskærm extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel7)
                                 .addGap(5, 5, 5)
-                                .addComponent(jPasswordField_password, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
+                                .addComponent(jPasswordField_password, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -405,9 +399,10 @@ public class Velkomstskærm extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_ipActionPerformed
 
-    private void JButton_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButton_createActionPerformed
+    private void jButton_createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_createActionPerformed
         createGame();
-    }//GEN-LAST:event_JButton_createActionPerformed
+        updateGames();
+    }//GEN-LAST:event_jButton_createActionPerformed
 
     private void jTable_gamesCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTable_gamesCaretPositionChanged
         //InputFraJtable();
@@ -423,17 +418,30 @@ public class Velkomstskærm extends javax.swing.JPanel {
     }//GEN-LAST:event_jTable_gamesKeyPressed
 
     private void jTable_gamesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_gamesMouseClicked
-        InputFraJtable();
+        inputFraJtable();
     }//GEN-LAST:event_jTable_gamesMouseClicked
 
     private void jTable_gamesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_gamesKeyReleased
-        InputFraJtable();
+        inputFraJtable();
     }//GEN-LAST:event_jTable_gamesKeyReleased
 
+    private void jPasswordField_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField_passwordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordField_passwordActionPerformed
+
+    private void jButton_ClosegameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ClosegameActionPerformed
+        // TODO add your handling code here:
+        closeGame();
+        updateGames();
+        inputFraJtable();
+        
+    }//GEN-LAST:event_jButton_ClosegameActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton JButton_create;
     private javax.swing.JComboBox<String> diceChoice;
+    private javax.swing.JButton jButton_Closegame;
     private javax.swing.JButton jButton_connect;
+    private javax.swing.JButton jButton_create;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -467,6 +475,76 @@ public class Velkomstskærm extends javax.swing.JPanel {
     void resetstart() {
         start = 1;
     }
+    
+    void updateGames() {
+        ArrayList<SpilData> spil = rest.getGames();
+        if (spil.isEmpty()) {
+            String noGamesMsg = "No games online";
+                        
+            //Checks for update on already empty list
+            if(noGamesOnline){
+                return;
+            }
+            try{
+                model.removeRow(0);
+            } catch (Exception e){
+                System.out.println("Client started with no games online.");
+            }
+            model.addRow(new Object[]{noGamesMsg});
+            noGamesOnline = true;
+        } else {
+            noGamesOnline = false;
+            int x = jTable_games.getSelectedColumn();
+            int y = jTable_games.getSelectedRow();
+            
+            int size = model.getRowCount();
+            for (int i = 0; i < size; i++) {
+                model.removeRow(0);
+            }
+            for (int i = 0; i < spil.size(); i++) {
+                model.addRow(new Object[]{
+                    spil.get(i).getBrugernavn(),
+                    spil.get(i).getSpillere(),
+                    spil.get(i).getTerninger(),
+                    spil.get(i).getPort()});
+            }
+            try {
+                jTable_games.setRowSelectionInterval(y, y);
+            } catch (Exception e) {
+                jTable_games.setRowSelectionInterval(0, 0);
+            }
+
+        }
+    }
+    
+    void createGame() {
+        String user = jTextField_username.getText();
+        String pass = new String(jPasswordField_password.getPassword());
+        int tern = diceChoice.getSelectedIndex() + 1;
+        int spillere = (int) jSpinner_playerNum.getValue();
+        
+        System.out.println("createGame kaldes med:" + user + " " + pass + " " + tern + " " + spillere+".");
+        SpilData nytSpil = rest.createGame(user, pass, tern, spillere);
+        System.out.println(nytSpil.getBrugernavn());
+        
+    }
+    
+    void closeGame() {
+        String user = jTextField_username.getText();
+        String pass = new String(jPasswordField_password.getPassword());
+        int port;
+        try {
+            port = Integer.parseInt(jTextField_port.getText());
+        } catch (java.lang.NumberFormatException e){
+            System.out.println("No port selected.");
+            return;
+        }
+        
+        System.out.println("closeGame kaldes med:" + user + " " + pass + " " + port + ".");
+        port = rest.closeGame(port, user, pass);
+        System.out.println("Closed game returned with: "+ port);
+        
+    }
 
     /**
      * Tager den indskrevede port og navn fra tekstboksene og forsøger at
@@ -497,11 +575,20 @@ public class Velkomstskærm extends javax.swing.JPanel {
      * Kaldes når der sker et input på de aktive spil og opdatere porten som at
      * det køre på.
      */
-    void InputFraJtable() {
+    void inputFraJtable() {
         int i = jTable_games.getSelectedRow();
+        
+        if (jTable_games.getSize().height < 1){
+            return;
+        }
+        
         Object port;
         port = model.getValueAt(i, 3);
-        jTextField_port.setText(port.toString());
-        System.out.println("Klient.Velkomstskærm.InputFraJtable()");
+        try{
+            jTextField_port.setText(port.toString());
+        } catch (java.lang.NullPointerException e){
+            System.out.println("No values in table. No port selected.");
+        }
+        System.out.println("New port selected: "+port);
     }
 }

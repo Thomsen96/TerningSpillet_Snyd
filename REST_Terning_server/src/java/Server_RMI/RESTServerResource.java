@@ -180,7 +180,7 @@ public class RESTServerResource {
             int port;
             try {
                 ServerSpil_Interface ServerSpil_inst = (ServerSpil_Interface) Naming.lookup("rmi://130.225.170.205:1099/ServerSpil_Snyd_RMI");
-                port = (ServerSpil_inst.closegame(recived.getInt("port"), username));
+                port = ServerSpil_inst.closegame(recived.getInt("port"), username);
                 
                 response = recived;
                 response.put("port", port);
@@ -189,7 +189,6 @@ public class RESTServerResource {
                 System.out.println("closeGame worked on port: "+ port+" by user: "+ username);
                 response.put("pictureUrl", "https://http.cat/200");
                 return Response.ok(response.toString(), MediaType.APPLICATION_JSON).build();
-                //System.err.println(SDA);
 
             } catch (java.rmi.ServerError e) {
                 //No game found and closed
@@ -288,7 +287,7 @@ public class RESTServerResource {
         //Authenticate
         if (Storage.tokenMap.get(username).equals(token)) {
             
-            int port;
+            int port = 0;
 
             try {
                 ServerSpil_Interface ServerSpil_inst = (ServerSpil_Interface) Naming.lookup("rmi://130.225.170.205:1099/ServerSpil_Snyd_RMI");
