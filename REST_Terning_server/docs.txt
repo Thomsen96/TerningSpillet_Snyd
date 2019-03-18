@@ -3,44 +3,48 @@ Dokumentation til REST service
 
 POST http://130.225.170.205:8080/REST_Terning_server/login
  	recives:
- 	JSON:	{	"username":"casam",
- 				"password":"password123" }
+ 	JSON:	{	"username":	string,
+ 				"password":	string }
  	returns:
- 	JSON:	{	"token":"abc-def-g" }			200
-
- 			{	"url":"error url"	}			401
+ 	JSON:	{	"token":	string }			200
+ 			{	"pictureUrl":		url	}			401/500
 
 GET http://130.225.170.205:8080/REST_Terning_server/games
+	returns:
 	JSON Array list
-	JSON:	[	{"terninger":22,	"spillere":22022,	"port":44, "brugernavn":casam	},
-				{"terninger":6,		"spillere":3300,	"port":5, "brugernavn":casam	}	]
+	JSON:	[	{"terninger":int,	"spillere":int,	"port":int, "brugernavn":string	},
+				{"terninger":int,	"spillere":int,	"port":int, "brugernavn":string	}	]	200
+			{	"pictureUrl":url	}																401/500
 
 POST http://130.225.170.205:8080/REST_Terning_server/games
  	recives:
- 	JSON:	{	"username":"casam",
- 				"token": "????",
- 				"terninger":22,	
- 				"spillere":22022,"	}
+ 	JSON:	{	"username":		string,
+ 				"token": 		string,
+ 				"terninger":	int,	
+ 				"spillere":		int,"	}
  	returns:
  	JSON:	{	"port":80, "spillere":22022, "terninger":22, "username":"casam"	}	200
- 			{	"url":"error url"	}												401
+ 			{	"pictureUrl":"error url"	}										401/500
 
 
 
 POST http://130.225.170.205:8080/REST_Terning_server/closeGame
  	recives:
- 	JSON:	{	"username":"casam",
- 				"token": "????",
- 				"port" : 9226 }
+ 	JSON:	{	"username":	string,
+ 				"token": 	string,
+ 				"port" : 	int }
+ 	returns:
+ 	JSON:	{	"port": 		int }						200
+ 			{	"pictureUrl":	url	}		401/500
 
 POST http://130.225.170.205:8080/REST_Terning_server/closeAllGames
  	recives:
- 	JSON:	{	"username":"casam",
- 				"token": "????"	}
+ 	JSON:	{	"username":	string,
+ 				"token": string	}
 
  	returns:
- 	JSON:	{	"gamesClosed", gamesClosed	}	200
- 			{	"url":"error url"	}	
+ 	JSON:	{	"gamesClosed", int	}	200
+ 			{	"url":"error url"	}			401/500
 
 
  				

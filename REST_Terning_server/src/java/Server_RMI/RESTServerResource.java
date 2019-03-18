@@ -70,11 +70,21 @@ import org.json.JSONObject;
 @Stateless
 @Path("")
 public class RESTServerResource {
-
+    
     @EJB
     private NameStorageBean nameStorage = new NameStorageBean();
 
     //private HashMap<String, String> tokenMap = new HashMap<String, String>(); //Usernames mapped to tokens
+    /**
+     * This is the constructor for the REST server.
+     */
+    public RESTServerResource() {
+        Storage.admins.add("madas");
+        Storage.admins.add("casam");
+    }
+   
+    
+    
     /**
      * Retrieves representation of an instance of helloworld.HelloWorldResource
      *
@@ -98,6 +108,14 @@ public class RESTServerResource {
         //Authenticate
         if (Storage.tokenMap.get(username).equals(token)) {
             //TODO: check for "admin" user
+            
+            if (!Storage.admins.contains(username)){
+                System.out.println("Unautherized closeAllGames call by user: "+ username);
+                response.put("pictureUrl", "https://http.cat/401");
+                return Response.status(Response.Status.UNAUTHORIZED).entity(response.toString()).build();
+            }
+            
+            
             int gamesClosed;
             try {
                 //System.out.println("Start");
@@ -109,37 +127,36 @@ public class RESTServerResource {
                 response.remove("token");
                 
                 System.out.println("All games closed by user: "+ username);
+                response.put("pictureUrl", "https://http.cat/200");
                 return Response.ok(response.toString(), MediaType.APPLICATION_JSON).build();
                 //System.err.println(SDA);
 
             } catch (java.rmi.ServerError e) {
                 //Der var ingen spil
                 //e.printStackTrace();
-                System.out.println("RMI returned a list that was empty");
-                JSONArray games = new JSONArray();
-                return Response.ok(games.toString(), MediaType.APPLICATION_JSON).build();
+                System.out.println("No running games to close. By user: "+username);
+                response.put("pictureUrl", "https://http.cat/200");
+                return Response.ok(response.toString(), MediaType.APPLICATION_JSON).build();
                 //return Response.noContent().build();
             } catch (java.rmi.UnmarshalException e) {
                 e.printStackTrace();
                 System.out.println("The RMI-server lorte fejl :(");
-                JSONObject game = new JSONObject();
-                game.put("Error", 12345);
-
-                return Response.serverError().build();
+                
+                response.put("pictureUrl", "https://http.cat/500");
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(response.toString()).build();
             } catch (Exception e) {
                 //Serveren er nok ikke oppe
                 e.printStackTrace();
                 System.out.println("The RMI-server is probably not running :(");
-                JSONObject game = new JSONObject();
-                game.put("Error", 12345);
-
-                return Response.serverError().build();
+                
+                response.put("pictureUrl", "https://http.cat/500");
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(response.toString()).build();
             }
 
         } else {
             //not valid user/token
             System.out.println("User failed to authenticate with username" + username + " and token: " + token);
-            response.put("url", "https://http.cat/401");
+            response.put("pictureUrl", "https://http.cat/401");
             return Response.status(Response.Status.UNAUTHORIZED).entity(response.toString()).build();
         }
 
@@ -168,37 +185,37 @@ public class RESTServerResource {
                 response.remove("token");
                 
                 System.out.println("closeGame worked on port: "+ port+" by user: "+ username);
+                response.put("pictureUrl", "https://http.cat/200");
                 return Response.ok(response.toString(), MediaType.APPLICATION_JSON).build();
                 //System.err.println(SDA);
 
             } catch (java.rmi.ServerError e) {
-                //Der var ingen spil
+                //No game found and closed
                 //e.printStackTrace();
-                System.out.println("RMI returned a list that was empty");
-                JSONArray games = new JSONArray();
-                return Response.ok(games.toString(), MediaType.APPLICATION_JSON).build();
+                
+                System.out.println("No game matched port:"+recived.getInt("port")+" with username: " + username);
+                response.put("pictureUrl", "https://http.cat/400");
+                return Response.status(Response.Status.BAD_REQUEST).entity(response.toString()).build();
                 //return Response.noContent().build();
             } catch (java.rmi.UnmarshalException e) {
                 e.printStackTrace();
                 System.out.println("The RMI-server lorte fejl :(");
-                JSONObject game = new JSONObject();
-                game.put("Error", 12345);
-
-                return Response.serverError().build();
+                
+                response.put("pictureUrl", "https://http.cat/500");
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(response.toString()).build();
             } catch (Exception e) {
                 //Serveren er nok ikke oppe
                 e.printStackTrace();
                 System.out.println("The RMI-server is probably not running :(");
-                JSONObject game = new JSONObject();
-                game.put("Error", 12345);
-
-                return Response.serverError().build();
+                
+                response.put("pictureUrl", "https://http.cat/500");
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(response.toString()).build();
             }
 
         } else {
             //not valid user/token
             System.out.println("User failed to authenticate with username" + username + " and token: " + token);
-            response.put("url", "https://http.cat/401");
+            response.put("pictureUrl", "https://http.cat/401");
             return Response.status(Response.Status.UNAUTHORIZED).entity(response.toString()).build();
         }
 
@@ -209,8 +226,9 @@ public class RESTServerResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getGames() {
         //TODO return list of games gotten from Server Spil object over RMI
-
+        JSONObject response = new JSONObject();
         ArrayList<SpilData> SDA = new ArrayList<SpilData>();
+        
         try {
             System.out.println("Start");
             ServerSpil_Interface ServerSpil_inst = (ServerSpil_Interface) Naming.lookup("rmi://130.225.170.205:1099/ServerSpil_Snyd_RMI");
@@ -228,18 +246,16 @@ public class RESTServerResource {
         } catch (java.rmi.UnmarshalException e) {
             e.printStackTrace();
             System.out.println("The RMI-server lorte fejl :(");
-            JSONObject game = new JSONObject();
-            game.put("Error", 12345);
 
-            return Response.serverError().build();
+            response.put("pictureUrl", "https://http.cat/500");
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(response.toString()).build();
         } catch (Exception e) {
             //Serveren er nok ikke oppe
             e.printStackTrace();
             System.out.println("The RMI-server is probably not running :(");
-            JSONObject game = new JSONObject();
-            game.put("Error", 12345);
 
-            return Response.serverError().build();
+            response.put("pictureUrl", "https://http.cat/500");
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(response.toString()).build();
         }
 
         JSONArray games = new JSONArray();
@@ -254,7 +270,7 @@ public class RESTServerResource {
             games.put(game);
 
         }
-        System.err.println("json creation worked");
+        System.out.println("GET on getGames");
 
         return Response.ok(games.toString(), MediaType.APPLICATION_JSON).build();
     }
@@ -270,50 +286,40 @@ public class RESTServerResource {
 
         //Authenticate
         if (Storage.tokenMap.get(username).equals(token)) {
-            //TODO: Code here to gennerate game over RMI
-            /*
-            response.put("port", 2); //return port
-            response.put("spillere", recived.optString("spillere")); //return spillere
-            response.put("terninger", recived.optString("terninger")); //return spillere
-            response.put("brugernavn", "madas");
-            return Response.ok(response.toString(), MediaType.APPLICATION_JSON).build();
-             */
-
+            
             int port;
 
             try {
-                //System.out.println("Start");
                 ServerSpil_Interface ServerSpil_inst = (ServerSpil_Interface) Naming.lookup("rmi://130.225.170.205:1099/ServerSpil_Snyd_RMI");
                 port = (ServerSpil_inst.createGame(recived.getInt("spillere"), recived.getInt("terninger"), username));
                 System.out.println("RMI returned a list that was not empty");
                 response = recived;
                 response.put("port", port);
                 response.remove("token");
+                response.put("pictureUrl", "https://http.cat/200");
                 return Response.ok(response.toString(), MediaType.APPLICATION_JSON).build();
                 //System.err.println(SDA);
 
             } catch (java.rmi.ServerError e) {
                 //Der var ingen spil
                 //e.printStackTrace();
-                System.out.println("RMI returned a list that was empty");
-                JSONArray games = new JSONArray();
-                return Response.ok(games.toString(), MediaType.APPLICATION_JSON).build();
-                //return Response.noContent().build();
+                System.out.println("Create game went wrong, out of ports");
+                
+                response.put("pictureUrl", "https://http.cat/500");
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(response.toString()).build();
             } catch (java.rmi.UnmarshalException e) {
                 e.printStackTrace();
                 System.out.println("The RMI-server lorte fejl :(");
-                JSONObject game = new JSONObject();
-                game.put("Error", 12345);
 
-                return Response.serverError().build();
+                response.put("pictureUrl", "https://http.cat/500");
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(response.toString()).build();
             } catch (Exception e) {
                 //Serveren er nok ikke oppe
                 e.printStackTrace();
                 System.out.println("The RMI-server is probably not running :(");
-                JSONObject game = new JSONObject();
-                game.put("Error", 12345);
 
-                return Response.serverError().build();
+                response.put("pictureUrl", "https://http.cat/500");
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(response.toString()).build();
             }
 
         } else {

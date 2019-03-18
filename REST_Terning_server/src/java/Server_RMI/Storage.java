@@ -5,6 +5,7 @@
  */
 package Server_RMI;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -13,4 +14,5 @@ import java.util.HashMap;
  */
 public class Storage {
     static public HashMap<String, String> tokenMap = new HashMap<String, String>(); //Usernames mapped to tokens
+    static public ArrayList<String> admins = new ArrayList<String>();
 }
