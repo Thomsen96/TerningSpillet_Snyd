@@ -10,3 +10,10 @@
 Server Spil/A\[Ljava\.lang\.String;@2d6e8792\.txt
 
 Server Spil/dist/
+/Swing Klient/nbproject/private/
+/Swing Klient/build/
+/TestRESTApi/build/
+/TestRESTApi/dist/
+
+!/REST_Terning_server/apache-tomcat-8.5.38/*
+/Swing Klient/dist/
