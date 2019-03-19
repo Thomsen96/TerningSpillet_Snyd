@@ -16,3 +16,4 @@ Server Spil/dist/
 /TestRESTApi/dist/
 
 !/REST_Terning_server/apache-tomcat-8.5.38/*
+/Swing Klient/dist/
