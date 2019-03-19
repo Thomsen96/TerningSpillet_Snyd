@@ -100,8 +100,7 @@ public class Velkomstskærm extends javax.swing.JPanel {
         jSpinner_playerNum = new javax.swing.JSpinner();
         jButton_create = new javax.swing.JButton();
         jButton_Closegame = new javax.swing.JButton();
-
-        setPreferredSize(new java.awt.Dimension(600, 500));
+        jButton_update = new javax.swing.JButton();
 
         jTextField_ip.setText("130.225.170.205");
         jTextField_ip.addActionListener(new java.awt.event.ActionListener() {
@@ -246,6 +245,13 @@ public class Velkomstskærm extends javax.swing.JPanel {
             }
         });
 
+        jButton_update.setText("Opdater");
+        jButton_update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_updateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -302,6 +308,10 @@ public class Velkomstskærm extends javax.swing.JPanel {
                                 .addComponent(jButton_Closegame)
                                 .addGap(73, 73, 73)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton_update)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,7 +340,9 @@ public class Velkomstskærm extends javax.swing.JPanel {
                         .addComponent(jTextField_playername, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton_update)
+                        .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(jLabel8))
@@ -438,11 +450,17 @@ public class Velkomstskærm extends javax.swing.JPanel {
         
     }//GEN-LAST:event_jButton_ClosegameActionPerformed
 
+    private void jButton_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_updateActionPerformed
+        // TODO add your handling code here:
+        updateGames();
+    }//GEN-LAST:event_jButton_updateActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> diceChoice;
     private javax.swing.JButton jButton_Closegame;
     private javax.swing.JButton jButton_connect;
     private javax.swing.JButton jButton_create;
+    private javax.swing.JButton jButton_update;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

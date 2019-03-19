@@ -26,7 +26,7 @@ public class Klient {
         vindue = new JFrame("Snyd");
         vindue.add( faneblade );
         vindue.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // reagér på luk
-        vindue.pack();                  // lad vinduet selv bestemme sin størrelse
+        vindue.pack();                  // lad vinduet selv bestemme sin størrelse //TODO der opstår problemer her.
         vindue.setVisible(true);
         //Denne kode kommer fra Jakob Falk
 //        faneblade.setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI(){
