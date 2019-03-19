@@ -49,8 +49,9 @@ function startGame(token, username) {
 	    	console.log(this.responseText);
 	    	var myObj = JSON.parse(this.responseText);
 	        port = myObj.port;
-	        alert("Game created on port\n"+port);
+	        //alert("Game created on port\n"+port);
 	        console.log("Nyt spil på port:" + port);
+	        updateCurrentGames();
 	    }
 	}
 	xmlhttp.send(data);
