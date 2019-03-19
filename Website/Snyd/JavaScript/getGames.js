@@ -12,11 +12,11 @@ function updateCurrentGames() {
 		if (this.readyState == 4 && this.status == 200) {
 		    myObj = JSON.parse(this.responseText);
 		    txt += "<table>"
-	    	txt += "<tr><th>token</th><th>Spillere</th><th>terninger</th></tr>";
+	    	txt += "<tr><th>Port</th><th>Spillere</th><th>terninger</th></tr>";
 		    for (x in myObj) {
-		      	txt += "<tr><td>" 	+myObj[x].token 	+ "</td>";
-		      	txt += "<td>"		+myObj[x].spillere 	+ "</td>";
-		      	txt += "<td>"		+myObj[x].terninger + "</td></tr>";
+		      	txt += "<tr><td><p>" 	+myObj[x].port 	+ "</p></td>";
+		      	txt += "<td><p>"		+myObj[x].spillere 	+ "</p></td>";
+		      	txt += "<td><p>"		+myObj[x].terninger + "</p></td></tr>";
 		    }
 		    txt += "</table>"    
 		    document.getElementById("currentGames").innerHTML = txt;

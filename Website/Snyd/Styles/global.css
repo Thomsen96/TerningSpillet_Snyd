@@ -1,0 +1,45 @@
+/*Selector: element: */
+h1 {
+	color: black;
+	font-family: Verdana;
+	font-size: 40px;
+	padding-top: 8px;
+	padding-bottom: 2px;
+ 
+}
+
+p {
+	color: black;
+	font-family: Verdana;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+
+
+td {
+  	text-align: left;
+  	padding-top: 0px;
+	padding-bottom: 0px;
+  	padding-left: 2px
+  	font-size:15px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+th {
+	text-align: left;
+	padding-left: 2px
+  	padding-top: 8px;
+	padding-bottom: 8px;
+	font-size: 25px;
+ 	background-color: #4CAF50;
+  	color: white;
+  
+}
