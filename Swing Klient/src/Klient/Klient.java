@@ -1,6 +1,8 @@
 package Klient;
 
+import java.awt.CardLayout;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 /**
@@ -17,14 +19,18 @@ public class Klient {
     public static void main(String[] args) {
         klient = null;
         
-        faneblade = new JTabbedPane();
+        //faneblade = new JTabbedPane();
+        
+        JPanel kortblade = new JPanel(new CardLayout());
         
         Velkomstskærm = new Velkomstskærm();
         spil_skærm = new Spil_skærm();
         
-        faneblade.add("Start", Velkomstskærm);
+        //faneblade.add("Start", Velkomstskærm);
+        kortblade.add(Velkomstskærm, "start");
         vindue = new JFrame("Snyd");
-        vindue.add( faneblade );
+        //vindue.add( faneblade );
+        vindue.add( kortblade );
         vindue.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // reagér på luk
         vindue.pack();                  // lad vinduet selv bestemme sin størrelse //TODO der opstår problemer her.
         vindue.setVisible(true);
@@ -61,10 +67,12 @@ public class Klient {
         
         try {
             klient = new KlientFunk(port,navn,IP);
-            faneblade.add("Spillet", spil_skærm);     
+            //faneblade.add("Spillet", spil_skærm);
+            kortblade.add(spil_skærm, "Spillet"); 
 
             spil_skærm.setlogik(klient,navn); // Giver Spil_skærmen et KlientFunk objekt og navnet brugeren har opgivet
-            faneblade.remove(Velkomstskærm); // Fjerner Velkomstskærmen så spillet vises
+            //faneblade.remove(Velkomstskærm); // Fjerner Velkomstskærmen så spillet vises
+            kortblade.remove(Velkomstskærm);
 
             while(klient.Forbundet() && vindue.isShowing()){ // Hvis der er en forbindelse og vinduet bliver vist
                 String msg = klient.modtagKommando(); // Modtag kommandoer og hvis det er en "message" ("msg:...") gem den i msg      

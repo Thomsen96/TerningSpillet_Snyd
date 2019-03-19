@@ -25,11 +25,13 @@ public class TestRESTApi {
         String url = "http://130.225.170.205:8080/REST_Terning_server/";
 
         System.out.println("Login attempt");
+
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(url + "login");
         Response response = target.request(MediaType.APPLICATION_JSON)
                 .accept(MediaType.TEXT_PLAIN_TYPE)
                 .post(Entity.json(login.toString()), Response.class);
+
         System.out.println("Code: " + response.getStatus() + " Response: " + response.getStatusInfo().getReasonPhrase());
 
         JSONObject jResponse = new JSONObject(response.readEntity(String.class));
@@ -54,6 +56,74 @@ public class TestRESTApi {
         jResponse = new JSONObject(response.readEntity(String.class));
         System.out.println("" + jResponse.toString());
 
-        //System.out.println(""+ jResponse.getString("status"));
+        
+        
+        System.out.println("Get games:");
+
+        target = client.target(url + "games");
+        response = target.request(MediaType.APPLICATION_JSON)
+                .accept(MediaType.TEXT_PLAIN_TYPE)
+                .get();
+        JSONArray jArr = new JSONArray(response.readEntity(String.class));
+
+        System.out.println("Games:" + jArr.toString());
+
+        
+        
+        /*
+        System.out.println("Post closeGame:");
+
+        login.put("port", jResponse.getInt("port"));
+
+        target = client.target(url + "closeGame");
+        response = target.request(MediaType.APPLICATION_JSON)
+                .accept(MediaType.TEXT_PLAIN_TYPE)
+                .post(Entity.json(login.toString()), Response.class);
+        jResponse = new JSONObject(response.readEntity(String.class));
+
+        System.out.println("Games:" + jResponse.toString());
+        */
+        
+        
+        System.out.println("Get games2:");
+
+        target = client.target(url + "games");
+        response = target.request(MediaType.APPLICATION_JSON)
+                .accept(MediaType.TEXT_PLAIN_TYPE)
+                .get();
+        jArr = new JSONArray(response.readEntity(String.class));
+
+        System.out.println("Games:" + jArr.toString());
+        
+        
+        
+        System.out.println("Post closeAllGames:");
+
+        target = client.target(url + "closeAllGames");
+        response = target.request(MediaType.APPLICATION_JSON)
+                .accept(MediaType.TEXT_PLAIN_TYPE)
+                .post(Entity.json(login.toString()), Response.class);
+        
+        if (response.getStatus() != 200) {
+            System.out.println("Creating game failed - " + response.getStatusInfo().getReasonPhrase() + " - response");
+            System.exit(0);
+        }
+        jResponse = new JSONObject(response.readEntity(String.class));
+
+        System.out.println("Games:" + jResponse.toString());
+        
+        
+        
+        System.out.println("Get games3:");
+
+        target = client.target(url + "games");
+        response = target.request(MediaType.APPLICATION_JSON)
+                .accept(MediaType.TEXT_PLAIN_TYPE)
+                .get();
+        jArr = new JSONArray(response.readEntity(String.class));
+
+        System.out.println("Games:" + jArr.toString());
+        
+
     }
 }

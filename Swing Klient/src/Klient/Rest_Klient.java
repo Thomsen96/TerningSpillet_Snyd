@@ -80,7 +80,7 @@ public class Rest_Klient {
                 .get();
         if (response.getStatus() != 200) {
             System.err.println("UNKNOWN ERROR - Get games failed with statuscode: " + response.getStatus());
-            return null;
+            return new ArrayList<>();
         }
 
         JSONArray jRecived = new JSONArray(response.readEntity(String.class));
