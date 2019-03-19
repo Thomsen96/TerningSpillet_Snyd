@@ -4,14 +4,14 @@
 function closeAllGames() {
 	var username = document.getElementById("userID").value;
 	var password = document.getElementById("PassID").value;
-	console.log("Calls login with: " + username + " " + password);
+	////console.log("Calls login with: " + username + " " + password);
 	var token = login2(username, password);
 }
 
 function login2(username , password) {
-	console.log("login Recived:" + username + " & " + password);
+	////console.log("login Recived:" + username + " & " + password);
 	var data = "{\n\"username\" : \""+ username +"\",\n\"password\" : \""+ password +"\"}";
-	console.log("Login POSTS:\n" + data);
+	////console.log("Login POSTS:\n" + data);
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.open("POST", "http://130.225.170.205:8080/REST_Terning_server/login", true);
 
@@ -29,9 +29,9 @@ function login2(username , password) {
 }
 
 function closeAllGames2(token, username) {
-	console.log("closeAllGames was called with: " + token + " & " + username);
+	////console.log("closeAllGames was called with: " + token + " & " + username);
 	var data = "{\n\"token\" : \""+ token +"\",\n\"username\" : \""+ username +"\"\n}";
-	console.log("Posts: \n" + data);
+	////console.log("Posts: \n" + data);
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.open("POST", "http://130.225.170.205:8080/REST_Terning_server/closeAllGames", true);
 
@@ -40,12 +40,12 @@ function closeAllGames2(token, username) {
 
 	xmlhttp.onreadystatechange = function() { // Call a function when the state changes.
 	    if (this.readyState === XMLHttpRequest.DONE) {
-	    	console.log(this.status);
-	    	console.log(this.responseText);
+	    	//console.log(this.status);
+	    	//console.log(this.responseText);
 	    	var myObj = JSON.parse(this.responseText);
 	    	updateCurrentGames();
 	        //alert("Closed all games");
-	        console.log("Closed " + myObj.gamesClosed + " games");
+	        //console.log("Closed " + myObj.gamesClosed + " games");
 
 	    }
 	}

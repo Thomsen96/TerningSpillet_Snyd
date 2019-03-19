@@ -5,13 +5,13 @@
 function createGame() {
 	var username = document.getElementById("userID").value;
 	var password = document.getElementById("PassID").value;
-	console.log(username + " " + password);
+	//console.log(username + " " + password);
 	var token = login(username, password);
 }
 
 function login(username , password) {
 	var data = "{\n\"username\" : \""+ username +"\",\n\"password\" : \""+ password +"\"}";
-	console.log(data);
+	//console.log(data);
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.open("POST", "http://130.225.170.205:8080/REST_Terning_server/login", true);
 
@@ -36,7 +36,7 @@ function startGame(token, username) {
 	var spillere = document.getElementById("spillereID").value;
 	var terninger = document.getElementById("terningerID").value;
 	var data = "{\n\"username\" : \""+ username +"\",\n\"token\" : \""+ token +"\",\n\"spillere\" : "+ spillere + ",\n\"terninger\" : "+ terninger +"}";
-	console.log("Posts: \n" + data);
+	//console.log("Posts: \n" + data);
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.open("POST", "http://130.225.170.205:8080/REST_Terning_server/games", true);
 
@@ -45,12 +45,12 @@ function startGame(token, username) {
 
 	xmlhttp.onreadystatechange = function() { // Call a function when the state changes.
 	    if (this.readyState === XMLHttpRequest.DONE) {
-	    	console.log(this.status);
-	    	console.log(this.responseText);
+	    	//console.log(this.status);
+	    	//console.log(this.responseText);
 	    	var myObj = JSON.parse(this.responseText);
 	        port = myObj.port;
 	        //alert("Game created on port\n"+port);
-	        console.log("Nyt spil på port:" + port);
+	        //console.log("Nyt spil på port:" + port);
 	        updateCurrentGames();
 	    }
 	}
