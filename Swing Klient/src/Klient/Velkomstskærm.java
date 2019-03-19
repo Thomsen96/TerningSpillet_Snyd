@@ -199,7 +199,6 @@ public class Velkomstskærm extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 0, 51));
         jLabel1.setText("Velkommen til terningespillet Snyd!");
 
-        jTextField_username.setText("madas");
         jTextField_username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField_usernameActionPerformed(evt);
@@ -210,7 +209,6 @@ public class Velkomstskærm extends javax.swing.JPanel {
 
         jLabel7.setText("Kode");
 
-        jPasswordField_password.setText("madsersej");
         jPasswordField_password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordField_passwordActionPerformed(evt);

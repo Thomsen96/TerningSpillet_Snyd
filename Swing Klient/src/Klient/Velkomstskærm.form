@@ -276,9 +276,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField_username">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="madas"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField_usernameActionPerformed"/>
       </Events>
@@ -294,9 +291,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="jPasswordField_password">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="madsersej"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jPasswordField_passwordActionPerformed"/>
       </Events>
